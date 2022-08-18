@@ -39,4 +39,4 @@ bin/
 .logs/
 
 ## Target
- .target/
+/target

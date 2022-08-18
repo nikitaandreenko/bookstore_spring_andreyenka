@@ -18,7 +18,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.company.dao.connection.DateSourсe" level="info">
+        <Logger name="com.company.dao.connection.DataSource" level="info">
             <AppenderRef ref="File1"/>
         </Logger>
         <Logger name="com.company.dao.impl.BookDaoImpl" level="debug">

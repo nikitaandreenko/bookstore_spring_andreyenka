@@ -1,10 +1,10 @@
-# bookstore_bh
+# bookstore_bh_andreyenka
 
-## module_dao
+## module1_config_annotation
 
-* class DaoBook
-* class UserService
-* class DataSourse
-* CRUD metods
+* @Controller
+* @Service
+* @Repository
 
-Installed connect with database and implemented DAO pattern in module_dao with CRUD metods
+
+Create project with Spring (annotation configuration)

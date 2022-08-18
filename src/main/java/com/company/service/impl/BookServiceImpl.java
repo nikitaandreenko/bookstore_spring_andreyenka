@@ -5,15 +5,19 @@ import com.company.entity.Book;
 import com.company.service.BookService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Service("bookService")
 public class BookServiceImpl implements BookService {
     private static final Logger log = LogManager.getLogger(BookServiceImpl.class);
 
     private final BookDaoImpl bookDao;
 
+    @Autowired
     public BookServiceImpl(BookDaoImpl bookDao) {
         this.bookDao = bookDao;
     }
@@ -75,9 +79,10 @@ public class BookServiceImpl implements BookService {
     }
 
     private void validate(Book book) {
-        if (book.getPrice().compareTo(BigDecimal.ZERO) < 0){
+        if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new RuntimeException("Price is not valid. Price can't be less 0");
-        };
+        }
+        ;
     }
 
     @Override

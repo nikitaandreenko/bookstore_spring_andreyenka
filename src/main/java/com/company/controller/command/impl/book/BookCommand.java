@@ -5,12 +5,17 @@ import com.company.controller.command.Command;
 import com.company.entity.Book;
 import com.company.service.BookService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
+@Controller("book")
 public class BookCommand implements Command {
 
     private final BookService bookService;
 
-    public BookCommand(com.company.service.BookService bookService) {
+    @Autowired
+    public BookCommand(BookService bookService) {
         this.bookService = bookService;
     }
 

@@ -1,32 +1,38 @@
 package com.company.controller;
 
+import com.company.AppConfiguration;
 import com.company.controller.command.Command;
-import com.company.controller.command.CommandFactory;
-import com.company.dao.connection.DateSourсe;
+import com.company.controller.command.impl.error.ErrorCommand;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
-    private DateSourсe dateSourсe;
+    private AnnotationConfigApplicationContext context;
+
+    @Override
+    public void init() throws ServletException {
+        context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         process(req, resp);
     }
 
-    private void process (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commandParam = req.getParameter("command");
         Command command;
-        if (CommandFactory.INSTANCE.getCommand(commandParam) == null) {
-            command = CommandFactory.INSTANCE.getCommand("error");
+        if (context.getBean(commandParam) == null) {
+            command = context.getBean(ErrorCommand.class);
         } else {
-            command = CommandFactory.INSTANCE.getCommand(commandParam);
+            command = (Command) context.getBean(commandParam);
         }
         String page;
         try {
@@ -45,7 +51,7 @@ public class Controller extends HttpServlet {
 
     @Override
     public void destroy() {
-        DateSourсe.INSTANCE.close();
+        context.close();
     }
 }
 

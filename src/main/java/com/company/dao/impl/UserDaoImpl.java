@@ -1,15 +1,18 @@
 package com.company.dao.impl;
 
 import com.company.dao.UserDao;
-import com.company.dao.connection.DateSourсe;
+import com.company.dao.connection.DataSource;
 import com.company.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("userDao")
 public class UserDaoImpl implements UserDao {
     private static final Logger log = LogManager.getLogger(UserDaoImpl.class);
 
@@ -31,10 +34,11 @@ public class UserDaoImpl implements UserDao {
     public static final String COUNT_All_USERS = "SELECT count(*) AS total FROM users";
 
 
-    private final DateSourсe dateSourсe;
+    private final DataSource dataSource;
 
-    public UserDaoImpl(DateSourсe dateSourсe) {
-        this.dateSourсe = dateSourсe;
+    @Autowired
+    public UserDaoImpl(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     private User process(ResultSet resultSet) throws SQLException {
@@ -51,7 +55,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User create(User user) {
         log.debug("Create user={} in database user", user);
-        Connection connection = dateSourсe.getConnection();
+        Connection connection = dataSource.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(CREATE_USER)) {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
@@ -70,7 +74,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findById(Long id) {
         log.debug("Get user by id={} from database users", id);
-        Connection connection = dateSourсe.getConnection();
+        Connection connection = dataSource.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(GET_BY_ID)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -86,7 +90,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByEmail(String email) {
         log.debug("Get book by email={} from database users", email);
-        Connection connection = dateSourсe.getConnection();
+        Connection connection = dataSource.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(GET_BY_EMAIL)) {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
@@ -104,7 +108,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> findAll() {
         log.debug("Get all users from database users");
         List<User> users = new ArrayList<>();
-        Connection connection = dateSourсe.getConnection();
+        Connection connection = dataSource.getConnection();
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(GET_ALL);
             while (resultSet.next()) {
@@ -121,7 +125,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> getUserByLastName(String lastName) {
         log.debug("Get book by lastName={} from database users", lastName);
         List<User> users = new ArrayList<>();
-        Connection connection = dateSourсe.getConnection();
+        Connection connection = dataSource.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_LASTNAME)) {
             statement.setString(1, lastName);
             ResultSet resultSet = statement.executeQuery();
@@ -139,7 +143,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Long countAll() {
         log.debug("Count all users from database users");
-        Connection connection = dateSourсe.getConnection();
+        Connection connection = dataSource.getConnection();
         try (Statement statement = connection.createStatement();) {
             ResultSet resultSet = statement.executeQuery(COUNT_All_USERS);
             if (resultSet.next()) {
@@ -154,7 +158,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User update(User user) {
         log.debug("Update user={} in database users", user);
-        Connection connection = dateSourсe.getConnection();
+        Connection connection = dataSource.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
@@ -174,7 +178,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean delete(Long id) {
         log.debug("Delete user by id={} from database users", id);
-        Connection connection = dateSourсe.getConnection();
+        Connection connection = dataSource.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID)) {
             statement.setLong(1, findById(id).getId());
             return statement.executeUpdate() == 1;
