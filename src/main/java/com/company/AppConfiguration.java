@@ -6,7 +6,7 @@ import com.company.controller.command.impl.error.ErrorCommand;
 import com.company.controller.command.impl.user.AllUserCommand;
 import com.company.controller.command.impl.user.CreateUserCommand;
 import com.company.controller.command.impl.user.UserCommand;
-import com.company.dao.connection.DateSourсe;
+import com.company.dao.connection.DataSource;
 import com.company.dao.impl.BookDaoImpl;
 import com.company.dao.impl.UserDaoImpl;
 import com.company.service.impl.BookServiceImpl;
@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfiguration {
     @Bean
-    public DateSourсe dateSourсe(){
-        return DateSourсe.INSTANCE;
+    public DataSource dateSourсe(){
+        return new DataSource();
     }
 
     @Bean

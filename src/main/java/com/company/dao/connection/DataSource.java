@@ -5,19 +5,17 @@ import com.company.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DateSourсe {
+public class DataSource {
 
-    public static final DateSourсe INSTANCE = new DateSourсe();
 
-    private DateSourсe() {
+    public DataSource() {
     }
 
-    private static final Logger log = LogManager.getLogger(DateSourсe.class);
+    private static final Logger log = LogManager.getLogger(DataSource.class);
 
     private Connection connection;
 
