@@ -11,14 +11,14 @@
             <PatternLayout pattern="${pattern_console}"/>
         </Console>
 
-        <File name="File1" fileName="${LOG_DIR}/logs/text.log">
+        <File name="File1" fileName="${LOG_DIR}/text.log">
             <PatternLayout pattern="${pattern_file}"/>
         </File>
 
     </Appenders>
 
     <Loggers>
-        <Logger name="com.company.dao.connection.DateSourсe" level="info">
+        <Logger name="com.company.dao.connection.DataSource" level="info">
             <AppenderRef ref="File1"/>
         </Logger>
         <Logger name="com.company.dao.impl.BookDaoImpl" level="debug">

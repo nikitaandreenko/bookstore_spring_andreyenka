@@ -5,11 +5,14 @@ import com.company.dao.connection.DataSource;
 import com.company.entity.Book;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("bookDao")
 public class BookDaoImpl implements BookDao {
 
     private static final Logger log = LogManager.getLogger(BookDaoImpl.class);
@@ -37,6 +40,7 @@ public class BookDaoImpl implements BookDao {
 
     private final DataSource dataSource;
 
+    @Autowired
     public BookDaoImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }

@@ -5,11 +5,14 @@ import com.company.dao.connection.DataSource;
 import com.company.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("userDao")
 public class UserDaoImpl implements UserDao {
     private static final Logger log = LogManager.getLogger(UserDaoImpl.class);
 
@@ -33,6 +36,7 @@ public class UserDaoImpl implements UserDao {
 
     private final DataSource dataSource;
 
+    @Autowired
     public UserDaoImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }

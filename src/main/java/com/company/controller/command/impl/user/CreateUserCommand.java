@@ -4,11 +4,15 @@ import com.company.controller.command.Command;
 import com.company.entity.User;
 import com.company.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller("create_user")
 public class CreateUserCommand implements Command {
     private final UserService userService;
 
-    public CreateUserCommand(com.company.service.UserService userService) {
+    @Autowired
+    public CreateUserCommand(UserService userService) {
         this.userService = userService;
     }
 

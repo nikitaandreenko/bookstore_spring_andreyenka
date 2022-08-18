@@ -4,15 +4,19 @@ package com.company.dao.connection;
 import com.company.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Component
 public class DataSource {
 
     public static final DataSource INSTANCE = new DataSource();
 
+    @Autowired
     private DataSource() {
     }
 
@@ -26,12 +30,11 @@ public class DataSource {
         String password_key = null;
         String typeOfConnection = ConfigurationManager.INSTANCE.getProperty("connection");
 
-        if(typeOfConnection.equals("local")){
+        if (typeOfConnection.equals("local")) {
             url_key = ConfigurationManager.INSTANCE.getProperty("db.local.url");
             user_key = ConfigurationManager.INSTANCE.getProperty("db.local.user");
             password_key = ConfigurationManager.INSTANCE.getProperty("db.local.password");
-        }
-        else if(typeOfConnection.equals("remote")){
+        } else if (typeOfConnection.equals("remote")) {
             url_key = ConfigurationManager.INSTANCE.getProperty("db.elephant.url");
             user_key = ConfigurationManager.INSTANCE.getProperty("db.elephant.user");
             password_key = ConfigurationManager.INSTANCE.getProperty("db.elephant.password");
