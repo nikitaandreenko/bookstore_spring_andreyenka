@@ -10,7 +10,7 @@ public class BookCommand implements Command {
 
     private final BookService bookService;
 
-    public BookCommand(com.company.service.BookService bookService) {
+    public BookCommand(BookService bookService) {
         this.bookService = bookService;
     }
 

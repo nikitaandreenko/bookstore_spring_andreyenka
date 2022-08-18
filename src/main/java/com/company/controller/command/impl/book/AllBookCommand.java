@@ -10,7 +10,7 @@ import java.util.List;
 public class AllBookCommand implements Command {
     private final BookService bookService;
 
-    public AllBookCommand(com.company.service.BookService bookService) {
+    public AllBookCommand(BookService bookService) {
         this.bookService = bookService;
     }
 

@@ -11,7 +11,7 @@
             <PatternLayout pattern="${pattern_console}"/>
         </Console>
 
-        <File name="File1" fileName="${LOG_DIR}/logs/text.log">
+        <File name="File1" fileName="${LOG_DIR}/text.log">
             <PatternLayout pattern="${pattern_file}"/>
         </File>
 

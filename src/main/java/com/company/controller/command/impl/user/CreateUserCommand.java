@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class CreateUserCommand implements Command {
     private final UserService userService;
 
-    public CreateUserCommand(com.company.service.UserService userService) {
+    public CreateUserCommand(UserService userService) {
         this.userService = userService;
     }
 
