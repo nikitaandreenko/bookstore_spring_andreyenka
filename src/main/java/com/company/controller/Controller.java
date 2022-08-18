@@ -2,7 +2,7 @@ package com.company.controller;
 
 import com.company.controller.command.Command;
 import com.company.controller.command.CommandFactory;
-import com.company.dao.connection.DateSourсe;
+import com.company.dao.connection.DataSource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
-    private DateSourсe dateSourсe;
+    private DataSource dataSource;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
 
     @Override
     public void destroy() {
-        DateSourсe.INSTANCE.close();
+        DataSource.INSTANCE.close();
     }
 }
 
