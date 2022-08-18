@@ -1,4 +1,4 @@
-package com.company.dao.connection;
+package com.company;
 
 import java.io.IOException;
 import java.util.Properties;

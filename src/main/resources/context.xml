@@ -33,5 +33,5 @@
     </bean>
     <bean id="error" class="com.company.controller.command.impl.error.ErrorCommand"/>
 
-    <bean id="dataSource" class="com.company.dao.connection.DateSourсe"/>
+    <bean id="dataSource" class="com.company.dao.connection.DataSource"/>
 </beans>
