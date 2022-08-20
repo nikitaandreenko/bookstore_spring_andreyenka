@@ -14,10 +14,9 @@ import java.sql.SQLException;
 @Component
 public class DataSource {
 
-    public static final DataSource INSTANCE = new DataSource();
 
     @Autowired
-    private DataSource() {
+    public DataSource() {
     }
 
     private static final Logger log = LogManager.getLogger(DataSource.class);
