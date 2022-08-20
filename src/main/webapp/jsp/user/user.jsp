@@ -37,12 +37,15 @@
         <th>Surname</th>
         <th>Role</th>
         <th>update</th>
+        <th>delete</th>
+
     </tr>
     <tr>
         <td>${requestScope.user.firstName}</td>
         <td>${requestScope.user.lastName}</td>
         <td>${requestScope.user.role}</td>
         <td><a href="controller?command=update_user_form&id=${requestScope.user.id}">update</a></td>
+        <td><a href="controller?command=delete_user&id=${requestScope.user.id}">delete</a></td>
     </tr>
 </table>
 </body>

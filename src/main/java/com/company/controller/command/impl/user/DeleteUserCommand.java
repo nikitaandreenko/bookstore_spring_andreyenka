@@ -7,22 +7,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-@Controller("update_user_form")
-public class UpdateUserFormCommand implements Command {
-
+@Controller("delete_user")
+public class DeleteUserCommand implements Command {
     private final UserService userService;
 
     @Autowired
-    public UpdateUserFormCommand(UserService userService) {
+    public DeleteUserCommand(UserService userService) {
         this.userService = userService;
     }
-
 
     @Override
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter("id"));
-        User user = userService.getById(id);
-        req.setAttribute("user", user);
-        return "jsp/user/update_user.jsp";
+        userService.delete(id);
+        req.setAttribute("message", "bookstore by Andreyenka");
+        req.setAttribute("message2", "User successfully deleted!!!");
+        return "jsp/user/delete_user.jsp";
+
     }
 }
