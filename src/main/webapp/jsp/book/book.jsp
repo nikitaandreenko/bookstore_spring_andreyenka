@@ -31,6 +31,12 @@
 <c:if test="${requestScope.message!=null}">
     <h3 align="center" style="color:#0000ff"><em> ${requestScope.message}</em></h3>
 </c:if>
+<c:if test="${requestScope.messageUpdate!=null}">
+    <h3 align="center" style="color:#0000ff"><em> ${requestScope.messageUpdate}</em></h3>
+</c:if>
+<c:if test="${requestScope.messageCreate!=null}">
+    <h3 align="center" style="color:#0000ff"><em> ${requestScope.messageCreate}</em></h3>
+</c:if>
 <table>
     <tr>
         <th>Title</th>

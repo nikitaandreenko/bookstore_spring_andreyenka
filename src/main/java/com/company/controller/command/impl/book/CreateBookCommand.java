@@ -33,7 +33,7 @@ public class CreateBookCommand implements Command {
         bookService.create(book);
         req.setAttribute("book", book);
         req.setAttribute("message", "bookstore by Andreyenka");
-        req.setAttribute("message2", "New book successfully added!!!");
+        req.setAttribute("messageCreate", "New book successfully added!!!");
         return "jsp/book/book.jsp";
     }
 }
