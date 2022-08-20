@@ -36,11 +36,13 @@
         <th>Name</th>
         <th>Surname</th>
         <th>Role</th>
+        <th>update</th>
     </tr>
     <tr>
         <td>${requestScope.user.firstName}</td>
         <td>${requestScope.user.lastName}</td>
         <td>${requestScope.user.role}</td>
+        <td><a href="controller?command=update_user_form&id=${requestScope.user.id}">update</a></td>
     </tr>
 </table>
 </body>
