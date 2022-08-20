@@ -12,9 +12,9 @@
     <br><br>
     Last name: <input type="text" name="lastName" value="${requestScope.user.lastName}"/>
     <br><br>
-    Age: <input type="number" name="age" value="${requestScope.user.age}"/>
+    Age: <input type="text" name="age" value="${requestScope.user.age}"/>
     <br><br>
-    Email: <input type="email" name="email" value="${requestScope.user.email}"/>
+    Email: <input type="text" name="email" value="${requestScope.user.email}"/>
     <br><br>
     Role: <select name="role" value="${requestScope.user.role}">
     <option>USER</option>

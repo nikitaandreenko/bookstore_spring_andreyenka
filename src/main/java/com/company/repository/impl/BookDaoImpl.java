@@ -38,7 +38,7 @@ public class BookDaoImpl implements BookDao {
             "FROM books JOIN languages ON language_id = languages.id WHERE isbn = ?";
     public static final String UPDATE_NAMED = "UPDATE books SET book_name = :book_name, author = :author, isbn = :isbn, " +
             "price = :price, pages = :pages, binding = :binding, " +
-            "year_publishing = year_publishing, language_id = (SELECT id FROM languages WHERE name = :name) WHERE id = :id";
+            "year_publishing = :year_publishing, language_id = (SELECT id FROM languages WHERE name = :name) WHERE id = :id";
     public static final String GET_ALL_AUTHOR = "SELECT books.id, books.book_name, books.author, books.isbn, books.price, books.pages, " +
             "books.binding, books.year_publishing, languages.name " +
             "FROM books JOIN languages ON language_id = languages.id WHERE author =?";
@@ -77,7 +77,6 @@ public class BookDaoImpl implements BookDao {
     @Override
     public Book create(Book book) {
         log.debug("Create book={} in database book", book);
-        log.info("Connection with database");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(CREATE_BOOK, Statement.RETURN_GENERATED_KEYS);
@@ -151,7 +150,7 @@ public class BookDaoImpl implements BookDao {
         map.put("pages", book.getPages());
         map.put("binding", book.getBinding());
         map.put("year_publishing", book.getYear_publishing());
-        map.put("language_id", book.getLanguage().toString());
+        map.put("name", book.getLanguage().toString());
         map.put("id", book.getId());
         namedJdbcTemplate.update(UPDATE_NAMED, map);
         return findById(book.getId());

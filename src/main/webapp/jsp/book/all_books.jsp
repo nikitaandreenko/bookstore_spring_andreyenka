@@ -46,6 +46,7 @@
 <c:if test="${requestScope.message!=null}">
     <h3 align="center" style="color:#0000ff"><em> ${requestScope.message}</em></h3>
 </c:if>
+<h1 align=right><a href="controller?command=create_book_form">add book</a></h1>
 <table>
     <tr>
         <th>#</th>

@@ -36,11 +36,15 @@
         <th>Title</th>
         <th>Author</th>
         <th>Year Publishing</th>
+        <th>update</th>
+        <th>delete</th>
     </tr>
     <tr>
         <td>${requestScope.book.book_name}</td>
         <td>${requestScope.book.author}</td>
         <td>${requestScope.book.year_publishing}</td>
+        <td><a href="controller?command=update_book_form&id=${requestScope.book.id}">update</a></td>
+        <td><a href="controller?command=delete_book&id=${requestScope.book.id}">delete</a></td>
     </tr>
 </table>
 </body>

@@ -29,7 +29,7 @@ public class UpdateUserCommand implements Command {
         User updated = userService.update(user);
         req.setAttribute("user", updated);
         req.setAttribute("message", "bookstore by Andreyenka");
-        req.setAttribute("message2", "New user successfully updated!!!");
+        req.setAttribute("message2", "User successfully updated!!!");
         return "jsp/user/user.jsp";
 
     }

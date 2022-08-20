@@ -10,9 +10,9 @@
     <br><br>
     Last name: <input type="text" name="lastName"/>
     <br><br>
-    Age: <input type="number" name="age"/>
+    Age: <input type="text" name="age"/>
     <br><br>
-    Email: <input type="email" name="email"/>
+    Email: <input type="text" name="email"/>
     <br><br>
     Role: <select name="role">
     <option>USER</option>

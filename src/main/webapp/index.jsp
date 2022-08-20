@@ -13,7 +13,6 @@
             <h1 align=center>Bookstore made by Andreyenka with Java</h1>
             <h1 align=center><a href="controller?command=all_books">books</a></h1>
             <h1 align=center><a href="controller?command=all_users">users</a></h1>
-            <h1 align=center><a href="controller?command=create_user_form">add user</a></h1>
         </body>
     </head>
 </html>
