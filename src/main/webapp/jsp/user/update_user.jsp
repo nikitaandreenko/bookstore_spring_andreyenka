@@ -21,7 +21,6 @@
     <option>MANAGER</option>
     <option>ADMIN</option>
 </select>
-    <%--    Role: <input type="text" name="role" value="${requestScope.user.role}"/>--%>
     <br><br>
     <input type="submit" value="update"/>
 </form>

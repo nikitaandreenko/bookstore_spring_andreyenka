@@ -33,6 +33,6 @@ public class CreateUserCommand implements Command {
         req.setAttribute("user", user);
         req.setAttribute("message", "bookstore by Andreyenka");
         req.setAttribute("message2", "New user successfully added!!!");
-        return "jsp/user/create_user.jsp";
+        return "jsp/user/user.jsp";
     }
 }
