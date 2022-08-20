@@ -42,7 +42,6 @@ public class UserDaoImpl implements UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
 //    public UserDaoImpl(DataSource dataSource) {
 //        this.dataSource = dataSource;
 //    }
