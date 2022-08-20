@@ -1,6 +1,6 @@
 package com.company.service.impl;
 
-import com.company.dao.impl.BookDaoImpl;
+import com.company.repository.impl.BookDaoImpl;
 import com.company.entity.Book;
 import com.company.service.BookService;
 import org.apache.logging.log4j.LogManager;

@@ -1,7 +1,7 @@
-package com.company.dao.impl;
+package com.company.repository.impl;
 
-import com.company.dao.BookDao;
-import com.company.dao.connection.DataSource;
+import com.company.repository.BookDao;
+import com.company.repository.connection.DataSource;
 import com.company.entity.Book;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

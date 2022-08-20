@@ -1,4 +1,4 @@
-package com.company.dao.connection;
+package com.company.repository.connection;
 
 
 import com.company.ConfigurationManager;

@@ -1,11 +1,11 @@
-package com.company.dao.impl;
+package com.company.repository.impl;
 
-import com.company.dao.UserDao;
-import com.company.dao.connection.DataSource;
+import com.company.repository.UserDao;
 import com.company.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -34,12 +34,18 @@ public class UserDaoImpl implements UserDao {
     public static final String COUNT_All_USERS = "SELECT count(*) AS total FROM users";
 
 
-    private final DataSource dataSource;
+    //private final DataSource dataSource;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public UserDaoImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public UserDaoImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
+
+
+//    public UserDaoImpl(DataSource dataSource) {
+//        this.dataSource = dataSource;
+//    }
 
     private User process(ResultSet resultSet) throws SQLException {
         User user = new User();
