@@ -42,15 +42,23 @@
         <th>Title</th>
         <th>Author</th>
         <th>Year Publishing</th>
-        <th>update</th>
-        <th>delete</th>
+        <th></th>
+        <th></th>
     </tr>
     <tr>
         <td>${requestScope.book.book_name}</td>
         <td>${requestScope.book.author}</td>
         <td>${requestScope.book.year_publishing}</td>
-        <td><a href="controller?command=update_book_form&id=${requestScope.book.id}">update</a></td>
-        <td><a href="controller?command=delete_book&id=${requestScope.book.id}">delete</a></td>
+        <td><a href="controller?command=update_book_form&id=${requestScope.book.id}" target = "_blank">
+            <button style="
+          background-color: rgb(6, 6, 6);
+          color: rgb(240, 243, 246);
+          border-radius: 8px;">update</button></a></td>
+        <td><a href="controller?command=delete_book&id=${requestScope.book.id}" target = "_blank">
+            <button style="
+          background-color: rgb(6, 6, 6);
+          color: rgb(240, 243, 246);
+          border-radius: 8px;">delete</button></a></td>
     </tr>
 </table>
 </body>

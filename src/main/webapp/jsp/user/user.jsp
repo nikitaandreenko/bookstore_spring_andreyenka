@@ -42,16 +42,24 @@
         <th>Name</th>
         <th>Surname</th>
         <th>Role</th>
-        <th>update</th>
-        <th>delete</th>
+        <th></th>
+        <th></th>
 
     </tr>
     <tr>
         <td>${requestScope.user.firstName}</td>
         <td>${requestScope.user.lastName}</td>
         <td>${requestScope.user.role}</td>
-        <td><a href="controller?command=update_user_form&id=${requestScope.user.id}">update</a></td>
-        <td><a href="controller?command=delete_user&id=${requestScope.user.id}">delete</a></td>
+        <td><a href="controller?command=update_user_form&id=${requestScope.user.id}" target = "_blank">
+            <button style="
+          background-color: rgb(6, 6, 6);
+          color: rgb(240, 243, 246);
+          border-radius: 8px;">update</button></a></td>
+        <td><a href="controller?command=delete_user&id=${requestScope.user.id}" target = "_blank">
+            <button style="
+          background-color: rgb(6, 6, 6);
+          color: rgb(240, 243, 246);
+          border-radius: 8px;">delete</button></a></td>
     </tr>
 </table>
 </body>

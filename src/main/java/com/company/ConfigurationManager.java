@@ -11,7 +11,7 @@ public class ConfigurationManager {
         props = new Properties();
         try {
             props.load(getClass().getResourceAsStream
-                    ("/datasource.properties"));
+                    ("/application.properties"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
