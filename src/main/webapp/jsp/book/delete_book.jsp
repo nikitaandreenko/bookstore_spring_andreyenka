@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Title</title>
+  <title>Delete book</title>
 </head>
 <body>
 <h1 align="center" style="color:#ff0000">Delete</h1>

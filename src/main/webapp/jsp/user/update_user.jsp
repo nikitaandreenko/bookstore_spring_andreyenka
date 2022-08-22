@@ -3,6 +3,26 @@
 <head>
     <title>Update user</title>
 </head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    input[type=text], select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+    input[type=submit] {
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
 <body>
 <form align=center action="controller" method="post">
     <input type="hidden" name="command" value="update_user">
@@ -22,7 +42,7 @@
     <option>ADMIN</option>
 </select>
     <br><br>
-    <input type="submit" value="update"/>
+    <input type="submit" value="save"/>
 </form>
 </body>
 </html>

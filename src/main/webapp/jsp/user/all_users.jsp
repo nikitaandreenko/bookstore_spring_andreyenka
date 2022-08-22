@@ -40,13 +40,21 @@
         table tbody tr:nth-child(even) {
             background: #f3f3f3;
         }
+        .btn {
+            display: inline-block;
+            background: #00BFFF;
+            color: #2F4F4F;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            border-radius: 3px;
+        }
     </style>
 <body>
 <h1 align="center" style="color:#ff0000">Users</h1>
 <c:if test="${requestScope.message!=null}">
     <h3 align="center" style="color:#0000ff"><em> ${requestScope.message}</em></h3>
 </c:if>
-<h1 align=right><a href="controller?command=create_user_form">add user</a></h1>
+<h1 align=center><a class="btn" href="controller?command=create_user_form">add user</a></h1>
 <table>
     <tr>
         <th>#</th>

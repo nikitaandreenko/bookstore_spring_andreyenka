@@ -1,7 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Create user</title>
 </head>
 <body>
 <form align=center action="controller" method="post">
@@ -20,7 +40,7 @@
     <option>ADMIN</option>
 </select>
     <br><br>
-    <input type="submit" value="add"/>
+    <input type="submit" value="save"/>
 </form>
 </body>
 </html>
