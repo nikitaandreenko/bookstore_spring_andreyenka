@@ -6,10 +6,15 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.Properties;
 
 
 @Configuration
@@ -29,28 +34,26 @@ public class AppConfiguration {
 
     @Bean
     public DataSource dataSource() {
-        String url_key = null;
-        String user_key = null;
-        String password_key = null;
-        String typeOfConnection = ConfigurationManager.INSTANCE.getProperty("connection");
-        String className = ConfigurationManager.INSTANCE.getProperty("db.ClassName");
-
-        if(typeOfConnection.equals("1")){
-
-            url_key = ConfigurationManager.INSTANCE.getProperty("db.local.url");
-            user_key = ConfigurationManager.INSTANCE.getProperty("db.local.user");
-            password_key = ConfigurationManager.INSTANCE.getProperty("db.local.password");
-        }
-        else if(typeOfConnection.equals("2")){
-            url_key = ConfigurationManager.INSTANCE.getProperty("db.elephant.url");
-            user_key = ConfigurationManager.INSTANCE.getProperty("db.elephant.user");
-            password_key = ConfigurationManager.INSTANCE.getProperty("db.elephant.password");
-        }
         HikariConfig config = new HikariConfig();
-        config.setDriverClassName(className);
-        config.setUsername(user_key);
-        config.setPassword(password_key);
-        config.setJdbcUrl(url_key);
+        Properties properties = properties();
+        boolean useLocal = properties.getProperty("connection").equals("local");
+        config.setDriverClassName(properties.getProperty("db.ClassName"));
+        config.setUsername(properties.getProperty(useLocal ? "db.local.user" : "db.elephant.user"));
+        config.setPassword(properties.getProperty(useLocal ? "db.local.password" : "db.elephant.password"));
+        config.setJdbcUrl(properties.getProperty(useLocal ? "db.local.url" : "db.elephant.url"));
         return new HikariDataSource(config);
+    }
+
+    @Bean
+    public Properties properties(){
+
+        try {
+            Resource resource = new ClassPathResource("/application.properties");
+            Properties properties = PropertiesLoaderUtils.loadProperties(resource);
+            return properties;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

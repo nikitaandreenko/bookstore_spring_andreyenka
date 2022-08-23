@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Delete book</title>
+  <link href="jsp/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Delete</h1>
