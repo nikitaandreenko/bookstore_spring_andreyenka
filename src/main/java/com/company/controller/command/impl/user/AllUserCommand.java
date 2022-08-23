@@ -21,7 +21,7 @@ public class AllUserCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req) {
-        List<User> users = userService.getAll();
+        List<User> users = userService.findAll();
         req.setAttribute("all_users", users);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/user/all_users.jsp";

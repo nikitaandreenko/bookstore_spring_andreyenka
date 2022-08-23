@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(Long id) {
+    public User findById(Long id) {
         log.debug("Get user by id={} from database users", id);
         User user = userDao.findById(id);
         if (user == null) {
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> findAll() {
         log.debug("Get all users from database users");
         return userDao.findAll();
     }
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long countAllUsers() {
+    public Long countAll() {
         log.debug("Count all users from database users");
         return userDao.countAll();
     }

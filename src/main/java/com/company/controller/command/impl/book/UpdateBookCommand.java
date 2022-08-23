@@ -22,7 +22,7 @@ public class UpdateBookCommand implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter("id"));
-        Book book = bookService.getById(id);
+        Book book = bookService.findById(id);
         book.setBook_name(req.getParameter("bookName"));
         book.setAuthor(req.getParameter("author"));
         book.setIsbn(req.getParameter("isbn"));

@@ -21,7 +21,7 @@ public class UserCommand implements Command {
     public String execute(HttpServletRequest req) {
         String idRaw = req.getParameter("id");
         Long id = Long.parseLong(idRaw);
-        User user = userService.getById(id);
+        User user = userService.findById(id);
         req.setAttribute("user", user);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/user/user.jsp";

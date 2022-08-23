@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getById(Long id) {
+    public Book findById(Long id) {
         log.debug("Get book by id={} from database books", id);
         Book book = bookDao.findById(id);
         if (book == null) {
@@ -50,7 +50,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getAll() {
+    public List<Book> findAll() {
         log.debug("Get all books from database books");
         return bookDao.findAll();
     }
@@ -62,7 +62,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Long countAllBooks() {
+    public Long countAll() {
         log.debug("Count all books from database books");
         return bookDao.countAll();
     }

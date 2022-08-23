@@ -20,7 +20,7 @@ public class UpdateUserCommand implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter("id"));
-        User user = userService.getById(id);
+        User user = userService.findById(id);
         user.setFirstName(req.getParameter("firstName"));
         user.setLastName(req.getParameter("lastName"));
         user.setAge(Integer.parseInt(req.getParameter("age")));

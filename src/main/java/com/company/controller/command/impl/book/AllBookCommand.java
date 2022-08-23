@@ -20,7 +20,7 @@ public class AllBookCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req) {
-        List<Book> books = bookService.getAll();
+        List<Book> books = bookService.findAll();
         req.setAttribute("all_books", books);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/book/all_books.jsp";

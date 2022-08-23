@@ -19,7 +19,7 @@ public class UpdateBookFormCommand implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter("id"));
-        Book book = bookService.getById(id);
+        Book book = bookService.findById(id);
         req.setAttribute("book", book);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/book/update_book.jsp";
