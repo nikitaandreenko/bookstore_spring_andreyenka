@@ -5,7 +5,6 @@ import com.company.entity.Book;
 import com.company.service.BookService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;

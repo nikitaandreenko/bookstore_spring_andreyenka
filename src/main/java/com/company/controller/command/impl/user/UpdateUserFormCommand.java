@@ -23,6 +23,7 @@ public class UpdateUserFormCommand implements Command {
         Long id = Long.parseLong(req.getParameter("id"));
         User user = userService.getById(id);
         req.setAttribute("user", user);
+        req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/user/update_user.jsp";
     }
 }

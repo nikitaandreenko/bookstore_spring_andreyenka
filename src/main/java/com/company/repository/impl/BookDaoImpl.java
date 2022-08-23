@@ -132,9 +132,8 @@ public class BookDaoImpl implements BookDao {
     @Override
     public Long countAll() {
         log.debug("Count all books from database books");
-        return jdbcTemplate.query(COUNT_ALL_BOOKS, (ResultSet rs) -> {
-            Long total = rs.getLong("total");
-            return total;
+        return jdbcTemplate.query(COUNT_ALL_BOOKS, (rs) -> {
+            return rs.getLong("total");
         });
     }
 

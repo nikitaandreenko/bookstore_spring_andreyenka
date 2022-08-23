@@ -2,75 +2,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <style>
-        table {
-            width: 100%;
-            border: none;
-            margin-bottom: 20px;
-        }
-
-        table thead th {
-            font-weight: bold;
-            text-align: left;
-            border: none;
-            padding: 10px 15px;
-            background: #d8d8d8;
-            font-size: 14px;
-            border-left: 1px solid #ddd;
-            border-right: 1px solid #ddd;
-        }
-
-        table tbody td {
-            text-align: left;
-            border-left: 1px solid #ddd;
-            border-right: 1px solid #ddd;
-            padding: 10px 15px;
-            font-size: 14px;
-            vertical-align: top;
-        }
-
-        table thead tr th:first-child, .table tbody tr td:first-child {
-            border-left: none;
-        }
-
-        table thead tr th:last-child, .table tbody tr td:last-child {
-            border-right: none;
-        }
-
-        table tbody tr:nth-child(even) {
-            background: #f3f3f3;
-        }
-        .btn {
-            display: inline-block;
-            background: #00BFFF;
-            color: #2F4F4F;
-            padding: 1rem 1.5rem;
-            text-decoration: none;
-            border-radius: 3px;
-        }
-    </style>
+    <link href="jsp/styles.css" rel="stylesheet" type="text/css">
+</head>
 <body>
-<h1 align="center" style="color:#ff0000">Users</h1>
+<h1>Users</h1>
 <c:if test="${requestScope.message!=null}">
-    <h3 align="center" style="color:#0000ff"><em> ${requestScope.message}</em></h3>
+    <h3><em> ${requestScope.message}</em></h3>
 </c:if>
-<h1 align=center><a class="btn" href="controller?command=create_user_form">add user</a></h1>
+<h1><a href="controller?command=create_user_form"><button>add user</button></a></h1>
 <table>
     <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Surname</th>
+        <th>First name</th>
+        <th>Last name</th>
         <th>Role</th>
+        <th>More info</th>
     </tr>
     <c:forEach items="${requestScope.all_users}" var="user" varStatus="counter">
         <tr>
             <td>${counter.count}</td>
             <td>${user.firstName}</td>
-            <td><a href="controller?command=user&id=${user.id}">${user.lastName}<a/></td>
+            <td>${user.lastName}</td>
             <td>${user.role}</td>
+            <td><a href="controller?command=user&id=${user.id}"><button>Click me</button></a></td>
         </tr>
     </c:forEach>
 </table>
 </body>
-</head>
 </html>

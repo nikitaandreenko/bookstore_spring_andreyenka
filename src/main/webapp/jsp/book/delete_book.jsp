@@ -4,12 +4,12 @@
   <title>Delete book</title>
 </head>
 <body>
-<h1 align="center" style="color:#ff0000">Delete</h1>
+<h1>Delete</h1>
 <c:if test="${requestScope.message!=null}">
-  <h3 align="center" style="color:#0000ff"><em> ${requestScope.message}</em></h3>
+  <h3><em> ${requestScope.message}</em></h3>
 </c:if>
 <c:if test="${requestScope.messageDelete!=null}">
-  <h3 align="center" style="color:#008080"><em>${requestScope.messageDelete}</em></h3>
+  <h3><em>${requestScope.messageDelete}</em></h3>
 </c:if>
 </body>
 </html>

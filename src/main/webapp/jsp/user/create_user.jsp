@@ -1,29 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        input[type=text], select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            resize: vertical;
-        }
-        input[type=submit] {
-            background-color: #04AA6D;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
     <title>Create user</title>
+    <link href="jsp/styles.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class="user">
+<c:if test="${requestScope.message!=null}">
+    <h3><em> ${requestScope.message}</em></h3>
+</c:if>
 <form align=center action="controller" method="post">
     <input type="hidden" name="command" value="create_user">
     First name: <input type="text" name="firstName"/>

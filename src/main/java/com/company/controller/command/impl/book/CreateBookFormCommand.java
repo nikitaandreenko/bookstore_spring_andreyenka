@@ -18,6 +18,7 @@ public class CreateBookFormCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req) {
+        req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/book/create_book.jsp";
     }
 }
