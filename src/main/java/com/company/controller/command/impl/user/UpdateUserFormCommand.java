@@ -7,23 +7,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
-
-@Controller("all_users")
-public class AllUserCommand implements Command {
+@Controller("update_user_form")
+public class UpdateUserFormCommand implements Command {
 
     private final UserService userService;
 
     @Autowired
-    public AllUserCommand(UserService userService) {
+    public UpdateUserFormCommand(UserService userService) {
         this.userService = userService;
     }
 
+
     @Override
     public String execute(HttpServletRequest req) {
-        List<User> users = userService.findAll();
-        req.setAttribute("all_users", users);
+        Long id = Long.parseLong(req.getParameter("id"));
+        User user = userService.findById(id);
+        req.setAttribute("user", user);
         req.setAttribute("message", "bookstore by Andreyenka");
-        return "jsp/user/all_users.jsp";
+        return "jsp/user/update_user.jsp";
     }
 }

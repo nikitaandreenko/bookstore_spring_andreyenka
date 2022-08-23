@@ -1,8 +1,8 @@
-package com.company.dao;
+package com.company.service;
 
 import java.util.List;
 
-public interface AbstractDao <K, T> {
+public interface AbstractService <K, T>{
 
     T create(T entity);
 
@@ -14,5 +14,6 @@ public interface AbstractDao <K, T> {
 
     T update(T entity);
 
-    boolean delete(K id);
+    void delete(K id);
+
 }

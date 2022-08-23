@@ -2,47 +2,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <style>
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-            border-collapse: collapse;
-            outline: 3px solid #ffd300;
-            font-size: 15px;
-        }
+    <link href="jsp/styles.css" rel="stylesheet" type="text/css">
+</head>
 
-        table th {
-            font-weight: bold;
-            padding: 7px;
-            background: #ffd300;
-            border: none;
-            text-align: left;
-            font-size: 15px;
-            border-bottom: 3px solid #ffd300;
-        }
-
-        table td {
-            padding: 7px;
-            border: none;
-        }
-    </style>
 <body>
-<h1 align="center" style="color:#ff0000">User</h1>
+<h1>User</h1>
 <c:if test="${requestScope.message!=null}">
-    <h3 align="center" style="color:#0000ff"><em> ${requestScope.message}</em></h3>
+    <h3><em> ${requestScope.message}</em></h3>
+</c:if>
+<c:if test="${requestScope.messageUpdate!=null}">
+    <h3><em> ${requestScope.messageUpdate}</em></h3>
+</c:if>
+<c:if test="${requestScope.messageCreate!=null}">
+    <h3><em> ${requestScope.messageCreate}</em></h3>
 </c:if>
 <table>
     <tr>
-        <th>Name</th>
-        <th>Surname</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Age</th>
+        <th>Email</th>
         <th>Role</th>
+
     </tr>
     <tr>
         <td>${requestScope.user.firstName}</td>
         <td>${requestScope.user.lastName}</td>
+        <td>${requestScope.user.age}</td>
+        <td>${requestScope.user.email}</td>
         <td>${requestScope.user.role}</td>
     </tr>
 </table>
+<div>
+    <a href="controller?command=update_user_form&id=${requestScope.user.id}" target = "_blank">
+        <button>update</button></a>
+    <a href="controller?command=delete_user&id=${requestScope.user.id}" target = "_blank">
+        <button>delete</button></a>
+</div>
 </body>
-</head>
 </html>

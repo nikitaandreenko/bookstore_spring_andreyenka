@@ -21,3 +21,4 @@ public class ConfigurationManager {
         return props.getProperty(key);
     }
 }
+

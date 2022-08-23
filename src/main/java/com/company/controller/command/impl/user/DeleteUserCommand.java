@@ -1,29 +1,27 @@
 package com.company.controller.command.impl.user;
 
 import com.company.controller.command.Command;
-import com.company.entity.User;
 import com.company.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
-
-@Controller("all_users")
-public class AllUserCommand implements Command {
-
+@Controller("delete_user")
+public class DeleteUserCommand implements Command {
     private final UserService userService;
 
     @Autowired
-    public AllUserCommand(UserService userService) {
+    public DeleteUserCommand(UserService userService) {
         this.userService = userService;
     }
 
     @Override
     public String execute(HttpServletRequest req) {
-        List<User> users = userService.findAll();
-        req.setAttribute("all_users", users);
+        Long id = Long.parseLong(req.getParameter("id"));
+        userService.delete(id);
         req.setAttribute("message", "bookstore by Andreyenka");
-        return "jsp/user/all_users.jsp";
+        req.setAttribute("message2", "User successfully deleted!!!");
+        return "jsp/user/delete_user.jsp";
+
     }
 }
