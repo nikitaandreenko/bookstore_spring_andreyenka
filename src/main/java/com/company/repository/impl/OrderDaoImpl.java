@@ -27,10 +27,12 @@ public class OrderDaoImpl implements OrderDao {
 
     private static final Logger log = LogManager.getLogger(BookDaoImpl.class);
 
-    public static final String GET_BY_ID = "SELECT o.id, o.user_id, o.total_cost, s.name " +
-            "FROM orders o JOIN status s  ON status_id = s.id WHERE o.id = ?";
-    public static final String GET_ALL = "SELECT o.id, o.user_id, o.total_cost, s.name " +
-            "FROM orders o JOIN status s  ON status_id = s.id";
+    public static final String GET_BY_ID = "SELECT o.id, o.user_id, (SELECT SUM (quantity * price) FROM order_items " +
+            "WHERE order_id = o.id) AS total_cost, s.name " +
+            "FROM orders o JOIN statuses s  ON status_id = s.id WHERE o.id = ?";
+    public static final String GET_ALL = "SELECT o.id, o.user_id, (SELECT SUM (quantity * price) FROM order_items " +
+            "WHERE order_id = o.id) AS total_cost, s.name " +
+            "FROM orders o JOIN statuses s  ON status_id = s.id";
 
     private Order processRow(ResultSet rs, int rowNum) throws SQLException {
         Order order = new Order();

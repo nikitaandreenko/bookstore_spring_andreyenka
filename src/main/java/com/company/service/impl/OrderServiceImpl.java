@@ -10,9 +10,10 @@ import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    @Autowired
+
     private final OrderDao orderDao;
 
+    @Autowired
     public OrderServiceImpl(OrderDao orderDao) {
         this.orderDao = orderDao;
     }
@@ -30,8 +31,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAll() {
-
-        return null;
+        List<Order> orders = orderDao.findAll();
+        return orders;
     }
 
     @Override

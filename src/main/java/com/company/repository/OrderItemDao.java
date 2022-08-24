@@ -5,8 +5,8 @@ import com.company.entity.OrderItem;
 
 import java.util.List;
 
-public interface OrderItemDao extends AbstractDao<Long, Order>{
+public interface OrderItemDao extends AbstractDao<Long, OrderItem>{
 
-    List <OrderItem> findByOrderId(Long OrderId);
+    List <OrderItem> findByOrderId(Long orderId);
 
 }
