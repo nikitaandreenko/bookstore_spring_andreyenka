@@ -60,3 +60,10 @@ VALUES ('Nik', 'Swanson', 35, 'n.sw@gmail.com', (SELECT id FROM roles WHERE name
        ('Wolly', 'Monson', 59, 'monson_1967@gmail.com', (SELECT id FROM roles WHERE name = 'MANAGER')),
        ('Nik', 'Cracks', 49, 'cr_nik_1979@gmail.com', (SELECT id FROM roles WHERE name = 'ADMIN')),
        ('Silly', 'Sorento', 42, 'sil.srn18@gmail.com', (SELECT id FROM roles WHERE name = 'USER'));
+
+INSERT INTO statuses (name)
+VALUES
+    ('PENDING'),
+    ('CONFIRMED'),
+    ('DELIVERED'),
+    ('CANCELED');

@@ -12,15 +12,16 @@ CREATE TABLE IF NOT EXISTS languages
 );
 CREATE TABLE IF NOT EXISTS books
 (
-    id BIGSERIAL NOT NULL,
+    id BIGSERIAL PRIMARY KEY NOT NULL,
     book_name VARCHAR(75) NOT NULL,
     author VARCHAR(30),
     isbn VARCHAR(75) UNIQUE NOT NULL,
-    price numeric NOT NULL,
+    price NUMERIC(6,2) NOT NULL,
     pages INTEGER NOT NULL,
     binding VARCHAR(30) NOT NULL,
     year_publishing INTEGER,
-    language_id BIGINT REFERENCES languages
+    language_id BIGINT REFERENCES languages NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS roles
@@ -35,6 +36,30 @@ CREATE TABLE IF NOT EXISTS users
     last_name VARCHAR(100) NOT NULL,
     age INTEGER,
     email VARCHAR(100)UNIQUE NOT NULL,
-    role_id BIGINT REFERENCES roles
+    role_id BIGINT REFERENCES roles NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+CREATE TABLE IF NOT EXISTS statuses
+(
+    id   BIGSERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS orders
+(
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT REFERENCES users NOT NULL,
+    total_cost NUMERIC(8,2) NOT NULL,
+    status_id BIGINT REFERENCES statuses NOT NULL
+);
+CREATE TABLE IF NOT EXISTS order_items
+(
+    id BIGSERIAL PRIMARY KEY,
+    order_id BIGINT REFERENCES orders NOT NULL,
+    book_id BIGINT REFERENCES books NOT NULL,
+    quantity INTEGER NOT NULL,
+    price NUMERIC(6,2) NOT NULL
+);
+
 
