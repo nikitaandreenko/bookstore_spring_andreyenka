@@ -41,7 +41,7 @@ public class BookDaoImpl implements BookDao {
     public static final String GET_ALL_AUTHOR = "SELECT books.id, books.book_name, books.author, books.isbn, books.price, books.pages, " +
             "books.binding, books.year_publishing, languages.name " +
             "FROM books JOIN languages ON language_id = languages.id WHERE author =?";
-    public static final String DELETE_BY_ID = "DELETE FROM books WHERE id=?";
+    public static final String DELETE_BY_ID = "UPDATE books SET deleted = TRUE WHERE id = ?";
     public static final String COUNT_ALL_BOOKS = "SELECT count(*) AS total FROM books";
 
 

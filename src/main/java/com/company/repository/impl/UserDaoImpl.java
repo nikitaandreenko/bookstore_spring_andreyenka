@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
             "role_id = (SELECT id FROM roles WHERE name = :name) WHERE id = :id";
     public static final String GET_ALL_LASTNAME = "SELECT users.id, users.first_name, users.last_name, users.age, users.email, roles.name " +
             "FROM users JOIN roles ON role_id = roles.id WHERE users.last_name= ?";
-    public static final String DELETE_BY_ID = "DELETE FROM users WHERE id=?";
+    public static final String DELETE_BY_ID = "UPDATE users SET deleted = TRUE WHERE id = ?";
     public static final String COUNT_All_USERS = "SELECT count(*) AS total FROM users";
 
     private final JdbcTemplate jdbcTemplate;
