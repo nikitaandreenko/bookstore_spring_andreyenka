@@ -1,5 +1,6 @@
 package com.company.service.impl;
 
+import com.company.repository.BookDao;
 import com.company.repository.impl.BookDaoImpl;
 import com.company.entity.Book;
 import com.company.service.BookService;
@@ -15,10 +16,10 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
     private static final Logger log = LogManager.getLogger(BookServiceImpl.class);
 
-    private final BookDaoImpl bookDao;
+    private final BookDao bookDao;
 
     @Autowired
-    public BookServiceImpl(BookDaoImpl bookDao) {
+    public BookServiceImpl(BookDao bookDao) {
         this.bookDao = bookDao;
     }
 

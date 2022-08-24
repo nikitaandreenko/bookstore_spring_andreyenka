@@ -1,6 +1,7 @@
 package com.company.service.impl;
 
 
+import com.company.repository.UserDao;
 import com.company.repository.impl.UserDaoImpl;
 import com.company.entity.User;
 import com.company.service.UserService;
@@ -14,10 +15,10 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
     private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
-    private final UserDaoImpl userDao;
+    private final UserDao userDao;
 
     @Autowired
-    public UserServiceImpl(UserDaoImpl userDao) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
