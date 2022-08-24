@@ -6,9 +6,11 @@ import com.company.entity.User;
 import com.company.repository.OrderDao;
 import com.company.repository.OrderItemDao;
 import com.company.repository.UserDao;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,21 +20,27 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class OrderDaoImpl implements OrderDao {
 
     private final JdbcTemplate jdbcTemplate;
     private final UserDao userDao;
     private final OrderItemDao orderItemDao;
 
+    @Autowired
+    public OrderDaoImpl(JdbcTemplate jdbcTemplate, UserDao userDao, OrderItemDao orderItemDao) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.userDao = userDao;
+        this.orderItemDao = orderItemDao;
+    }
+
     private static final Logger log = LogManager.getLogger(BookDaoImpl.class);
 
     public static final String GET_BY_ID = "SELECT o.id, o.user_id, (SELECT SUM (quantity * price) FROM order_items " +
-            "WHERE order_id = o.id) AS total_cost, s.name " +
+            "WHERE order_id = o.id) AS total_cost, s.name AS status " +
             "FROM orders o JOIN statuses s  ON status_id = s.id WHERE o.id = ?";
     public static final String GET_ALL = "SELECT o.id, o.user_id, (SELECT SUM (quantity * price) FROM order_items " +
-            "WHERE order_id = o.id) AS total_cost, s.name " +
-            "FROM orders o JOIN statuses s  ON status_id = s.id";
+            "WHERE order_id = o.id) AS total_cost, s.name AS status " +
+            "FROM orders o JOIN statuses s  ON o.status_id = s.id";
 
     private Order processRow(ResultSet rs, int rowNum) throws SQLException {
         Order order = new Order();
@@ -40,8 +48,8 @@ public class OrderDaoImpl implements OrderDao {
         Long userId = rs.getLong("user_id");
         User user = userDao.findById(userId);
         order.setUser(user);
-        order.setStatus(Order.Status.valueOf(rs.getString("status")));
         order.setTotalCost(rs.getBigDecimal("total_cost"));
+        order.setStatus(Order.Status.valueOf(rs.getString("status")));
         List<OrderItem> items = orderItemDao.findByOrderId(order.getId());
         order.setItems(items);
         return order;

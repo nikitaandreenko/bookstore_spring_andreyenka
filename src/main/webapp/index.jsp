@@ -8,6 +8,7 @@
             <h1>Bookstore made by Andreyenka with Java</h1>
             <h1><a href="controller?command=all_books"> <button>books</button></a></h1>
             <h1><a href="controller?command=all_users"><button>users</button></a></h1>
+            <h1><a href="controller?command=all_orders"><button>orders</button></a></h1>
         </body>
 
 </html>

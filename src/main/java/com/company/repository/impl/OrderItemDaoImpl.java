@@ -4,9 +4,9 @@ import com.company.entity.Book;
 import com.company.entity.OrderItem;
 import com.company.repository.BookDao;
 import com.company.repository.OrderItemDao;
-import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class OrderItemDaoImpl implements OrderItemDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -24,9 +23,15 @@ public class OrderItemDaoImpl implements OrderItemDao {
 
     private static final Logger log = LogManager.getLogger(BookDaoImpl.class);
 
-    public static final String GET_BY_ID = "SELECT * FROM order_items WHERE id = ?";
-    public static final String GET_ALL = "SSELECT * FROM order_items ";
-    public static final String GET_BY_ORDER_ID = "SELECT * FROM order_items WHERE order_id = ?";
+    public static final String GET_BY_ID = "SELECT order_items.id, order_items.order_id, order_items.book_id, order_items.quantity, order_items.price FROM order_items WHERE id = ?";
+    public static final String GET_ALL = "SELECT order_items.id,order_items.order_id, order_items.book_id, order_items.quantity, order_items.price FROM order_items ";
+    public static final String GET_BY_ORDER_ID = "SELECT order_items.id, order_items.order_id, order_items.book_id, order_items.quantity, order_items.price FROM order_items WHERE order_id = ?";
+
+    @Autowired
+    public OrderItemDaoImpl(JdbcTemplate jdbcTemplate, BookDao bookDao) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.bookDao = bookDao;
+    }
 
 
     private OrderItem processRow(ResultSet rs, int rowNum) throws SQLException {
