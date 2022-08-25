@@ -14,7 +14,7 @@
     <tr>
         <th>User</th>
         <th>Status</th>
-        <th>Total price</th>
+        <th>Total cost</th>
         <th>Order items</th>
 
     </tr>
@@ -23,9 +23,9 @@
         <td>${requestScope.order.status}</td>
         <td>${requestScope.order.totalCost}</td>
         <td>
-            <table>
+            <table class="table_mini">
                 <c:forEach items="${requestScope.order.items}" var="items">
-                    <tr  align = left>
+                    <tr>
                         <td>${items.book.book_name}</td>
                         <td>${items.quantity}</td>
                         <td>${items.price}</td>
