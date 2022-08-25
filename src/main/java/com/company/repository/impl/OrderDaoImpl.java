@@ -39,6 +39,9 @@ public class OrderDaoImpl implements OrderDao {
     public static final String GET_ALL = "SELECT o.id, o.user_id, (SELECT SUM (quantity * price) FROM order_items " +
             "WHERE order_id = o.id) AS total_cost, s.name AS status " +
             "FROM orders o JOIN statuses s  ON o.status_id = s.id WHERE s.name != 'CANCELED'";
+    public static final String GET_BY_USER_ID = "SELECT o.id, o.user_id, (SELECT SUM (quantity * price) FROM order_items " +
+            "WHERE order_id = o.id) AS total_cost, s.name AS status " +
+            "FROM orders o JOIN statuses s  ON status_id = s.id WHERE s.name != 'CANCELED' AND user_id = ?";
 
     private Order processRow(ResultSet rs, int rowNum) throws SQLException {
         Order order = new Order();
@@ -87,5 +90,15 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean delete(Long id) {
         return false;
+    }
+
+    @Override
+    public List<Order> findByUserId(Long userId) {
+        log.debug("Get order by user_id={} from database order_items", userId);
+        try {
+            return jdbcTemplate.query(GET_BY_USER_ID, this::processRow, userId);
+        } catch (EmptyResultDataAccessException ignored) {
+            return null;
+        }
     }
 }

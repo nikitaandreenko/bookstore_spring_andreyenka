@@ -16,7 +16,7 @@
         <th>Status</th>
         <th>Total cost</th>
         <th>Order items</th>
-
+        <th>All orders this user</th>
     </tr>
     <tr>
         <td><a href="controller?command=user&id=${requestScope.order.user.id}">${requestScope.order.user.email}</a></td>
@@ -29,11 +29,11 @@
                         <td>${items.book.book_name}</td>
                         <td>${items.quantity}</td>
                         <td>${items.price}</td>
-<%--                        <td><a href="controller?command=book&id=${book.id}"><button>Click me</button></a></td>--%>
                     </tr>
                 </c:forEach>
             </table>
         </td>
+        <td><a href="controller?command=order_by_user_id&user_id=${requestScope.order.user.id}"><button>Click me</button></a></td>
     </tr>
 </table>
 </body>

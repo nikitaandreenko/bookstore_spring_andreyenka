@@ -89,7 +89,8 @@ VALUES ((SELECT id FROM users WHERE email = 'n.sw@gmail.com'), 0.0,(SELECT id FR
        ((SELECT id FROM users WHERE email = 'cokky_sam1987@gmail.com'), 0.0,(SELECT id FROM statuses WHERE name = 'CONFIRMED')),
        ((SELECT id FROM users WHERE email = 'monson_1967@gmail.com'), 0.0,(SELECT id FROM statuses WHERE name = 'CONFIRMED')),
        ((SELECT id FROM users WHERE email = 'cr_nik_1979@gmail.com'), 0.0,(SELECT id FROM statuses WHERE name = 'CONFIRMED')),
-       ((SELECT id FROM users WHERE email = 'sil.srn18@gmail.com'), 0.0,(SELECT id FROM statuses WHERE name = 'CONFIRMED'));
+       ((SELECT id FROM users WHERE email = 'sil.srn18@gmail.com'), 0.0,(SELECT id FROM statuses WHERE name = 'CONFIRMED')),
+       ((SELECT id FROM users WHERE email = 'n.sw@gmail.com'), 0.0,(SELECT id FROM statuses WHERE name = 'PENDING'));
 
 INSERT INTO order_items (order_id, book_id, quantity, price)
 VALUES (1, (SELECT id FROM books WHERE book_name = 'it starts us'),2, (SELECT price FROM books WHERE book_name = 'it starts us')),
@@ -120,4 +121,5 @@ VALUES (1, (SELECT id FROM books WHERE book_name = 'it starts us'),2, (SELECT pr
        (18, (SELECT id FROM books WHERE book_name = 'A Time for Mercy'),3, (SELECT price FROM books WHERE book_name = 'A Time for Mercy')),
        (19, (SELECT id FROM books WHERE book_name = 'Maybe Someday'),2, (SELECT price FROM books WHERE book_name = 'Maybe Someday')),
        (20, (SELECT id FROM books WHERE book_name = 'A Time for Mercy'),2, (SELECT price FROM books WHERE book_name = 'A Time for Mercy')),
-       (21, (SELECT id FROM books WHERE book_name = 'it starts us'),5, (SELECT price FROM books WHERE book_name = 'it starts us'));
+       (21, (SELECT id FROM books WHERE book_name = 'it starts us'),5, (SELECT price FROM books WHERE book_name = 'it starts us')),
+       (22, (SELECT id FROM books WHERE book_name = 'it starts us'),2, (SELECT price FROM books WHERE book_name = 'it starts us'));

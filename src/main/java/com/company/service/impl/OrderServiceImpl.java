@@ -49,4 +49,10 @@ public class OrderServiceImpl implements OrderService {
     public void delete(Long id) {
 
     }
+
+    @Override
+    public List<Order> findByUserId(Long userId) {
+        List<Order> orders = orderDao.findByUserId(userId);
+        return orders;
+    }
 }
