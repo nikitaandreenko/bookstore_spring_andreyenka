@@ -22,21 +22,21 @@ public class UserDaoImpl implements UserDao {
     private static final Logger log = LogManager.getLogger(UserDaoImpl.class);
 
     public static final String GET_ALL = "SELECT users.id, users.first_name, users.last_name, users.age, users.email, roles.name " +
-            "FROM users JOIN roles ON role_id = roles.id";
+            "FROM users JOIN roles ON role_id = roles.id WHERE users.deleted = FALSE";
     public static final String GET_BY_ID = "SELECT users.id, users.first_name, users.last_name, users.age, users.email, roles.name " +
-            "FROM users JOIN roles ON role_id = roles.id WHERE users.id = ?";
+            "FROM users JOIN roles ON role_id = roles.id WHERE users.deleted = FALSE AND users.id = ?";
 
     public static final String CREATE_USER = "INSERT INTO users (first_name, last_name, age, email, role_id) " +
-            "VALUES (?, ?, ?, ?, (SELECT id FROM roles WHERE name = ?))";
+            "VALUES (?, ?, ?, ?, (SELECT id FROM roles WHERE name = ?)) ";
 
     public static final String GET_BY_EMAIL = "SELECT users.id, users.first_name, users.last_name, users.age, users.email, roles.name " +
-            "FROM users JOIN roles ON role_id = roles.id WHERE users.email = ?";
+            "FROM users JOIN roles ON role_id = roles.id WHERE users.deleted = FALSE AND users.email = ?";
     public static final String UPDATE_NAMED = "UPDATE users SET first_name = :first_name, last_name = :last_name, age = :age, email = :email, " +
-            "role_id = (SELECT id FROM roles WHERE name = :name) WHERE id = :id";
+            "role_id = (SELECT id FROM roles WHERE name = :name) WHERE deleted = FALSE AND id = :id";
     public static final String GET_ALL_LASTNAME = "SELECT users.id, users.first_name, users.last_name, users.age, users.email, roles.name " +
-            "FROM users JOIN roles ON role_id = roles.id WHERE users.last_name= ?";
+            "FROM users JOIN roles ON role_id = roles.id WHERE user.deleted = FALSE AND users.last_name= ?";
     public static final String DELETE_BY_ID = "UPDATE users SET deleted = TRUE WHERE id = ?";
-    public static final String COUNT_All_USERS = "SELECT count(*) AS total FROM users";
+    public static final String COUNT_All_USERS = "SELECT count(*) AS total FROM users WHERE user.deleted = FALSE ";
 
     private final JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedJdbcTemplate;

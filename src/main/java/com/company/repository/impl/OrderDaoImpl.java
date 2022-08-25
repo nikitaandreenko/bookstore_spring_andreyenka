@@ -37,10 +37,10 @@ public class OrderDaoImpl implements OrderDao {
 
     public static final String GET_BY_ID = "SELECT o.id, o.user_id, (SELECT SUM (quantity * price) FROM order_items " +
             "WHERE order_id = o.id) AS total_cost, s.name AS status " +
-            "FROM orders o JOIN statuses s  ON status_id = s.id WHERE o.id = ?";
+            "FROM orders o JOIN statuses s  ON status_id = s.id WHERE s.name != 'CANCELED' AND o.id = ?";
     public static final String GET_ALL = "SELECT o.id, o.user_id, (SELECT SUM (quantity * price) FROM order_items " +
             "WHERE order_id = o.id) AS total_cost, s.name AS status " +
-            "FROM orders o JOIN statuses s  ON o.status_id = s.id";
+            "FROM orders o JOIN statuses s  ON o.status_id = s.id WHERE s.name != 'CANCELED'";
 
     private Order processRow(ResultSet rs, int rowNum) throws SQLException {
         Order order = new Order();
