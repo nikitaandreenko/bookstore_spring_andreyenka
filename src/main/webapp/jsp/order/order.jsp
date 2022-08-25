@@ -19,14 +19,14 @@
         <th>All orders this user</th>
     </tr>
     <tr>
-        <td><a href="controller?command=user&id=${requestScope.order.user.id}">${requestScope.order.user.email}</a></td>
+        <td><a href="controller?command=user&id=${requestScope.order.user.id}"><button class="new_button">${requestScope.order.user.email}</button></a></td>
         <td>${requestScope.order.status}</td>
         <td>${requestScope.order.totalCost}</td>
         <td>
             <table class="table_mini">
                 <c:forEach items="${requestScope.order.items}" var="items">
                     <tr>
-                        <td>${items.book.book_name}</td>
+                        <td><a href="controller?command=book&id=${items.book.id}"><button class="new_button">${items.book.book_name}</button></a></td>
                         <td>${items.quantity}</td>
                         <td>${items.price}</td>
                     </tr>
