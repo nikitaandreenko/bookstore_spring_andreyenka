@@ -6,8 +6,6 @@ import com.company.entity.User;
 import com.company.repository.OrderDao;
 import com.company.repository.OrderItemDao;
 import com.company.repository.UserDao;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
