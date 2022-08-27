@@ -1,6 +1,6 @@
 package com.company.service.impl;
 
-import com.company.repository.BookDao;
+import com.company.data.repository.BookRepository;
 import com.company.entity.Book;
 import com.company.service.BookService;
 import org.apache.logging.log4j.LogManager;
@@ -15,24 +15,25 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
     private static final Logger log = LogManager.getLogger(BookServiceImpl.class);
 
-    private final BookDao bookDao;
+    private final BookRepository bookRepository;
 
     @Autowired
-    public BookServiceImpl(BookDao bookDao) {
-        this.bookDao = bookDao;
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
+
 
     @Override
     public Book create(Book book) {
         log.debug("Create book={} in database book", book);
         validate(book);
-        return bookDao.create(book);
+        return bookRepository.create(book);
     }
 
     @Override
     public Book findById(Long id) {
         log.debug("Get book by id={} from database books", id);
-        Book book = bookDao.findById(id);
+        Book book = bookRepository.findById(id);
         if (book == null) {
             throw new RuntimeException("Book with id:" + id + " doesn't exist");
         }
@@ -42,7 +43,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getByIsbn(String isbn) {
         log.debug("Get book by isbn={} from database books", isbn);
-        Book book = bookDao.getByIsbn(isbn);
+        Book book = bookRepository.getByIsbn(isbn);
         if (book == null) {
             throw new RuntimeException("Book with isbn:" + isbn + " doesn't exist");
         }
@@ -52,26 +53,26 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAll() {
         log.debug("Get all books from database books");
-        return bookDao.findAll();
+        return bookRepository.findAll();
     }
 
     @Override
     public List<Book> getByAuthor(String author) {
         log.debug("Get book by author={} from database books", author);
-        return bookDao.getByAuthor(author);
+        return bookRepository.getByAuthor(author);
     }
 
     @Override
     public Long countAll() {
         log.debug("Count all books from database books");
-        return bookDao.countAll();
+        return bookRepository.countAll();
     }
 
     @Override
     public Book update(Book book) {
         log.debug("Update book={} in database books", book);
         validate(book);
-        Book book1 = bookDao.update(book);
+        Book book1 = bookRepository.update(book);
         if (book1 == null) {
             throw new RuntimeException("Books can't be empty...");
         }
@@ -87,7 +88,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void delete(Long id) {
         log.debug("Delete book by id={} from database books", id);
-        boolean successRemove = bookDao.delete(id);
+        boolean successRemove = bookRepository.delete(id);
         if (!successRemove) {
             throw new RuntimeException("This book doesn't remove");
         }

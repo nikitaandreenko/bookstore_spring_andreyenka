@@ -1,7 +1,7 @@
 package com.company.service.impl;
 
 import com.company.entity.Order;
-import com.company.repository.OrderDao;
+import com.company.data.repository.OrderRepository;
 import com.company.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +11,10 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderDao orderDao;
+    private final OrderRepository orderRepository;
 
-    @Autowired
-    public OrderServiceImpl(OrderDao orderDao) {
-        this.orderDao = orderDao;
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     @Override
@@ -25,13 +24,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(Long id) {
-        Order order = orderDao.findById(id);
+        Order order = orderRepository.findById(id);
         return order;
     }
 
     @Override
     public List<Order> findAll() {
-        List<Order> orders = orderDao.findAll();
+        List<Order> orders = orderRepository.findAll();
         return orders;
     }
 
@@ -52,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findByUserId(Long userId) {
-        List<Order> orders = orderDao.findByUserId(userId);
+        List<Order> orders = orderRepository.findByUserId(userId);
         return orders;
     }
 }

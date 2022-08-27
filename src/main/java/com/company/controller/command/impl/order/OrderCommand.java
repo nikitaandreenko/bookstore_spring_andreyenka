@@ -2,7 +2,6 @@ package com.company.controller.command.impl.order;
 
 import com.company.controller.command.Command;
 import com.company.entity.Order;
-import com.company.entity.User;
 import com.company.service.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

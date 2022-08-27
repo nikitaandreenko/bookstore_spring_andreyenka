@@ -1,10 +1,10 @@
-package com.company.repository;
+package com.company.data.repository;
 
 import com.company.entity.Book;
 
 import java.util.List;
 
-public interface BookDao extends AbstractDao<Long, Book> {
+public interface BookRepository extends AbstractRepository<Long, Book> {
     Book getByIsbn(String isbn);
 
     List<Book> getByAuthor(String author);
