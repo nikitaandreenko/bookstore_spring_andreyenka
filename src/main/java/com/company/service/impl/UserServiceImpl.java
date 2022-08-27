@@ -7,8 +7,8 @@ import com.company.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Objects;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         log.debug("Create user={} in database user", user);
+        validateCreate(user);
         return userRepository.create(user);
     }
 
@@ -71,6 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         log.debug("Update user={} in database users", user);
+        validateUpdate(user);
         User user1 = userRepository.update(user);
         if (user1 == null) {
             throw new RuntimeException("Users can't be empty...");
@@ -84,6 +86,18 @@ public class UserServiceImpl implements UserService {
         boolean successRemove = userRepository.delete(id);
         if (!successRemove) {
             throw new RuntimeException("This user doesn't remove");
+        }
+    }
+    private void validateCreate(User user) {
+        User newUser = userRepository.getUserByEmail(user.getEmail());
+        if (newUser != null) {
+            throw new RuntimeException("User with email: " + user.getEmail() + "already exist!");
+        }
+    }
+    private void validateUpdate(User user) {
+        User newUser = userRepository.getUserByEmail(user.getEmail());
+        if (!Objects.equals(user.getId(),newUser.getId())) {
+            throw new RuntimeException("User with email: " + user.getEmail() + "already exist!");
         }
     }
 }

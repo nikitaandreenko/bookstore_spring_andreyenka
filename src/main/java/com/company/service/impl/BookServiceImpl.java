@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Service("bookService")
 public class BookServiceImpl implements BookService {
@@ -26,7 +27,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book create(Book book) {
         log.debug("Create book={} in database book", book);
-        validate(book);
+        validateCreate(book);
         return bookRepository.create(book);
     }
 
@@ -71,7 +72,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book update(Book book) {
         log.debug("Update book={} in database books", book);
-        validate(book);
+        validateUpdate(book);
         Book book1 = bookRepository.update(book);
         if (book1 == null) {
             throw new RuntimeException("Books can't be empty...");
@@ -79,9 +80,22 @@ public class BookServiceImpl implements BookService {
         return book1;
     }
 
-    private void validate(Book book) {
+    private void validateCreate(Book book) {
         if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new RuntimeException("Price is not valid. Price can't be less 0");
+        }
+        Book newBook = bookRepository.getByIsbn(book.getIsbn());
+        if (newBook != null) {
+            throw new RuntimeException("Book with isbn: " + book.getIsbn() + "already exist!");
+        }
+    }
+    private void validateUpdate(Book book) {
+        if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
+            throw new RuntimeException("Price is not valid. Price can't be less 0");
+        }
+        Book newBook = bookRepository.getByIsbn(book.getIsbn());
+        if (!Objects.equals(book.getId(),newBook.getId())) {
+            throw new RuntimeException("Book with isbn: " + book.getIsbn() + "already exist!");
         }
     }
 
