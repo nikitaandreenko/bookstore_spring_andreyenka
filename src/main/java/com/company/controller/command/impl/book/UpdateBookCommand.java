@@ -3,6 +3,7 @@ package com.company.controller.command.impl.book;
 import com.company.controller.command.Command;
 import com.company.entity.Book;
 import com.company.service.BookService;
+import com.company.service.dto.BookDtoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class UpdateBookCommand implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter("id"));
-        Book book = bookService.findById(id);
+        BookDtoService book = bookService.findById(id);
         book.setBook_name(req.getParameter("bookName"));
         book.setAuthor(req.getParameter("author"));
         book.setIsbn(req.getParameter("isbn"));
@@ -30,7 +31,7 @@ public class UpdateBookCommand implements Command {
         book.setPages(Integer.parseInt(req.getParameter("pages")));
         book.setBinding(req.getParameter("binding"));
         book.setYear_publishing(Integer.parseInt(req.getParameter("year_publishing")));
-        book.setLanguage(Book.Language.valueOf(req.getParameter("language")));
+        book.setLanguage(BookDtoService.Language.valueOf(req.getParameter("language")));
         bookService.update(book);
         req.setAttribute("book", book);
         req.setAttribute("message", "bookstore by Andreyenka");

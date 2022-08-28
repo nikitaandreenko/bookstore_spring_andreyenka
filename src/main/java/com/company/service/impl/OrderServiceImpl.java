@@ -3,6 +3,11 @@ package com.company.service.impl;
 import com.company.entity.Order;
 import com.company.data.repository.OrderRepository;
 import com.company.service.OrderService;
+import com.company.service.dto.ObjectMapperService;
+import com.company.service.dto.OrderDtoService;
+import lombok.experimental.Accessors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,26 +17,34 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
+    private final ObjectMapperService mapper;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
+
+    @Autowired
+    public OrderServiceImpl(OrderRepository orderRepository, ObjectMapperService mapper) {
         this.orderRepository = orderRepository;
+        this.mapper = mapper;
     }
 
+
     @Override
-    public Order create(Order entity) {
+    public Order create(OrderDtoService entity) {
         return null;
     }
 
     @Override
-    public Order findById(Long id) {
+    public OrderDtoService findById(Long id) {
+        log.debug("Get order by id={} from database orders", id);
         Order order = orderRepository.findById(id);
-        return order;
+        OrderDtoService orderDtoService = mapper.toDto(order);
+        return orderDtoService;
     }
 
     @Override
-    public List<Order> findAll() {
-        List<Order> orders = orderRepository.findAll();
-        return orders;
+    public List<OrderDtoService> findAll() {
+        log.debug("Get all orders from database orders");
+        return orderRepository.findAll().stream().map(mapper::toDto).toList();
     }
 
     @Override
@@ -40,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order update(Order entity) {
+    public Order update(OrderDtoService entity) {
         return null;
     }
 
@@ -50,8 +63,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findByUserId(Long userId) {
-        List<Order> orders = orderRepository.findByUserId(userId);
-        return orders;
+    public List<OrderDtoService> findByUserId(Long userId) {
+       return orderRepository.findByUserId(userId).stream().map(mapper::toDto).toList();
     }
 }

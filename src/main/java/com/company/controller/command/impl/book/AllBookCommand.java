@@ -3,6 +3,7 @@ package com.company.controller.command.impl.book;
 import com.company.controller.command.Command;
 import com.company.entity.Book;
 import com.company.service.BookService;
+import com.company.service.dto.BookDtoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class AllBookCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req) {
-        List<Book> books = bookService.findAll();
+        List<BookDtoService> books = bookService.findAll();
         req.setAttribute("all_books", books);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/book/all_books.jsp";
