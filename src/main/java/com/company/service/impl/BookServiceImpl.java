@@ -80,15 +80,15 @@ public class BookServiceImpl implements BookService {
     public Book update(BookDtoService book) {
         log.debug("Update book={} in database books", book);
         validateUpdate(book);
-        Book bookUodated = mapper.toEntity(book);
-        Book book1 = bookRepository.update(bookUodated);
-        if (book1 == null) {
-            throw new RuntimeException("Books can't be empty...");
-        }
+        Book bookUpdated = mapper.toEntity(book);
+        Book book1 = bookRepository.update(bookUpdated);
         return book1;
     }
 
     private void validateCreate(BookDtoService book) {
+        if (book == null) {
+            throw new RuntimeException("Books can't be empty...");
+        }
         if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new RuntimeException("Price is not valid. Price can't be less 0");
         }
@@ -103,7 +103,7 @@ public class BookServiceImpl implements BookService {
             throw new RuntimeException("Price is not valid. Price can't be less 0");
         }
         Book newBook = bookRepository.getByIsbn(book.getIsbn());
-        if (!Objects.equals(book.getId(), newBook.getId())) {
+        if (newBook != null && !Objects.equals(book.getId(), newBook.getId())) {
             throw new RuntimeException("Book with isbn: " + book.getIsbn() + "already exist!");
         }
     }

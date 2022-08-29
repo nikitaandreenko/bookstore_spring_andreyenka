@@ -85,9 +85,7 @@ public class UserServiceImpl implements UserService {
         validateUpdate(user);
         User userUpdated = mapper.toEntity(user);
         User user1 = userRepository.update(userUpdated);
-        if (user1 == null) {
-            throw new RuntimeException("Users can't be empty...");
-        }
+
         return user1;
     }
 
@@ -108,6 +106,9 @@ public class UserServiceImpl implements UserService {
     }
 
     private void validateUpdate(UserDtoService user) {
+        if (user == null) {
+            throw new RuntimeException("Users can't be empty...");
+        }
         User newUser = userRepository.getUserByEmail(user.getEmail());
         if (!Objects.equals(user.getId(), newUser.getId())) {
             throw new RuntimeException("User with email: " + user.getEmail() + "already exist!");
