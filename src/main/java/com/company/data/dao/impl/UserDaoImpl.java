@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     public static final String GET_ALL = "SELECT users.id, users.first_name, users.last_name, users.age, users.email, roles.name " +
             "FROM users JOIN roles ON role_id = roles.id WHERE users.deleted = FALSE";
     public static final String GET_BY_ID = "SELECT users.id, users.first_name, users.last_name, users.age, users.email, roles.name " +
-            "FROM users JOIN roles ON role_id = roles.id WHERE users.deleted = FALSE AND users.id = ?";
+            "FROM users JOIN roles ON role_id = roles.id WHERE users.id = ?";
 
     public static final String CREATE_USER = "INSERT INTO users (first_name, last_name, age, email, role_id) " +
             "VALUES (?, ?, ?, ?, (SELECT id FROM roles WHERE name = ?)) ";
