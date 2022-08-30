@@ -12,6 +12,8 @@
         <slf4j.version>1.7.36</slf4j.version>
         <postgresql.version>42.4.1</postgresql.version>
         <springframework.version>5.3.22</springframework.version>
+        <hibernate.version>6.1.2.Final</hibernate.version>
+
     </properties>
 
     <groupId>com.company</groupId>
@@ -94,6 +96,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
     </dependencies>
 
