@@ -1,11 +1,12 @@
-package com.company.entity;
+package com.company.data.dto;
 
+import com.company.entity.Book;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class Book {
+public class BookDto {
     private Long id;
     private String book_name;
     private String author;
@@ -20,5 +21,4 @@ public class Book {
     public enum Language {
         ENGLISH, RUSSIAN, SPANISH, FRENCH, DEUTSCH, ARABIC, CHINESE, JAPANESE
     }
-
 }

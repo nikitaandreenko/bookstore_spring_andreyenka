@@ -1,11 +1,8 @@
-package com.company.entity;
-
-import lombok.*;
-
-import java.util.Objects;
+package com.company.service.dto;
+import lombok.Data;
 
 @Data
-public class User {
+public class UserDtoService {
     private Long id;
     private String firstName;
     private String lastName;

@@ -1,10 +1,10 @@
-package com.company.repository;
+package com.company.data.repository;
 
 import com.company.entity.User;
 
 import java.util.List;
 
-public interface UserDao extends AbstractDao<Long, User> {
+public interface UserRepository extends AbstractRepository<Long, User> {
 
 
     User getUserByEmail(String email);

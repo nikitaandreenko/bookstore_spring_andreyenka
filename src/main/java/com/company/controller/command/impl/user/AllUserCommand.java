@@ -1,8 +1,10 @@
 package com.company.controller.command.impl.user;
 
 import com.company.controller.command.Command;
+import com.company.data.dto.UserDto;
 import com.company.entity.User;
 import com.company.service.UserService;
+import com.company.service.dto.UserDtoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,7 @@ public class AllUserCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req) {
-        List<User> users = userService.findAll();
+        List<UserDtoService> users = userService.findAll();
         req.setAttribute("all_users", users);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/user/all_users.jsp";

@@ -1,8 +1,8 @@
-package com.company.repository;
+package com.company.data.repository;
 
 import java.util.List;
 
-public interface AbstractDao <K, T> {
+public interface AbstractRepository<K, T> {
 
     T create(T entity);
 

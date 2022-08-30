@@ -2,17 +2,17 @@ package com.company.service;
 
 import java.util.List;
 
-public interface AbstractService <K, T>{
+public interface AbstractService <K, T, V>{
 
-    T create(T entity);
+    T create(V dto);
 
-    T findById(K id);
+    V findById(K id);
 
-    List<T> findAll();
+    List<V> findAll();
 
     K countAll();
 
-    T update(T entity);
+    T update(V dto);
 
     void delete(K id);
 

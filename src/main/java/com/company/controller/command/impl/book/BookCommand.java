@@ -4,6 +4,7 @@ package com.company.controller.command.impl.book;
 import com.company.controller.command.Command;
 import com.company.entity.Book;
 import com.company.service.BookService;
+import com.company.service.dto.BookDtoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class BookCommand implements Command {
     public String execute(HttpServletRequest req) {
         String idRaw = req.getParameter("id");
         Long id = Long.parseLong(idRaw);
-        Book book = bookService.findById(id);
+        BookDtoService book = bookService.findById(id);
         req.setAttribute("book", book);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/book/book.jsp";

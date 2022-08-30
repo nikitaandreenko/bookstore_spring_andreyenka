@@ -1,11 +1,10 @@
-package com.company.entity;
+package com.company.data.dto;
 
-import lombok.*;
-
-import java.util.Objects;
+import com.company.entity.User;
+import lombok.Data;
 
 @Data
-public class User {
+public class UserDto {
     private Long id;
     private String firstName;
     private String lastName;

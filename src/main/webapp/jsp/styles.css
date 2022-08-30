@@ -1,9 +1,9 @@
 table {
     width: 75%;
     margin-bottom: 20px;
-    outline: 3px solid #ffd300;
     font-size: 15px;
-    margin-left:150px;
+    margin-left:125px;
+    margin-right:100px;
 }
 
 table th {
@@ -54,7 +54,10 @@ button{
     font-size: 20px;
 }
 div{
-    margin-left:150px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+
 }
 input[type=text], select, textarea {
     width: 50%;
@@ -86,3 +89,30 @@ button:hover{
     background: url(images/users.jpg) no-repeat;
     background-size: cover;
 }
+
+.table_mini{
+    width: 75%;
+    margin-bottom: 20px;
+    font-size: 15px;
+    margin-left:50px;
+    margin-right:20px;
+}
+
+.new_button{
+    font-size: 16px;
+    width: 200px;
+    height: 30px;
+    background-color: #20E2E2;
+}
+.new_button:hover{
+    font-size: 16px;
+    width: 200px;
+    height: 30px;
+    transition: 0.5s;
+    background-color: #ffd300;
+}
+
+
+
+
+
