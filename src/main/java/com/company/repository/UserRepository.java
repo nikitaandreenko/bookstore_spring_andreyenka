@@ -1,6 +1,6 @@
-package com.company.data.repository;
+package com.company.repository;
 
-import com.company.entity.User;
+import com.company.repository.entity.User;
 
 import java.util.List;
 

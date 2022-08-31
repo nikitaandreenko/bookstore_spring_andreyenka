@@ -1,9 +1,8 @@
 package com.company.controller.command.impl.book;
 
 import com.company.controller.command.Command;
-import com.company.entity.Book;
 import com.company.service.BookService;
-import com.company.service.dto.BookDtoService;
+import com.company.service.dto.BookDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ public class UpdateBookFormCommand implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter("id"));
-        BookDtoService book = bookService.findById(id);
+        BookDto book = bookService.findById(id);
         req.setAttribute("book", book);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/book/update_book.jsp";

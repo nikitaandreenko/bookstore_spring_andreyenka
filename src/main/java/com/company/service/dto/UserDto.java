@@ -2,7 +2,7 @@ package com.company.service.dto;
 import lombok.Data;
 
 @Data
-public class UserDtoService {
+public class UserDto {
     private Long id;
     private String firstName;
     private String lastName;

@@ -1,6 +1,6 @@
-package com.company.data.repository;
+package com.company.repository;
 
-import com.company.entity.Order;
+import com.company.repository.entity.Order;
 
 import java.util.List;
 

@@ -3,6 +3,9 @@ package com.company;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +23,6 @@ import java.util.Properties;
 @Configuration
 @ComponentScan
 public class AppConfiguration {
-
 
     @Bean
     public JdbcTemplate jdbcTemplate() {
@@ -45,7 +47,7 @@ public class AppConfiguration {
     }
 
     @Bean
-    public Properties properties(){
+    public Properties properties() {
 
         try {
             Resource resource = new ClassPathResource("/application.properties");
@@ -54,6 +56,6 @@ public class AppConfiguration {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
+
 }

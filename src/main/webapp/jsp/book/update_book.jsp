@@ -11,7 +11,7 @@
 <form align=center action="controller" method="post">
   <input type="hidden" name="command" value="update_book">
   <input type="hidden" name="id" value="${requestScope.book.id}">
-  Name: <input type="text" name="bookName" value="${requestScope.book.book_name}"/>
+  Name: <input type="text" name="book_name" value="${requestScope.book.bookName}"/>
   <br><br>
   Author: <input type="text" name="author" value="${requestScope.book.author}"/>
   <br><br>
@@ -23,9 +23,9 @@
   <br><br>
   Binding: <input type="text" name="binding" value="${requestScope.book.binding}"/>
   <br><br>
-  Year_publishing: <input type="text" name="year_publishing" value="${requestScope.book.year_publishing}"/>
+  Year_publishing: <input type="text" name="year_publishing" value="${requestScope.book.yearPublishing}"/>
   <br><br>
-  Language: <select name="language" value="${requestScope.book.language}" >
+  Language: <select name="book_language" value="${requestScope.book.language}" >
   <option>ENGLISH</option>
   <option>RUSSIAN</option>
   <option>SPANISH</option>

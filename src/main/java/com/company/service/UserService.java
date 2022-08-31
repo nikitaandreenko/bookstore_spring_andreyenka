@@ -1,14 +1,13 @@
 package com.company.service;
 
-import com.company.entity.User;
-import com.company.service.dto.UserDtoService;
+import com.company.service.dto.UserDto;
 
 import java.util.List;
 
-public interface UserService extends AbstractService<Long, User, UserDtoService>{
+public interface UserService extends AbstractService<Long, UserDto>{
 
-    UserDtoService getUserByEmail(String email);
+    UserDto getUserByEmail(String email);
 
-    List<UserDtoService> getUserByLastName(String lastName);
+    List<UserDto> getUserByLastName(String lastName);
 
 }

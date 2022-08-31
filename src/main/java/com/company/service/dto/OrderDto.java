@@ -1,11 +1,13 @@
-package com.company.entity;
+package com.company.service.dto;
 
+import com.company.repository.entity.OrderItem;
+import com.company.repository.entity.User;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
 @Data
-public class Order {
+public class OrderDto {
     private Long id;
     private User user;
     private Status status;

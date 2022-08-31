@@ -28,13 +28,13 @@
 
     </tr>
     <tr>
-        <td>${requestScope.book.book_name}</td>
+        <td>${requestScope.book.bookName}</td>
         <td>${requestScope.book.author}</td>
         <td>${requestScope.book.isbn}</td>
         <td>${requestScope.book.price}</td>
         <td>${requestScope.book.pages}</td>
         <td>${requestScope.book.binding}</td>
-        <td>${requestScope.book.year_publishing}</td>
+        <td>${requestScope.book.yearPublishing}</td>
         <td>${requestScope.book.language}</td>
     </tr>
 </table>

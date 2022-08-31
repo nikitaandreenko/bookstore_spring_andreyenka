@@ -1,9 +1,8 @@
 package com.company.controller.command.impl.user;
 
 import com.company.controller.command.Command;
-import com.company.entity.User;
 import com.company.service.UserService;
-import com.company.service.dto.UserDtoService;
+import com.company.service.dto.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,7 @@ public class UserCommand implements Command {
     public String execute(HttpServletRequest req) {
         String idRaw = req.getParameter("id");
         Long id = Long.parseLong(idRaw);
-        UserDtoService user = userService.findById(id);
+        UserDto user = userService.findById(id);
         req.setAttribute("user", user);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/user/user.jsp";
