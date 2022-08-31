@@ -46,13 +46,6 @@ VALUES ('Nik', 'Swanson', 35, 'n.sw@gmail.com', 'ADMIN'),
        ('Nik', 'Cracks', 49, 'cr_nik_1979@gmail.com', 'ADMIN'),
        ('Silly', 'Sorento', 42, 'sil.srn18@gmail.com', 'USER');
 
-INSERT INTO statuses (name)
-VALUES
-    ('PENDING'),
-    ('CONFIRMED'),
-    ('DELIVERED'),
-    ('CANCELED');
-
 INSERT INTO orders (user_id, total_cost, status)
 VALUES ((SELECT id FROM users WHERE email = 'n.sw@gmail.com'), 0.0, 'PENDING'),
        ((SELECT id FROM users WHERE email = 'n.mcl@gmail.com'), 0.0, 'PENDING'),

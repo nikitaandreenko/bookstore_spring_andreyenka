@@ -4,10 +4,10 @@ import com.company.repository.OrderRepository;
 
 import com.company.repository.entity.Order;
 
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,10 +15,11 @@ import java.util.List;
 
 @Repository("orderRepository")
 public class OrderRepositoryImpl implements OrderRepository {
-    private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("psql");
-    private static final EntityManager entityManager = factory.createEntityManager();
+    private EntityManager entityManager;
 
-    public OrderRepositoryImpl() {
+    @Autowired
+    public OrderRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -51,13 +52,15 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public List<Order> findByUserId(Long userId) {
-        List<Order> orders = entityManager.createQuery("FROM Order where user = :paramName", Order.class)
-                .setParameter("paramName", userId).getResultList();
+
+        List<Order> orders = entityManager.createQuery("SELECT o from Order o where o.user.id = ?1")
+                .setParameter(1, userId)
+                .getResultList();
         return orders;
     }
-    public void close() {
-        if (factory != null) {
-        }
-        factory.close();
+
+    @PreDestroy
+    public void preDestroy() {
+        entityManager.close();
     }
 }

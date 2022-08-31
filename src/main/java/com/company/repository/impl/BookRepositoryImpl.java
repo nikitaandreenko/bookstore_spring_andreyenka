@@ -3,9 +3,8 @@ package com.company.repository.impl;
 import com.company.repository.BookRepository;
 import com.company.repository.entity.Book;
 import com.company.repository.entity.User;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +12,12 @@ import java.util.List;
 
 @Repository("bookRepository")
 public class BookRepositoryImpl implements BookRepository {
-    private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("psql");
-    private static final EntityManager entityManager = factory.createEntityManager();
+
+    private EntityManager entityManager;
 
     @Autowired
-    public BookRepositoryImpl() {
+    public BookRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -69,9 +69,8 @@ public class BookRepositoryImpl implements BookRepository {
         return books;
     }
 
-    public void close() {
-        if (factory != null) {
-        }
-        factory.close();
+    @PreDestroy
+    public void preDestroy() {
+        entityManager.close();
     }
 }

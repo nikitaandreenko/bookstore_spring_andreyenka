@@ -3,10 +3,8 @@ package com.company.repository.impl;
 ;
 import com.company.repository.UserRepository;
 import com.company.repository.entity.User;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
-
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,11 +13,11 @@ import java.util.List;
 @Repository("userRepository")
 public class UserRepositoryImpl implements UserRepository {
 
-    private static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("psql");
-    private static final EntityManager entityManager = factory.createEntityManager();
+    private EntityManager entityManager;
 
     @Autowired
-    public UserRepositoryImpl() {
+    public UserRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -38,7 +36,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        List <User> users = entityManager.createQuery("from User", User.class).getResultList();
+        List<User> users = entityManager.createQuery("from User", User.class).getResultList();
         return users;
     }
 
@@ -65,15 +63,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getUserByLastName(String lastName) {
-        List <User> users = entityManager.createQuery("FROM User where lastName = :paramName", User.class)
+        List<User> users = entityManager.createQuery("FROM User where lastName = :paramName", User.class)
                 .setParameter("paramName", lastName).getResultList();
         return users;
     }
 
-    public void close() {
-        if (factory != null) {
-        }
-        factory.close();
+    @PreDestroy
+    public void preDestroy() {
+        entityManager.close();
     }
-
 }
