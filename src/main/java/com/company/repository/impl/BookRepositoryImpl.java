@@ -69,8 +69,4 @@ public class BookRepositoryImpl implements BookRepository {
         return books;
     }
 
-    @PreDestroy
-    public void preDestroy() {
-        entityManager.close();
-    }
 }

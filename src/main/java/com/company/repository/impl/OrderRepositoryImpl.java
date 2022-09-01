@@ -59,8 +59,4 @@ public class OrderRepositoryImpl implements OrderRepository {
         return orders;
     }
 
-    @PreDestroy
-    public void preDestroy() {
-        entityManager.close();
-    }
 }

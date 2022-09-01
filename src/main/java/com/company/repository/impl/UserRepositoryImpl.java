@@ -68,8 +68,4 @@ public class UserRepositoryImpl implements UserRepository {
         return users;
     }
 
-    @PreDestroy
-    public void preDestroy() {
-        entityManager.close();
-    }
 }
