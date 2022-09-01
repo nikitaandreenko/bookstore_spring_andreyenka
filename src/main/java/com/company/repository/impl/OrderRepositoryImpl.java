@@ -2,9 +2,9 @@ package com.company.repository.impl;
 
 import com.company.repository.OrderRepository;
 
+import com.company.repository.UserRepository;
 import com.company.repository.entity.Order;
 
-import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,12 @@ import java.util.List;
 public class OrderRepositoryImpl implements OrderRepository {
     private EntityManager entityManager;
 
+    private UserRepository userRepository;
+
     @Autowired
-    public OrderRepositoryImpl(EntityManager entityManager) {
+    public OrderRepositoryImpl(EntityManager entityManager, UserRepository userRepository) {
         this.entityManager = entityManager;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -36,6 +39,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public List<Order> findAll() {
+        userRepository.findAll();
         List<Order> orders = entityManager.createQuery("from Order ", Order.class).getResultList();
         return orders;
     }
@@ -47,7 +51,6 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public void delete(Long id) {
-        System.out.println(id);
     }
 
     @Override

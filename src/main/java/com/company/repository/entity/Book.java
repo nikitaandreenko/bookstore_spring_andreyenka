@@ -1,6 +1,7 @@
 package com.company.repository.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 import java.util.Objects;

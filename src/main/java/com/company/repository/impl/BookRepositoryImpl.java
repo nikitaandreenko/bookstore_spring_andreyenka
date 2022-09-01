@@ -2,8 +2,6 @@ package com.company.repository.impl;
 
 import com.company.repository.BookRepository;
 import com.company.repository.entity.Book;
-import com.company.repository.entity.User;
-import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,7 +50,7 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public void delete(Long id) {
         entityManager.getTransaction().begin();
-        entityManager.remove(entityManager.find(User.class, id));
+        entityManager.remove(entityManager.find(Book.class, id));
         entityManager.getTransaction().commit();
     }
 

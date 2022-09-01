@@ -1,6 +1,8 @@
 package com.company.repository.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinFormula;
 
 
 import java.math.BigDecimal;
@@ -13,6 +15,7 @@ public class Order {
 
     public Order() {
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,6 +28,7 @@ public class Order {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
+
 
     @Column(name = "total_cost")
     private BigDecimal totalCost;
