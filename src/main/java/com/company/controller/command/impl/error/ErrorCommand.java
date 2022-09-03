@@ -1,8 +1,10 @@
 package com.company.controller.command.impl.error;
 
 import com.company.controller.command.Command;
-import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller("error")
 public class ErrorCommand implements Command {

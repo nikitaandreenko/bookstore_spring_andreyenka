@@ -35,7 +35,7 @@ public class User {
     @Column(name = "deleted")
     private boolean isDeleted = false;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Order> orders;
 
     public enum Role {
