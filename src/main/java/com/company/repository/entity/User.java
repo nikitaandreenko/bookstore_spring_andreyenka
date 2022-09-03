@@ -5,6 +5,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLUpdate;
 import org.hibernate.annotations.Where;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -33,6 +34,9 @@ public class User {
 
     @Column(name = "deleted")
     private boolean isDeleted = false;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     public enum Role {
         USER, MANAGER, ADMIN

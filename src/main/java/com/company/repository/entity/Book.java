@@ -5,6 +5,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -45,6 +46,9 @@ public class Book {
 
     @Column(name = "deleted")
     private Boolean isDeleted = false;
+
+    @OneToMany(mappedBy = "book")
+    private List<OrderItem> orderItems;
 
     public enum Language {
         ENGLISH, RUSSIAN, SPANISH, FRENCH, DEUTSCH, ARABIC, CHINESE, JAPANESE
