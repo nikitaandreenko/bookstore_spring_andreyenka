@@ -1,9 +1,8 @@
 package com.company.repository.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.JoinColumnOrFormula;
-import org.hibernate.annotations.JoinFormula;
-
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,8 +10,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
+@SQLDelete(sql = "update orders set status='CANCELED' where id=?")
 public class Order {
-
     public Order() {
     }
 
@@ -21,7 +20,7 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "user_id")
     private User user;
 

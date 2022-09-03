@@ -1,6 +1,9 @@
 package com.company.repository.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLUpdate;
+import org.hibernate.annotations.Where;
 
 import java.util.Objects;
 
@@ -27,6 +30,9 @@ public class User {
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name = "deleted")
+    private boolean isDeleted = false;
 
     public enum Role {
         USER, MANAGER, ADMIN
@@ -83,16 +89,37 @@ public class User {
         this.role = role;
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && role == user.role;
+        return age == user.age && isDeleted == user.isDeleted && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, age, email, role);
+        return Objects.hash(id, firstName, lastName, age, email, role, isDeleted);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                ", isDeleted=" + isDeleted +
+                '}';
     }
 }

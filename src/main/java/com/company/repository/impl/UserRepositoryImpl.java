@@ -3,7 +3,7 @@ package com.company.repository.impl;
 ;
 import com.company.repository.UserRepository;
 import com.company.repository.entity.User;
-import jakarta.annotation.PreDestroy;
+
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,7 +36,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        List<User> users = entityManager.createQuery("from User", User.class).getResultList();
+        List<User> users = entityManager.createQuery("from User where isDeleted = false", User.class).getResultList();
         return users;
     }
 
@@ -51,7 +51,8 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void delete(Long id) {
         entityManager.getTransaction().begin();
-        entityManager.remove(entityManager.find(User.class, id));
+        entityManager.createQuery("update User set isDeleted = true where id = :id").setParameter("id", id).executeUpdate();
+        //entityManager.remove(entityManager.find(User.class, id));
         entityManager.getTransaction().commit();
     }
 

@@ -1,13 +1,17 @@
 package com.company.repository.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
+
 @Entity
 @Table(name = "books")
+@SQLDelete(sql = "update books set deleted=true where id=?")
+@Where(clause = "deleted = false")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +42,9 @@ public class Book {
     @Column(name = "book_language")
     @Enumerated(EnumType.STRING)
     private Language language;
+
+    @Column(name = "deleted")
+    private Boolean isDeleted = false;
 
     public enum Language {
         ENGLISH, RUSSIAN, SPANISH, FRENCH, DEUTSCH, ARABIC, CHINESE, JAPANESE
@@ -118,17 +125,25 @@ public class Book {
         this.language = language;
     }
 
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(id, book.id) && Objects.equals(bookName, book.bookName) && Objects.equals(author, book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(price, book.price) && Objects.equals(pages, book.pages) && Objects.equals(binding, book.binding) && Objects.equals(yearPublishing, book.yearPublishing) && language == book.language;
+        return Objects.equals(id, book.id) && Objects.equals(bookName, book.bookName) && Objects.equals(author, book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(price, book.price) && Objects.equals(pages, book.pages) && Objects.equals(binding, book.binding) && Objects.equals(yearPublishing, book.yearPublishing) && language == book.language && Objects.equals(isDeleted, book.isDeleted);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, bookName, author, isbn, price, pages, binding, yearPublishing, language);
+        return Objects.hash(id, bookName, author, isbn, price, pages, binding, yearPublishing, language, isDeleted);
     }
 
     @Override
@@ -143,6 +158,7 @@ public class Book {
                 ", binding='" + binding + '\'' +
                 ", yearPublishing=" + yearPublishing +
                 ", language=" + language +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }

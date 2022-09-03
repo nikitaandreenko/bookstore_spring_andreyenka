@@ -40,7 +40,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public List<Order> findAll() {
         userRepository.findAll();
-        List<Order> orders = entityManager.createQuery("from Order ", Order.class).getResultList();
+        List<Order> orders = entityManager.createQuery("from Order", Order.class).getResultList();
         return orders;
     }
 

@@ -36,13 +36,13 @@ public class Controller extends HttpServlet {
         } else {
             command = (Command) context.getBean(commandParam);
         }
-        String page= command.execute(req);
-//        try {
-//            page = command.execute(req);
-//        } catch (Exception e) {
-//            req.setAttribute("message", "My friend please write correctly what you want to see in my store");
-//            page = "jsp/error.jsp";
-//        }
+        String page;
+        try {
+            page = command.execute(req);
+        } catch (Exception e) {
+            req.setAttribute("message", "My friend please write correctly what you want to see in my store");
+            page = "jsp/error.jsp";
+        }
         req.getRequestDispatcher(page).forward(req, resp);
     }
 
@@ -54,7 +54,7 @@ public class Controller extends HttpServlet {
     @Override
     public void destroy() {
         context.close();
-        context.getBean(EntityManager.class).close();
+        context.getBean(EntityManagerFactory.class).close();
     }
 }
 

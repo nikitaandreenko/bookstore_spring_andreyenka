@@ -88,7 +88,6 @@ public class BookServiceImpl implements BookService {
         if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new RuntimeException("Price is not valid. Price can't be less 0");
         }
-
     }
 
     private void validateUpdate(BookDto book) {
