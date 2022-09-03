@@ -35,8 +35,6 @@ public class User {
     @Column(name = "deleted")
     private boolean isDeleted = false;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
-    private List<Order> orders;
 
     public enum Role {
         USER, MANAGER, ADMIN
