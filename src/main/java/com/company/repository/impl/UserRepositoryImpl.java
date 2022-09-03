@@ -52,7 +52,6 @@ public class UserRepositoryImpl implements UserRepository {
     public void delete(Long id) {
         entityManager.getTransaction().begin();
         entityManager.createQuery("update User set isDeleted = true where id = :id").setParameter("id", id).executeUpdate();
-        //entityManager.remove(entityManager.find(User.class, id));
         entityManager.getTransaction().commit();
     }
 

@@ -22,13 +22,13 @@ public class UpdateUserCommand implements Command {
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter("id"));
         UserDto user = userService.findById(id);
-        user.setFirstName(req.getParameter("firstName"));
-        user.setLastName(req.getParameter("lastName"));
-        user.setAge(Integer.parseInt(req.getParameter("age")));
+        user.setFirstName(req.getParameter("first_name"));
+        user.setLastName(req.getParameter("last_name"));
+        user.setAge(Integer.parseInt(req.getParameter("user_age")));
         user.setEmail(req.getParameter("email"));
-        user.setRole((UserDto.Role.valueOf(req.getParameter("role"))));
-        UserDto updated = userService.update(user);
-        req.setAttribute("user", updated);
+        user.setRole((UserDto.Role.valueOf(req.getParameter("user_role"))));
+        userService.update(user);
+        req.setAttribute("user", user);
         req.setAttribute("message", "bookstore by Andreyenka");
         req.setAttribute("messageUpdate", "User successfully updated!!!");
         return "jsp/user/user.jsp";

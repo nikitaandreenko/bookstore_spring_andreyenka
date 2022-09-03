@@ -6,16 +6,14 @@ import com.company.repository.entity.User;
 import com.company.service.UserService;
 import com.company.service.dto.ObjectMapperService;
 import com.company.service.dto.UserDto;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
+
+
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -33,6 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto create(UserDto user) {
         log.debug("Create user={} in database user", user);
+        validateCreate(user);
         User userCreated = mapper.toEntity(user);
         userRepository.create(userCreated);
         return mapper.toDto(userCreated);
@@ -81,7 +80,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto update(UserDto user) {
         log.debug("Update user={} in database users", user);
-        validateUpdate(user);
+         validateUpdate(user);
         User userUpdated = mapper.toEntity(user);
         userRepository.update(userUpdated);
         return mapper.toDto(userUpdated);
@@ -94,9 +93,16 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    private void validateCreate(UserDto user) {
+        if (user == null) {
+            throw new RuntimeException("Books can't be empty...");
+        }
+    }
+
     private void validateUpdate(UserDto user) {
         if (user == null) {
             throw new RuntimeException("Users can't be empty...");
         }
     }
 }
+

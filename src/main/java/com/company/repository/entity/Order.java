@@ -1,6 +1,7 @@
 package com.company.repository.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.SQLDelete;
 
 import java.math.BigDecimal;
@@ -19,7 +20,11 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+    })
     @JoinColumn(name = "user_id")
     private User user;
 
