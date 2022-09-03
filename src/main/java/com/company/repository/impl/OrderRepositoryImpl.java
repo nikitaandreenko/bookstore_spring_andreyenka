@@ -17,12 +17,10 @@ import java.util.List;
 public class OrderRepositoryImpl implements OrderRepository {
     private EntityManager entityManager;
 
-    private UserRepository userRepository;
 
     @Autowired
-    public OrderRepositoryImpl(EntityManager entityManager, UserRepository userRepository) {
+    public OrderRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -39,7 +37,6 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public List<Order> findAll() {
-        userRepository.findAll();
         List<Order> orders = entityManager.createQuery("from Order", Order.class).getResultList();
         return orders;
     }

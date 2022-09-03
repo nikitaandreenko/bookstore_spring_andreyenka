@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
+        <title>Bookstore by Andreyenka</title>
         <link href="jsp/styles.css" rel="stylesheet" type="text/css">
     </head>
         <body>

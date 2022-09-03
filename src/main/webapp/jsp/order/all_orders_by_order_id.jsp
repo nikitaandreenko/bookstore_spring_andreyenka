@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <title>Title</title>
+  <title>Order by order id</title>
   <link href="jsp/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>

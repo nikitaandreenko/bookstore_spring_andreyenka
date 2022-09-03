@@ -2,7 +2,6 @@ package com.company.repository.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -32,7 +31,7 @@ public class Order {
     @Column(name = "total_cost")
     private BigDecimal totalCost;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> items;
 
     public enum Status {
