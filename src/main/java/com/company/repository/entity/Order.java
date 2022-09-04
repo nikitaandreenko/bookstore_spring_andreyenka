@@ -1,7 +1,6 @@
 package com.company.repository.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.SQLDelete;
 
 import java.math.BigDecimal;
@@ -103,7 +102,7 @@ public class Order {
                 "id=" + id +
                 ", user=" + user.getId() +
                 ", status=" + status +
-                ", totalCost=" + items +
+                ", totalCost=" + totalCost +
                 ", items=" + items +
                 '}';
     }

@@ -2,7 +2,6 @@ package com.company.repository.impl;
 
 import com.company.repository.OrderRepository;
 
-import com.company.repository.UserRepository;
 import com.company.repository.entity.Order;
 
 import jakarta.persistence.EntityManager;
