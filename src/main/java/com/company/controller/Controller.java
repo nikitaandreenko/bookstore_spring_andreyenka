@@ -3,13 +3,15 @@ package com.company.controller;
 import com.company.AppConfiguration;
 import com.company.controller.command.Command;
 import com.company.controller.command.impl.error.ErrorCommand;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/controller")
@@ -52,6 +54,7 @@ public class Controller extends HttpServlet {
     @Override
     public void destroy() {
         context.close();
+        context.getBean(EntityManagerFactory.class).close();
     }
 }
 

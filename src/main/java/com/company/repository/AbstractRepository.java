@@ -1,4 +1,4 @@
-package com.company.data.repository;
+package com.company.repository;
 
 import java.util.List;
 
@@ -10,9 +10,7 @@ public interface AbstractRepository<K, T> {
 
     List<T> findAll();
 
-    K countAll();
-
     T update(T entity);
 
-    boolean delete(K id);
+    void delete(K id);
 }

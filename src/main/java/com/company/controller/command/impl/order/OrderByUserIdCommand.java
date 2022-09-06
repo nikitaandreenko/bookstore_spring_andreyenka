@@ -1,13 +1,12 @@
 package com.company.controller.command.impl.order;
 
 import com.company.controller.command.Command;
-import com.company.entity.Order;
 import com.company.service.OrderService;
-import com.company.service.dto.OrderDtoService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.company.service.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller("order_by_user_id")
@@ -23,8 +22,8 @@ public class OrderByUserIdCommand implements Command {
     public String execute(HttpServletRequest req) {
         String idRaw = req.getParameter("user_id");
         Long id = Long.parseLong(idRaw);
-        OrderDtoService order = orderService.findById(id);
-        List<OrderDtoService> orders = orderService.findByUserId(order.getId());
+        OrderDto order = orderService.findById(id);
+        List<OrderDto> orders = orderService.findByUserId(order.getId());
         req.setAttribute("all_orders_by_order_id", orders);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/order/all_orders_by_order_id.jsp";

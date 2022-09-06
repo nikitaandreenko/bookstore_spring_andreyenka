@@ -1,12 +1,12 @@
 package com.company.controller.command.impl.user;
 
 import com.company.controller.command.Command;
-import com.company.entity.User;
 import com.company.service.UserService;
-import com.company.service.dto.UserDtoService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.company.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller("update_user_form")
 public class UpdateUserFormCommand implements Command {
@@ -22,7 +22,7 @@ public class UpdateUserFormCommand implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         Long id = Long.parseLong(req.getParameter("id"));
-        UserDtoService user = userService.findById(id);
+        UserDto user = userService.findById(id);
         req.setAttribute("user", user);
         req.setAttribute("message", "bookstore by Andreyenka");
         return "jsp/user/update_user.jsp";

@@ -3,20 +3,22 @@ package com.company.service.dto;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 @Data
-public class BookDtoService {
+public class BookDto {
         private Long id;
-        private String book_name;
+        private String bookName;
         private String author;
         private String isbn;
         private BigDecimal price;
         private Integer pages;
         private String binding;
-        private Integer year_publishing;
+        private Integer yearPublishing;
 
         private Language language;
 
         public enum Language {
             ENGLISH, RUSSIAN, SPANISH, FRENCH, DEUTSCH, ARABIC, CHINESE, JAPANESE
         }
-    }
+
+}

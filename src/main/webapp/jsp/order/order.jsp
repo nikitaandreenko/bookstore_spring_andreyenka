@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Order</title>
     <link href="jsp/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -26,7 +26,7 @@
             <table class="table_mini">
                 <c:forEach items="${requestScope.order.items}" var="items">
                     <tr>
-                        <td><a href="controller?command=book&id=${items.book.id}"><button class="new_button">${items.book.book_name}</button></a></td>
+                        <td><a href="controller?command=book&id=${items.book.id}"><button class="new_button">${items.book.bookName}</button></a></td>
                         <td>${items.quantity}</td>
                         <td>${items.price}</td>
                     </tr>

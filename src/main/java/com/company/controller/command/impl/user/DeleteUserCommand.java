@@ -2,9 +2,10 @@ package com.company.controller.command.impl.user;
 
 import com.company.controller.command.Command;
 import com.company.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller("delete_user")
 public class DeleteUserCommand implements Command {

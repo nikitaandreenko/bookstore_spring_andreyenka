@@ -1,12 +1,11 @@
 package com.company.service;
 
-import com.company.entity.Order;
-import com.company.service.dto.OrderDtoService;
+import com.company.service.dto.OrderDto;
 
 import java.util.List;
 
-public interface OrderService extends AbstractService<Long, Order, OrderDtoService>{
+public interface OrderService extends AbstractService<Long, OrderDto>{
 
-    List<OrderDtoService> findByUserId(Long userId);
+    List<OrderDto> findByUserId(Long userId);
 
 }

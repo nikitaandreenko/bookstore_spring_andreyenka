@@ -1,9 +1,9 @@
 package com.company.service.impl;
 
-import com.company.data.repository.BookRepository;
-import com.company.entity.Book;
+import com.company.repository.BookRepository;
+import com.company.repository.entity.Book;
 import com.company.service.BookService;
-import com.company.service.dto.BookDtoService;
+import com.company.service.dto.BookDto;
 import com.company.service.dto.ObjectMapperService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
+
+
 
 @Service("bookService")
 public class BookServiceImpl implements BookService {
@@ -29,99 +30,85 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public Book create(BookDtoService book) {
+    public BookDto create(BookDto book) {
         log.debug("Create book={} in database book", book);
         validateCreate(book);
         Book bookCreated = mapper.toEntity(book);
-        return bookRepository.create(bookCreated);
+        bookRepository.create(bookCreated);
+        return mapper.toDto(bookCreated);
     }
 
     @Override
-    public BookDtoService findById(Long id) {
+    public BookDto findById(Long id) {
         log.debug("Get book by id={} from database books", id);
         Book book = bookRepository.findById(id);
-        BookDtoService bookDtoService = mapper.toDto(book);
-        if (bookDtoService == null) {
+        BookDto bookDto = mapper.toDto(book);
+        if (bookDto == null) {
             throw new RuntimeException("Book with id:" + id + " doesn't exist");
         }
-        return bookDtoService;
+        return bookDto;
     }
 
     @Override
-    public BookDtoService getByIsbn(String isbn) {
+    public BookDto getByIsbn(String isbn) {
         log.debug("Get book by isbn={} from database books", isbn);
         Book book = bookRepository.getByIsbn(isbn);
-        BookDtoService bookDtoService = mapper.toDto(book);
-        if (bookDtoService == null) {
+        BookDto bookDto = mapper.toDto(book);
+        if (bookDto == null) {
             throw new RuntimeException("Book with isbn:" + isbn + " doesn't exist");
         }
-        return bookDtoService;
+        return bookDto;
     }
 
     @Override
-    public List<BookDtoService> findAll() {
+    public List<BookDto> findAll() {
         log.debug("Get all books from database books");
-        return bookRepository.findAll().stream().map(mapper::toDto).toList();
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public List<BookDtoService> getByAuthor(String author) {
+    public List<BookDto> getByAuthor(String author) {
         log.debug("Get book by author={} from database books", author);
-        return bookRepository.getByAuthor(author).stream().map(mapper::toDto).toList();
+        List<Book> books = bookRepository.getByAuthor(author);
+        return books.stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public Long countAll() {
-        log.debug("Count all books from database books");
-        return bookRepository.countAll();
-    }
-
-    @Override
-    public Book update(BookDtoService book) {
+    public BookDto update(BookDto book) {
         log.debug("Update book={} in database books", book);
         validateUpdate(book);
         Book bookUpdated = mapper.toEntity(book);
-        Book book1 = bookRepository.update(bookUpdated);
-        return book1;
+        bookRepository.update(bookUpdated);
+        return mapper.toDto(bookUpdated);
     }
 
-    private void validateCreate(BookDtoService book) {
+    private void validateCreate(BookDto book) {
         if (book == null) {
             throw new RuntimeException("Books can't be empty...");
         }
         if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new RuntimeException("Price is not valid. Price can't be less 0");
         }
-        Book newBook = bookRepository.getByIsbn(book.getIsbn());
-        if (newBook != null) {
-            throw new RuntimeException("Book with isbn: " + book.getIsbn() + "already exist!");
-        }
     }
 
-    private void validateUpdate(BookDtoService book) {
+    private void validateUpdate(BookDto book) {
         if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new RuntimeException("Price is not valid. Price can't be less 0");
-        }
-        Book newBook = bookRepository.getByIsbn(book.getIsbn());
-        if (newBook != null && !Objects.equals(book.getId(), newBook.getId())) {
-            throw new RuntimeException("Book with isbn: " + book.getIsbn() + "already exist!");
         }
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Delete book by id={} from database books", id);
-        boolean successRemove = bookRepository.delete(id);
-        if (!successRemove) {
-            throw new RuntimeException("This book doesn't remove");
-        }
+        bookRepository.delete(id);
     }
 
     @Override
     public BigDecimal totalPriceByAuthor(String author) {
         log.debug("Total books by author={} from database books", author);
-        List<BookDtoService> books = getByAuthor(author);
-        BigDecimal total = books.stream().map(BookDtoService::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+        List<BookDto> books = getByAuthor(author);
+        BigDecimal total = books.stream().map(BookDto::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
         return total;
     }
 }

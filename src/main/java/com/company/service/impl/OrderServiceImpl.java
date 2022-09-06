@@ -1,11 +1,10 @@
 package com.company.service.impl;
 
-import com.company.entity.Order;
-import com.company.data.repository.OrderRepository;
+import com.company.repository.entity.Order;
+import com.company.repository.OrderRepository;
 import com.company.service.OrderService;
 import com.company.service.dto.ObjectMapperService;
-import com.company.service.dto.OrderDtoService;
-import lombok.experimental.Accessors;
+import com.company.service.dto.OrderDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("orderService")
 public class OrderServiceImpl implements OrderService {
-
     private final OrderRepository orderRepository;
     private final ObjectMapperService mapper;
 
@@ -29,31 +27,27 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public Order create(OrderDtoService entity) {
+    public OrderDto create(OrderDto entity) {
         return null;
     }
 
     @Override
-    public OrderDtoService findById(Long id) {
+    public OrderDto findById(Long id) {
         log.debug("Get order by id={} from database orders", id);
         Order order = orderRepository.findById(id);
-        OrderDtoService orderDtoService = mapper.toDto(order);
-        return orderDtoService;
+        OrderDto orderDto = mapper.toDto(order);
+        return orderDto;
     }
 
     @Override
-    public List<OrderDtoService> findAll() {
+    public List<OrderDto> findAll() {
         log.debug("Get all orders from database orders");
-        return orderRepository.findAll().stream().map(mapper::toDto).toList();
+        List <Order> orders = orderRepository.findAll();
+        return orders.stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public Long countAll() {
-        return null;
-    }
-
-    @Override
-    public Order update(OrderDtoService entity) {
+    public OrderDto update(OrderDto entity) {
         return null;
     }
 
@@ -63,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDtoService> findByUserId(Long userId) {
-       return orderRepository.findByUserId(userId).stream().map(mapper::toDto).toList();
+    public List<OrderDto> findByUserId(Long userId) {
+        return orderRepository.findByUserId(userId).stream().map(mapper::toDto).toList();
     }
 }
