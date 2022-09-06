@@ -19,13 +19,13 @@
         <th>More info</th>
 
     </tr>
-<c:forEach items="${requestScope.all_orders}" var="order" varStatus="counter" >
+<c:forEach items="${orders}" var="order" varStatus="counter" >
     <tr>
         <td>${counter.count}</td>
         <td>${order.user.email}</td>
         <td>${order.status}</td>
         <td>${order.totalCost}</td>
-        <td><a href="controller?command=order&id=${order.id}"><button>Click me</button></a></td>
+        <td><a href="${pageContext.request.contextPath}/orders/${order.id}" method="get"><button>Click me</button></a></td>
     </tr>
 </c:forEach>
 </table>

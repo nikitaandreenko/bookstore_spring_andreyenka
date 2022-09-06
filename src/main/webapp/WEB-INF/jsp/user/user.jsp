@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>User</title>
-    <link href="jsp/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

@@ -2,21 +2,17 @@ package com.company.repository.impl;
 
 import com.company.repository.BookRepository;
 import com.company.repository.entity.Book;
-import jakarta.persistence.EntityManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository("bookRepository")
 public class BookRepositoryImpl implements BookRepository {
 
+    @PersistenceContext
     private EntityManager entityManager;
-
-    @Autowired
-    public BookRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public Book create(Book entity) {

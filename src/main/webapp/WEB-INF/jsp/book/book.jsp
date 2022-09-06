@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Book</title>
-    <link href="jsp/styles.css" rel="stylesheet" type="text/css">
+    <link href="/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Book</h1>

@@ -4,23 +4,17 @@ import com.company.repository.OrderRepository;
 
 import com.company.repository.entity.Order;
 
-import jakarta.persistence.EntityManager;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
 @Repository("orderRepository")
 public class OrderRepositoryImpl implements OrderRepository {
+    @PersistenceContext
     private EntityManager entityManager;
-
-
-    @Autowired
-    public OrderRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public Order create(Order entity) {

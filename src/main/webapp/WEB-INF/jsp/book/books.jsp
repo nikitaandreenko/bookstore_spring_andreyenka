@@ -19,13 +19,13 @@
         <th>Year Publishing</th>
         <th>More info</th>
     </tr>
-    <c:forEach items="${requestScope.all_books}" var="book" varStatus="counter">
+    <c:forEach items="${books}" var="book" varStatus="counter">
         <tr>
             <td>${counter.count}</td>
             <td>${book.bookName}</td>
             <td>${book.author}</td>
             <td>${book.yearPublishing}</td>
-            <td><a href="controller?command=book&id=${book.id}"><button>Click me</button></a></td>
+            <td><a href="${pageContext.request.contextPath}/books/${book.id}" method="get"><button>Click me</button></a></td>
         </tr>
     </c:forEach>
 </table>

@@ -4,21 +4,18 @@ package com.company.repository.impl;
 import com.company.repository.UserRepository;
 import com.company.repository.entity.User;
 
-import jakarta.persistence.EntityManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository("userRepository")
 public class UserRepositoryImpl implements UserRepository {
 
+    @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    public UserRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public User create(User entity) {
