@@ -5,6 +5,7 @@ import com.company.repository.OrderRepository;
 import com.company.repository.entity.Order;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +13,7 @@ import java.util.List;
 
 
 @Repository("orderRepository")
+@Transactional
 public class OrderRepositoryImpl implements OrderRepository {
     @PersistenceContext
     private EntityManager entityManager;

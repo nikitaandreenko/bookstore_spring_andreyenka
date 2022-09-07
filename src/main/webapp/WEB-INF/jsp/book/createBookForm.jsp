@@ -1,14 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <title>Create book</title>
-  <link href="jsp/styles.css" rel="stylesheet" type="text/css">
+  <link href="../css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body class="book">
-<c:if test="${requestScope.message!=null}">
-  <h3><em> ${requestScope.message}</em></h3>
+<c:if test="${message!=null}">
+  <h3><em> ${message}</em></h3>
 </c:if>
-<form align=center action="controller" method="post">
+<form align=center action="${pageContext.request.contextPath}/books/create" method="post">
   <input type="hidden" name="command" value="create_book">
   Name: <input type="text" name="bookName"/>
   <br><br>
@@ -22,7 +23,7 @@
   <br><br>
   Binding: <input type="text" name="binding"/>
   <br><br>
-  Year_publishing: <input type="text" name="year_publishing"/>
+  Year_publishing: <input type="text" name="yearPublishing"/>
   <br><br>
   Language: <select name="language">
   <option>ENGLISH</option>

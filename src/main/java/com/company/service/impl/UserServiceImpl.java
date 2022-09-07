@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-
 @Service("userService")
 public class UserServiceImpl implements UserService {
     private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
@@ -80,7 +79,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto update(UserDto user) {
         log.debug("Update user={} in database users", user);
-         validateUpdate(user);
+        validateUpdate(user);
         User userUpdated = mapper.toEntity(user);
         userRepository.update(userUpdated);
         return mapper.toDto(userUpdated);

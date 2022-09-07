@@ -3,12 +3,14 @@ package com.company.repository.impl;
 import com.company.repository.BookRepository;
 import com.company.repository.entity.Book;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository("bookRepository")
+@Transactional
 public class BookRepositoryImpl implements BookRepository {
 
     @PersistenceContext
@@ -16,9 +18,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book create(Book entity) {
-        entityManager.getTransaction().begin();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
@@ -37,17 +37,13 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book update(Book entity) {
-        entityManager.getTransaction().begin();
         entityManager.merge(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
     @Override
     public void delete(Long id) {
-        entityManager.getTransaction().begin();
         entityManager.remove(entityManager.find(Book.class, id));
-        entityManager.getTransaction().commit();
     }
 
     @Override

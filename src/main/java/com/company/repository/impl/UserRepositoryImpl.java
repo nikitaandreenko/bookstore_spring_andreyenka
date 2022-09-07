@@ -5,12 +5,14 @@ import com.company.repository.UserRepository;
 import com.company.repository.entity.User;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository("userRepository")
+@Transactional
 public class UserRepositoryImpl implements UserRepository {
 
     @PersistenceContext
@@ -19,9 +21,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User create(User entity) {
-        entityManager.getTransaction().begin();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
@@ -39,17 +39,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User update(User entity) {
-        entityManager.getTransaction().begin();
         entityManager.merge(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
     @Override
     public void delete(Long id) {
-        entityManager.getTransaction().begin();
         entityManager.createQuery("update User set isDeleted = true where id = :id").setParameter("id", id).executeUpdate();
-        entityManager.getTransaction().commit();
     }
 
     @Override

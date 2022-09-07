@@ -3,14 +3,14 @@
 <html>
 <head>
     <title>Users</title>
-    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <link href="../css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Users</h1>
 <c:if test="${message!=null}">
     <h3><em> ${message}</em></h3>
 </c:if>
-<h1><a href="controller?command=create_user_form"><button>add user</button></a></h1>
+<h1><a href="${pageContext.request.contextPath}/users/create"><button>add user</button></a></h1>
 <table>
     <tr>
         <th>#</th>

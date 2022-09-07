@@ -101,7 +101,6 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.2</version>
                 <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warName>bookstore</warName>
                     <!--suppress UnresolvedMavenProperty -->
                     <outputDirectory>${env.TOMCAT_HOME}/webapps</outputDirectory>

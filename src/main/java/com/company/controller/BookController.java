@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @Controller
 @RequestMapping("/books")
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class BookController {
         BookDto book = bookService.findById(id);
         model.addAttribute("message", "bookstore by Andreyenka");
         model.addAttribute("book", book);
-        return "book";
+        return "book/book";
     }
 
     @GetMapping("/getAll")
@@ -32,8 +33,9 @@ public class BookController {
     }
 
     @GetMapping("/create")
-    public String createUserForm() {
-        return "createUserForm";
+    public String createUserForm(Model model) {
+        model.addAttribute("message", "bookstore by Andreyenka");
+        return "book/createBookForm";
     }
 
     @PostMapping("/create")
@@ -42,22 +44,22 @@ public class BookController {
         return "redirect:/books/" + book.getId();
     }
 
-    @GetMapping("/edit/{id}")
-    public String editBookForm(@PathVariable Long id, Model model) {
+    @GetMapping("/update/{id}")
+    public String updateBookForm(@PathVariable Long id, Model model) {
         BookDto book = bookService.findById(id);
         model.addAttribute("message", "bookstore by Andreyenka");
         model.addAttribute("book", book);
-        return "editBookForm";
+        return "book/updateBookForm";
     }
 
-    @PostMapping("/edit/{id}")
-    public String editBook(@ModelAttribute BookDto book) {
+    @PostMapping("/update/{id}")
+    public String updateBook(@ModelAttribute BookDto book) {
         bookService.update(book);
         return "redirect:/books/" + book.getId();
     }
 
-    @PostMapping("/delete/{id}")
-    public String editBookForm(@PathVariable Long id) {
+    @GetMapping("/delete/{id}")
+    public String deleteBookForm(@PathVariable Long id) {
         bookService.delete(id);
         return "redirect:/books/getAll";
     }

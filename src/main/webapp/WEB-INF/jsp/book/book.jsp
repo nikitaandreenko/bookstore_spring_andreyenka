@@ -3,18 +3,12 @@
 <html>
 <head>
     <title>Book</title>
-    <link href="/styles.css" rel="stylesheet" type="text/css">
+    <link href="../css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Book</h1>
-<c:if test="${requestScope.message!=null}">
-    <h3><em> ${requestScope.message}</em></h3>
-</c:if>
-<c:if test="${requestScope.messageUpdate!=null}">
-    <h3><em> ${requestScope.messageUpdate}</em></h3>
-</c:if>
-<c:if test="${requestScope.messageCreate!=null}">
-    <h3><em> ${requestScope.messageCreate}</em></h3>
+<c:if test="${message!=null}">
+    <h3><em> ${message}</em></h3>
 </c:if>
 <table>
     <tr>
@@ -29,20 +23,20 @@
 
     </tr>
     <tr>
-        <td>${requestScope.book.bookName}</td>
-        <td>${requestScope.book.author}</td>
-        <td>${requestScope.book.isbn}</td>
-        <td>${requestScope.book.price}</td>
-        <td>${requestScope.book.pages}</td>
-        <td>${requestScope.book.binding}</td>
-        <td>${requestScope.book.yearPublishing}</td>
-        <td>${requestScope.book.language}</td>
+        <td>${book.bookName}</td>
+        <td>${book.author}</td>
+        <td>${book.isbn}</td>
+        <td>${book.price}</td>
+        <td>${book.pages}</td>
+        <td>${book.binding}</td>
+        <td>${book.yearPublishing}</td>
+        <td>${book.language}</td>
     </tr>
 </table>
 <div>
-    <a href="controller?command=update_book_form&id=${requestScope.book.id}" target = "_blank">
+    <a href="${pageContext.request.contextPath}/books/update/${book.id}" method="get" target = "_blank">
         <button>update</button></a>
-    <a href="controller?command=delete_book&id=${requestScope.book.id}" target = "_blank">
+    <a href="${pageContext.request.contextPath}/books/delete/${book.id}" method="get" target = "_blank">
         <button>delete</button></a>
 </div>
 </body>

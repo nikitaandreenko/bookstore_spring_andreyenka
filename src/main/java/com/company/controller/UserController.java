@@ -20,6 +20,8 @@ public class UserController {
     public String getUser(@PathVariable Long id, Model model) {
         UserDto user = userService.findById(id);
         model.addAttribute("message", "bookstore by Andreyenka");
+        model.addAttribute("messageUpdate", "User successfully updated!!!");
+        model.addAttribute("messageCreate", "User successfully updated!!!");
         model.addAttribute("user", user);
         return "user/user";
     }
@@ -33,32 +35,33 @@ public class UserController {
     }
 
     @GetMapping("/create")
-    public String createUserForm() {
-        return "createUserForm";
+    public String createUserForm(Model model) {
+        model.addAttribute("message", "bookstore by Andreyenka");
+        return "user/createUserForm";
     }
 
     @PostMapping("/create")
     public String createUser(@ModelAttribute UserDto user) {
         userService.create(user);
-        return "redirect:/users/" + user.getId();
+        return "redirect:/users/getAll";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editUserForm(@PathVariable Long id, Model model) {
+    @GetMapping("/update/{id}")
+    public String updateUserForm(@PathVariable Long id, Model model) {
         UserDto user = userService.findById(id);
         model.addAttribute("message", "bookstore by Andreyenka");
         model.addAttribute("user", user);
-        return "editUserForm";
+        return "user/updateUserForm";
     }
 
-    @PostMapping("/edit/{id}")
-    public String editUser(@ModelAttribute UserDto user) {
+    @PostMapping("/update/{id}")
+    public String updateUser(@ModelAttribute UserDto user, Model model) {
         userService.update(user);
         return "redirect:/users/" + user.getId();
     }
 
-    @PostMapping("/delete/{id}")
-    public String editUserForm(@PathVariable Long id) {
+    @GetMapping("/delete/{id}")
+    public String deleteUserForm(@PathVariable Long id) {
         userService.delete(id);
         return "redirect:/users/getAll";
     }

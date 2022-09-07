@@ -3,19 +3,13 @@
 <html>
 <head>
     <title>User</title>
-    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <link href="../css/styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 <h1>User</h1>
-<c:if test="${requestScope.message!=null}">
-    <h3><em> ${requestScope.message}</em></h3>
-</c:if>
-<c:if test="${requestScope.messageUpdate!=null}">
-    <h3><em> ${requestScope.messageUpdate}</em></h3>
-</c:if>
-<c:if test="${requestScope.messageCreate!=null}">
-    <h3><em> ${requestScope.messageCreate}</em></h3>
+<c:if test="${message!=null}">
+    <h3><em> ${message}</em></h3>
 </c:if>
 <table>
     <tr>
@@ -27,17 +21,17 @@
 
     </tr>
     <tr>
-        <td>${requestScope.user.firstName}</td>
-        <td>${requestScope.user.lastName}</td>
-        <td>${requestScope.user.age}</td>
-        <td>${requestScope.user.email}</td>
-        <td>${requestScope.user.role}</td>
+        <td>${user.firstName}</td>
+        <td>${user.lastName}</td>
+        <td>${user.age}</td>
+        <td>${user.email}</td>
+        <td>${user.role}</td>
     </tr>
 </table>
 <div>
-    <a href="controller?command=update_user_form&id=${requestScope.user.id}" target = "_blank">
+    <a href="${pageContext.request.contextPath}/users/update/${user.id}" method="get" target = "_blank">
         <button>update</button></a>
-    <a href="controller?command=delete_user&id=${requestScope.user.id}" target = "_blank">
+    <a href="${pageContext.request.contextPath}/users/delete/${user.id}" method="get" target = "_blank">
         <button>delete</button></a>
 </div>
 </body>

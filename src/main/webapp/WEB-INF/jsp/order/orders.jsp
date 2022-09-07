@@ -1,15 +1,14 @@
-
 <%@ page contentType="text/html;UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Orders</title>
-    <link href="jsp/styles.css" rel="stylesheet" type="text/css">
+    <link href="../css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Order</h1>
-<c:if test="${requestScope.message!=null}">
-    <h3><em> ${requestScope.message}</em></h3>
+<c:if test="${message!=null}">
+    <h3><em> ${message}</em></h3>
 </c:if>
 <table>
     <tr><th>#</th>

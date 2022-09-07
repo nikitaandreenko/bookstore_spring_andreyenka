@@ -3,14 +3,14 @@
 <html>
 <head>
     <title>Books</title>
- <link href="jsp/styles.css" rel="stylesheet" type="text/css">
+ <link href="../css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Books</h1>
-<c:if test="${requestScope.message!=null}">
-    <h3><em> ${requestScope.message}</em></h3>
+<c:if test="${message!=null}">
+    <h3><em> ${message}</em></h3>
 </c:if>
-<h1><a href="controller?command=create_book_form"><button>add book</button></a></h1>
+<h1><a href="${pageContext.request.contextPath}/books/create"><button>add book</button></a></h1>
 <table>
     <tr>
         <th>#</th>

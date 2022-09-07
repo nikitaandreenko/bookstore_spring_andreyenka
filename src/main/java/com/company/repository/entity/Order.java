@@ -35,13 +35,12 @@ public class Order {
     @Column(name = "total_cost")
     private BigDecimal totalCost;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderItem> items;
 
     public enum Status {
         PENDING, CONFIRMED, DELIVERED, CANCELED
     }
-
 
     public Long getId() {
         return id;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+
 @Controller
 @RequestMapping("/orders")
 @RequiredArgsConstructor
@@ -33,12 +34,12 @@ public class OrderController {
         return "order/orders";
     }
 
-    @GetMapping("/{user_id}")
+    @GetMapping("/order/{user_id}")
     public String getOrderByUser(@PathVariable Long user_id, Model model) {
         OrderDto order = orderService.findById(user_id);
         List<OrderDto> orders = orderService.findByUserId(order.getId());
         model.addAttribute("message", "bookstore by Andreyenka");
         model.addAttribute("all_orders_by_order_id", orders);
-        return "all_orders_by_order_id";
+        return "order/all_orders_by_order_id";
     }
 }
