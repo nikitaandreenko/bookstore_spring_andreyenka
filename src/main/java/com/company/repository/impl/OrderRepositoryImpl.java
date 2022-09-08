@@ -1,14 +1,11 @@
 package com.company.repository.impl;
 
 import com.company.repository.OrderRepository;
-
 import com.company.repository.entity.Order;
-
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -27,6 +24,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Order findById(Long id) {
         Order order = entityManager.find(Order.class, id);
+
         return order;
     }
 
@@ -42,16 +40,16 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public void delete(Long id) {
+    public boolean delete(Long id) {
+        return false;
     }
 
     @Override
     public List<Order> findByUserId(Long userId) {
 
-        List<Order> orders = entityManager.createQuery("SELECT o from Order o where o.user.id = ?1")
+        return entityManager.createQuery("SELECT o from Order o where o.user.id = ?1")
                 .setParameter(1, userId)
                 .getResultList();
-        return orders;
     }
 
 }

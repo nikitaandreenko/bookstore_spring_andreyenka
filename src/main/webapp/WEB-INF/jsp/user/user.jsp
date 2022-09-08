@@ -18,6 +18,7 @@
         <th>Age</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Life cycle</th>
 
     </tr>
     <tr>
@@ -26,6 +27,7 @@
         <td>${user.age}</td>
         <td>${user.email}</td>
         <td>${user.role}</td>
+        <td>${user.lifeCycle}</td>
     </tr>
 </table>
 <div>

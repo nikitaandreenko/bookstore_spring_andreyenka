@@ -21,6 +21,7 @@ public class ObjectMapperService {
         dto.setBinding(entity.getBinding());
         dto.setYearPublishing(entity.getYearPublishing());
         dto.setLanguage(BookDto.Language.valueOf(entity.getLanguage().toString()));
+        dto.setAvailability(entity.getAvailability());
         return dto;
     }
 
@@ -35,6 +36,7 @@ public class ObjectMapperService {
         entity.setBinding(dto.getBinding());
         entity.setYearPublishing(dto.getYearPublishing());
         entity.setLanguage(Book.Language.valueOf(dto.getLanguage().toString()));
+        entity.setAvailability(dto.getAvailability());
         return entity;
     }
 
@@ -46,6 +48,7 @@ public class ObjectMapperService {
         dto.setAge(entity.getAge());
         dto.setEmail(entity.getEmail());
         dto.setRole(UserDto.Role.valueOf(entity.getRole().toString()));
+        dto.setLifeCycle(entity.getLifeCycle());
         return dto;
     }
 
@@ -57,6 +60,7 @@ public class ObjectMapperService {
         entity.setAge(dto.getAge());
         entity.setEmail(dto.getEmail());
         entity.setRole(User.Role.valueOf(dto.getRole().toString()));
+        entity.setLifeCycle(dto.getLifeCycle());
         return entity;
     }
 

@@ -3,10 +3,11 @@ package com.company.repository.impl;
 import com.company.repository.BookRepository;
 import com.company.repository.entity.Book;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository("bookRepository")
@@ -42,8 +43,13 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public void delete(Long id) {
-        entityManager.remove(entityManager.find(Book.class, id));
+    public boolean delete(Long id) {
+        Book book = entityManager.find(Book.class, id);
+        if (book == null) {
+            return false;
+        }
+        entityManager.createQuery("update Book set availability = 'out of stock' where id = :id").setParameter("id", id).executeUpdate();
+        return true;
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.company.repository.entity.Book;
 import com.company.service.BookService;
 import com.company.service.dto.BookDto;
 import com.company.service.dto.ObjectMapperService;
+import com.company.service.exception.EntityNotFoundException;
+import com.company.service.exception.ValidateException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,22 +44,22 @@ public class BookServiceImpl implements BookService {
     public BookDto findById(Long id) {
         log.debug("Get book by id={} from database books", id);
         Book book = bookRepository.findById(id);
-        BookDto bookDto = mapper.toDto(book);
-        if (bookDto == null) {
-            throw new RuntimeException("Book with id:" + id + " doesn't exist");
+        if (book == null) {
+            throw new EntityNotFoundException("Book with id:" + id + " doesn't exist");
         }
-        return bookDto;
+
+        return mapper.toDto(book);
     }
 
     @Override
     public BookDto getByIsbn(String isbn) {
         log.debug("Get book by isbn={} from database books", isbn);
         Book book = bookRepository.getByIsbn(isbn);
-        BookDto bookDto = mapper.toDto(book);
-        if (bookDto == null) {
-            throw new RuntimeException("Book with isbn:" + isbn + " doesn't exist");
+        if (book == null) {
+            throw new EntityNotFoundException("Book with isbn:" + isbn + " doesn't exist");
         }
-        return bookDto;
+
+        return mapper.toDto(book);
     }
 
     @Override
@@ -85,22 +87,25 @@ public class BookServiceImpl implements BookService {
 
     private void validateCreate(BookDto book) {
         if (book == null) {
-            throw new RuntimeException("Books can't be empty...");
+            throw new ValidateException("Books can't be empty...");
         }
         if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
-            throw new RuntimeException("Price is not valid. Price can't be less 0");
+            throw new ValidateException("Price is not valid. Price can't be less 0");
         }
     }
 
     private void validateUpdate(BookDto book) {
         if (book.getPrice().compareTo(BigDecimal.ZERO) < 0) {
-            throw new RuntimeException("Price is not valid. Price can't be less 0");
+            throw new ValidateException("Price is not valid. Price can't be less 0");
         }
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Delete book by id={} from database books", id);
+        if (!bookRepository.delete(id)) {
+            throw new EntityNotFoundException("No entity with id: " + id);
+        }
         bookRepository.delete(id);
     }
 

@@ -23,6 +23,11 @@
     <option>ADMIN</option>
 </select>
     <br><br>
+    Life cycle: <select type="text" name="lifeCycle" value="${user.lifeCycle}">
+    <option>active</option>
+    <option>not active</option>
+</select>
+    <br><br>
     <input type="submit" value="save"/>
 </form>
 </body>

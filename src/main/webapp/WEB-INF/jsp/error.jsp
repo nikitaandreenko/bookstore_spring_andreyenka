@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
 </head>
-<body>
-<h1>Error!!!</h1>
-<p>$message}</p>
+<body class="error">
+<h1>Opps...</h1>
+<h2 align="center">${message}</h2>
 </body>
 </html>

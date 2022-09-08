@@ -35,6 +35,11 @@
   <option>JAPANESE</option>
 </select>
   <br><br>
+  Availability: <select type="text" name="availability" value="${book.availability}">
+  <option>in stock</option>
+  <option>out of stock</option>
+  <br><br>
+</select>
   <input type="submit" value="save"/>
 </form>
 </body>

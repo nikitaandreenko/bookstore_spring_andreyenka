@@ -89,6 +89,9 @@ button:hover{
     background: url(../images/users.jpg) no-repeat;
     background-size: cover;
 }
+.error{
+background: url(../images/error.jpg) no-repeat;
+}
 
 .table_mini{
     width: 75%;

@@ -2,13 +2,15 @@ package com.company.repository.impl;
 
 ;
 import com.company.repository.UserRepository;
+import com.company.repository.entity.Book;
 import com.company.repository.entity.User;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository("userRepository")
@@ -33,7 +35,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        List<User> users = entityManager.createQuery("from User where isDeleted = false", User.class).getResultList();
+        List<User> users = entityManager.createQuery("from User", User.class).getResultList();
         return users;
     }
 
@@ -44,8 +46,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void delete(Long id) {
-        entityManager.createQuery("update User set isDeleted = true where id = :id").setParameter("id", id).executeUpdate();
+    public boolean delete(Long id) {
+        User user = entityManager.find(User.class, id);
+        if (user == null) {
+            return false;
+        }
+        entityManager.createQuery("update User set lifeCycle = 'not active' where id = :id").setParameter("id", id).executeUpdate();
+        return true;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.company.service.exeption;
+package com.company.service.exception;
 
 public class ValidateException extends RuntimeException{
 

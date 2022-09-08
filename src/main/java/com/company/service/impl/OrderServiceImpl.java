@@ -5,6 +5,7 @@ import com.company.repository.OrderRepository;
 import com.company.service.OrderService;
 import com.company.service.dto.ObjectMapperService;
 import com.company.service.dto.OrderDto;
+import com.company.service.exception.EntityNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,10 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto findById(Long id) {
         log.debug("Get order by id={} from database orders", id);
         Order order = orderRepository.findById(id);
-        OrderDto orderDto = mapper.toDto(order);
-        return orderDto;
+        if (order == null) {
+            throw new EntityNotFoundException("User with id:" + id + " doesn't exist");
+        }
+        return mapper.toDto(order);
     }
 
     @Override
@@ -58,6 +61,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findByUserId(Long userId) {
+        log.debug("Get orders from database orders by userID");
+        List <Order> orders = orderRepository.findByUserId(userId);
+        if (orders.isEmpty()) {
+            throw new EntityNotFoundException("Orders with user id:" + userId + " doesn't exist");
+        }
         return orderRepository.findByUserId(userId).stream().map(mapper::toDto).toList();
     }
 }

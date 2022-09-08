@@ -20,6 +20,7 @@
         <th>Binding</th>
         <th>Year Publishing</th>
         <th>Language</th>
+        <th>availability</th>
 
     </tr>
     <tr>
@@ -31,6 +32,7 @@
         <td>${book.binding}</td>
         <td>${book.yearPublishing}</td>
         <td>${book.language}</td>
+        <td>${book.availability}</td>
     </tr>
 </table>
 <div>

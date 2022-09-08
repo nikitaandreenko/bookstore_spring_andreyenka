@@ -17,6 +17,7 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Role</th>
+        <th>Life cycle</th>
         <th>More info</th>
     </tr>
     <c:forEach items="${users}" var="user" varStatus="counter">
@@ -25,6 +26,7 @@
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.role}</td>
+            <td>${user.lifeCycle}</td>
             <td><a href="${pageContext.request.contextPath}/users/${user.id}" method="get"><button>Click me</button></a></td>
         </tr>
     </c:forEach>

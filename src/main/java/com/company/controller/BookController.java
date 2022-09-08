@@ -41,7 +41,7 @@ public class BookController {
     @PostMapping("/create")
     public String createBook(@ModelAttribute BookDto book) {
         bookService.create(book);
-        return "redirect:/books/" + book.getId();
+        return "redirect:/books/getAll";
     }
 
     @GetMapping("/update/{id}")
