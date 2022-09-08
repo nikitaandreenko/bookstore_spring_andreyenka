@@ -2,11 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <h1 align="center" style="color:#ff0000">Ops...</h1>
-    <c:if test="${requestScope.message!=null}">
-        <h3 align="center" style="color:#0000ff"><em> ${requestScope.message}</em></h3>
-    </c:if>
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
+<h1>Error!!!</h1>
+<p>$message}</p>
 </body>
 </html>
