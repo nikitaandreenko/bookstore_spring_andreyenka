@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
 @Configuration
 @ComponentScan
 @EnableTransactionManagement
-public class AppConfiguration extends WebMvcConfigurationSupport {
+public class  AppConfiguration extends WebMvcConfigurationSupport {
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -32,6 +32,7 @@ public class AppConfiguration extends WebMvcConfigurationSupport {
         registry.addResourceHandler("css/**", "images/**")
                 .addResourceLocations("classpath:/css/", "classpath:/images/");
     }
+
     @Bean
     public EntityManagerFactory factory(){
         return Persistence.createEntityManagerFactory("psql");

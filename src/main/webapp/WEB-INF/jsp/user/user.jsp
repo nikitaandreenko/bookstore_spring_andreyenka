@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>User</title>
-    <link href="../css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         <th>Age</th>
         <th>Email</th>
         <th>Role</th>
-        <th>Life cycle</th>
+<%--        <th>Life cycle</th>--%>
 
     </tr>
     <tr>
@@ -27,14 +27,14 @@
         <td>${user.age}</td>
         <td>${user.email}</td>
         <td>${user.role}</td>
-        <td>${user.lifeCycle}</td>
+<%--        <td>${user.lifeCycle}</td>--%>
     </tr>
 </table>
 <div>
-    <a href="${pageContext.request.contextPath}/users/update/${user.id}" method="get" target = "_blank">
-        <button>update</button></a>
-    <a href="${pageContext.request.contextPath}/users/delete/${user.id}" method="get" target = "_blank">
-        <button>delete</button></a>
+    <<form action="${pageContext.request.contextPath}/users/update/${user.id}" method="get" target = "_blank">
+        <button>update</button></form>
+    <form action="${pageContext.request.contextPath}/users/delete/${user.id}" method="post" target = "_blank">
+        <button>delete</button></form>
 </div>
 </body>
 </html>

@@ -3,26 +3,27 @@
 <html>
 <head>
     <title>Create user</title>
-    <link href="../css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body class="user">
 <c:if test="${message!=null}">
     <h3><em> ${message}</em></h3>
 </c:if>
 <form align=center action="${pageContext.request.contextPath}/users/create" method="post">
-    First name: <input type="text" name="firstName"/>
+    <label>First name: <input type="text" name="firstName"/></label>
+   <br><br>
+    <label>Last name: <input type="text" name="lastName"/></label>
     <br><br>
-    Last name: <input type="text" name="lastName"/>
+    <label>Age: <input type="text" name="age"/></label>
     <br><br>
-    Age: <input type="text" name="age"/>
-    <br><br>
-    Email: <input type="text" name="email"/>
-    <br><br>
-    Role: <select name="role">
+    <label>Email: <input type="text" name="email"/></label>
+   <br><br>
+    <label>Role: <select name="role">
     <option>USER</option>
     <option>MANAGER</option>
     <option>ADMIN</option>
 </select>
+    </label>
     <br><br>
     <input type="submit" value="save"/>
 </form>

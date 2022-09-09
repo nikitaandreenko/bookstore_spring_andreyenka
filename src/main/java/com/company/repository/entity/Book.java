@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -52,7 +51,7 @@ public class Book {
     private Language language;
 
     @Column(name = "availability")
-    private String availability;
+    private String availability = "in stock";
 
     @OneToMany(mappedBy = "book")
     private List<OrderItem> orderItems;

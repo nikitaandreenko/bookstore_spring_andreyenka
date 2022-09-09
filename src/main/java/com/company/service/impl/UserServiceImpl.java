@@ -13,10 +13,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
     private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
@@ -91,7 +93,6 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.delete(id)) {
             throw new EntityNotFoundException("No entity with id: " + id);
         }
-        userRepository.delete(id);
     }
 
 

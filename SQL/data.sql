@@ -44,7 +44,8 @@ VALUES ('Nik', 'Swanson', 35, 'n.sw@gmail.com', 'ADMIN'),
        ('Sam', 'Cook', 19, 'cokky_sam1987@gmail.com', 'USER'),
        ('Wolly', 'Monson', 59, 'monson_1967@gmail.com', 'MANAGER'),
        ('Nik', 'Cracks', 49, 'cr_nik_1979@gmail.com', 'ADMIN'),
-       ('Silly', 'Sorento', 42, 'sil.srn18@gmail.com', 'USER');
+       ('Silly', 'Sorento', 42, 'sil.srn18@gmail.com', 'USER'),
+       ('Molly', 'Mellony', 40, 'molly191919@gmail.com', 'USER');
 
 INSERT INTO orders (user_id, total_cost, status)
 VALUES ((SELECT id FROM users WHERE email = 'n.sw@gmail.com'), 0.0, 'PENDING'),

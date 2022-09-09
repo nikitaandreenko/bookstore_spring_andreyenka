@@ -5,6 +5,7 @@ import com.company.repository.OrderRepository;
 import com.company.service.OrderService;
 import com.company.service.dto.ObjectMapperService;
 import com.company.service.dto.OrderDto;
+import com.company.service.exception.BadRequestException;
 import com.company.service.exception.EntityNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -106,7 +106,6 @@ public class BookServiceImpl implements BookService {
         if (!bookRepository.delete(id)) {
             throw new EntityNotFoundException("No entity with id: " + id);
         }
-        bookRepository.delete(id);
     }
 
     @Override

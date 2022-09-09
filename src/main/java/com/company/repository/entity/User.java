@@ -40,7 +40,7 @@ public class User {
     private Role role;
 
     @Column(name = "life_cycle")
-    private String lifeCycle;
+    private String lifeCycle = "active";
 
 
     public enum Role {

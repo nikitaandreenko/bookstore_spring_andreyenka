@@ -2,31 +2,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <title>Update user</title>
-    <link href="../../css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body class="user">
 <c:if test="${message!=null}">
     <h3><em> ${message}</em></h3>
 </c:if>
 <form align=center action="${pageContext.request.contextPath}/users/update/${user.id}" method="post">
-    First name: <input type="text" name="firstName" value="${user.firstName}"/>
+    <label>First name: <input type="text" name="firstName" value="${user.firstName}"/></label>
     <br><br>
-    Last name: <input type="text" name="lastName" value="${user.lastName}"/>
+    <label>Last name: <input type="text" name="lastName" value="${user.lastName}"/></label>
     <br><br>
-    Age: <input type="text" name="age" value="${user.age}"/>
+    <label>Age: <input type="text" name="age" value="${user.age}"/></label>
     <br><br>
-    Email: <input type="text" name="email" value="${user.email}"/>
+    <label>Email: <input type="text" name="email" value="${user.email}"/></label>
     <br><br>
-    Role: <select type="text" name="role" value="${user.role}">
-    <option>USER</option>
-    <option>MANAGER</option>
-    <option>ADMIN</option>
-</select>
-    <br><br>
-    Life cycle: <select type="text" name="lifeCycle" value="${user.lifeCycle}">
-    <option>active</option>
-    <option>not active</option>
-</select>
+    <label>Role: <select name="role" value="${user.role}">
+        <option>USER</option>
+        <option>MANAGER</option>
+        <option>ADMIN</option>
+    </select>
+    </label>
     <br><br>
     <input type="submit" value="save"/>
 </form>

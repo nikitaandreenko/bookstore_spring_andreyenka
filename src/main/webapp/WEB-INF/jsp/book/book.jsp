@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Book</title>
-    <link href="../css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Book</h1>
@@ -20,7 +20,7 @@
         <th>Binding</th>
         <th>Year Publishing</th>
         <th>Language</th>
-        <th>availability</th>
+<%--        <th>availability</th>--%>
 
     </tr>
     <tr>
@@ -32,14 +32,14 @@
         <td>${book.binding}</td>
         <td>${book.yearPublishing}</td>
         <td>${book.language}</td>
-        <td>${book.availability}</td>
+<%--        <td>${book.availability}</td>--%>
     </tr>
 </table>
 <div>
-    <a href="${pageContext.request.contextPath}/books/update/${book.id}" method="get" target = "_blank">
-        <button>update</button></a>
-    <a href="${pageContext.request.contextPath}/books/delete/${book.id}" method="get" target = "_blank">
-        <button>delete</button></a>
+    <form action="${pageContext.request.contextPath}/books/update/${book.id}" method="get" target = "_blank">
+        <button>update</button></form>
+    <form action="${pageContext.request.contextPath}/books/delete/${book.id}" method="post" target = "_blank">
+        <button>delete</button></form>
 </div>
 </body>
 </html>

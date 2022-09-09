@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>Bookstore by Andreyenka</title>
-        <link href="css/styles.css" rel="stylesheet">
+        <link href="/css/styles.css" rel="stylesheet">
     </head>
         <body>
         <h1>Bookstore made by Andreyenka with Java</h1>

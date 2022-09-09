@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Users</title>
-    <link href="../css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Users</h1>
@@ -17,7 +17,7 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Role</th>
-        <th>Life cycle</th>
+<%--        <th>Life cycle</th>--%>
         <th>More info</th>
     </tr>
     <c:forEach items="${users}" var="user" varStatus="counter">
@@ -26,8 +26,8 @@
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.role}</td>
-            <td>${user.lifeCycle}</td>
-            <td><a href="${pageContext.request.contextPath}/users/${user.id}" method="get"><button>Click me</button></a></td>
+<%--            <td>${user.lifeCycle}</td>--%>
+            <td><form action="${pageContext.request.contextPath}/users/${user.id}" method="get"><button>Click me</button></form></td>
         </tr>
     </c:forEach>
 </table>

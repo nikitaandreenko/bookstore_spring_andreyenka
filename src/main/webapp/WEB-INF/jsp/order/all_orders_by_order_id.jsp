@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>Order by order id</title>
-  <link href="../../css/styles.css" rel="stylesheet" type="text/css">
+  <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Order</h1>
@@ -24,7 +24,7 @@
       <td>${order.user.email}</td>
       <td>${order.status}</td>
       <td>${order.totalCost}</td>
-      <td><a href="${pageContext.request.contextPath}/orders/${order.id}" method="get"><button>Click me</button></a></td>
+      <td><form action="${pageContext.request.contextPath}/orders/${order.id}" method="get"><button>Click me</button></form></td>
     </tr>
   </c:forEach>
 </table>
