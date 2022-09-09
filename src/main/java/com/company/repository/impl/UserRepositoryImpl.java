@@ -2,29 +2,28 @@ package com.company.repository.impl;
 
 ;
 import com.company.repository.UserRepository;
+import com.company.repository.entity.Book;
 import com.company.repository.entity.User;
 
-import jakarta.persistence.EntityManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository("userRepository")
+@Transactional
 public class UserRepositoryImpl implements UserRepository {
 
+    @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    public UserRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public User create(User entity) {
-        entityManager.getTransaction().begin();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
@@ -36,23 +35,24 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        List<User> users = entityManager.createQuery("from User where isDeleted = false", User.class).getResultList();
+        List<User> users = entityManager.createQuery("from User", User.class).getResultList();
         return users;
     }
 
     @Override
     public User update(User entity) {
-        entityManager.getTransaction().begin();
         entityManager.merge(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
     @Override
-    public void delete(Long id) {
-        entityManager.getTransaction().begin();
-        entityManager.createQuery("update User set isDeleted = true where id = :id").setParameter("id", id).executeUpdate();
-        entityManager.getTransaction().commit();
+    public boolean delete(Long id) {
+        User user = entityManager.find(User.class, id);
+        if (user == null) {
+            return false;
+        }
+        entityManager.createQuery("update User set lifeCycle = 'not active' where id = :id").setParameter("id", id).executeUpdate();
+        return true;
     }
 
     @Override

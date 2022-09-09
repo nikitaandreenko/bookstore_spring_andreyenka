@@ -1,7 +1,7 @@
 package com.company.repository.entity;
 
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -89,7 +89,7 @@ public class OrderItem {
         return "OrderItem{" +
                 "id=" + id +
                 ", book=" + book.getId() +
-                ", order=" + order.getId() +
+                ", order=" + order +
                 ", quantity=" + quantity +
                 ", price=" + price +
                 '}';

@@ -1,26 +1,19 @@
 package com.company.repository.impl;
 
 import com.company.repository.OrderRepository;
-
 import com.company.repository.entity.Order;
-
-import jakarta.persistence.EntityManager;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
 @Repository("orderRepository")
+@Transactional
 public class OrderRepositoryImpl implements OrderRepository {
+    @PersistenceContext
     private EntityManager entityManager;
-
-
-    @Autowired
-    public OrderRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public Order create(Order entity) {
@@ -31,6 +24,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Order findById(Long id) {
         Order order = entityManager.find(Order.class, id);
+
         return order;
     }
 
@@ -46,16 +40,16 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public void delete(Long id) {
+    public boolean delete(Long id) {
+        return false;
     }
 
     @Override
     public List<Order> findByUserId(Long userId) {
 
-        List<Order> orders = entityManager.createQuery("SELECT o from Order o where o.user.id = ?1")
+        return entityManager.createQuery("SELECT o from Order o where o.user.id = ?1")
                 .setParameter(1, userId)
                 .getResultList();
-        return orders;
     }
 
 }

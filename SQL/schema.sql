@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS books
     pages INTEGER NOT NULL,
     binding VARCHAR(30) NOT NULL,
     year_publishing INTEGER,
-    book_language VARCHAR(30) NOT NULl,
-    deleted BOOLEAN NOT NULL DEFAULT FALSE
+    book_language VARCHAR(30) NOT NULL,
+    availability VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS users
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS users
     user_age INTEGER NOT NULL,
     email VARCHAR(100) NOT NULL,
     user_role VARCHAR(100) NOT NULL,
-    deleted BOOLEAN NOT NULL DEFAULT FALSE
+    life_cycle VARCHAR(30) NOT NULL DEFAULT 'active'
 );
 
 CREATE TABLE IF NOT EXISTS orders

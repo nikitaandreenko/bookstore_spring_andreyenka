@@ -1,8 +1,8 @@
 package com.company.repository.entity;
 
-import jakarta.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -35,13 +35,12 @@ public class Order {
     @Column(name = "total_cost")
     private BigDecimal totalCost;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderItem> items;
 
     public enum Status {
         PENDING, CONFIRMED, DELIVERED, CANCELED
     }
-
 
     public Long getId() {
         return id;

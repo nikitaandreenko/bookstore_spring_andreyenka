@@ -14,8 +14,8 @@ public class BookDto {
         private Integer pages;
         private String binding;
         private Integer yearPublishing;
-
         private Language language;
+//        private String availability;
 
         public enum Language {
             ENGLISH, RUSSIAN, SPANISH, FRENCH, DEUTSCH, ARABIC, CHINESE, JAPANESE

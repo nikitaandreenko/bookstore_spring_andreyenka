@@ -12,5 +12,5 @@ public interface AbstractRepository<K, T> {
 
     T update(T entity);
 
-    void delete(K id);
+    boolean delete(K id);
 }

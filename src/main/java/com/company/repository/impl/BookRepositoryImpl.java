@@ -2,27 +2,24 @@ package com.company.repository.impl;
 
 import com.company.repository.BookRepository;
 import com.company.repository.entity.Book;
-import jakarta.persistence.EntityManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository("bookRepository")
+@Transactional
 public class BookRepositoryImpl implements BookRepository {
 
+    @PersistenceContext
     private EntityManager entityManager;
-
-    @Autowired
-    public BookRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public Book create(Book entity) {
-        entityManager.getTransaction().begin();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
@@ -41,17 +38,18 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Book update(Book entity) {
-        entityManager.getTransaction().begin();
         entityManager.merge(entity);
-        entityManager.getTransaction().commit();
         return entity;
     }
 
     @Override
-    public void delete(Long id) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(entityManager.find(Book.class, id));
-        entityManager.getTransaction().commit();
+    public boolean delete(Long id) {
+        Book book = entityManager.find(Book.class, id);
+        if (book == null) {
+            return false;
+        }
+        entityManager.createQuery("update Book set availability = 'out of stock' where id = :id").setParameter("id", id).executeUpdate();
+        return true;
     }
 
     @Override
