@@ -63,7 +63,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getUserByLastName(String lastName) {
-        List<User> users = entityManager.createQuery("FROM User where lastName = :paramName", User.class)
+        List<User> users = entityManager.createQuery("from User where lastName = :paramName", User.class)
                 .setParameter("paramName", lastName).getResultList();
         return users;
     }

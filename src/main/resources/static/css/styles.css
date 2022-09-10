@@ -40,7 +40,7 @@ h3{
     text-align: center;
 }
 body{
-    background: url(../images/bookstore.jpg) no-repeat;
+    background: url(images/bookstore.jpg) no-repeat;
     color: #000;
     background-size: cover;
 }
@@ -82,15 +82,15 @@ button:hover{
     background-color: #ffd300;
 }
 .book {
-    background: url(../images/book1.jpg) no-repeat;
+    background: url(images/book1.jpg) no-repeat;
     background-size: cover;
 }
 .user{
-    background: url(../images/users.jpg) no-repeat;
+    background: url(images/users.jpg) no-repeat;
     background-size: cover;
 }
 .error{
-background: url(../images/error.jpg) no-repeat;
+background: url(images/error.jpg) no-repeat;
 }
 
 .table_mini{
