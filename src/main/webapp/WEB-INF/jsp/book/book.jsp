@@ -6,10 +6,24 @@
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href=/books/getAll>books</a></li>
+    <li><a href="/">Home</a></li>
+    <c:if test="${sessionScope.user == null}">
+        <li style="float:right" ><a  class="active" href="/login">Login</a></li>
+        <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user != null}">
+        <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+        <li style="float:right"><a class="active" href="/users/create">New user</a></li>
+        <li><a href="/books/create">Add book</a></li>
+        <li><a href="/orders/getAll">orders</a></li>
+    </c:if>
+</ul>
 <h1>Book</h1>
-<c:if test="${message!=null}">
-    <h3><em> ${message}</em></h3>
-</c:if>
 <table>
     <tr>
         <th>Title</th>
@@ -24,22 +38,24 @@
 
     </tr>
     <tr>
-        <td>${book.bookName}</td>
-        <td>${book.author}</td>
-        <td>${book.isbn}</td>
-        <td>${book.price}</td>
-        <td>${book.pages}</td>
-        <td>${book.binding}</td>
-        <td>${book.yearPublishing}</td>
-        <td>${book.language}</td>
-<%--        <td>${book.availability}</td>--%>
+        <td><c:out value="${book.bookName}"/></td>
+        <td><c:out value="${book.author}"/></td>
+        <td><c:out value="${book.isbn}"/></td>
+        <td><c:out value="${book.price}"/></td>
+        <td><c:out value="${book.pages}"/></td>
+        <td><c:out value="${book.binding}"/></td>
+        <td><c:out value="${book.yearPublishing}"/></td>
+        <td><c:out value="${book.language}"/></td>
+        <td><c:out value="${book.availability}"/></td>
     </tr>
 </table>
 <div>
-    <form action="${pageContext.request.contextPath}/books/update/${book.id}" method="get" target = "_blank">
+<c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+    <form action="/books/update/${book.id}" method="get" target = "_blank">
         <button>update</button></form>
-    <form action="${pageContext.request.contextPath}/books/delete/${book.id}" method="post" target = "_blank">
+    <form action="/books/delete/${book.id}" method="post" target = "_blank">
         <button>delete</button></form>
 </div>
+</c:if>
 </body>
 </html>

@@ -6,28 +6,40 @@
  <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href=/books/getAll>books</a></li>
+    <c:if test="${sessionScope.user == null}">
+        <li style="float:right" ><a  class="active" href="/login">Login</a></li>
+        <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user != null}">
+        <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+        <li style="float:right"><a class="active" href="/users/create">New user</a></li>
+        <li><a href="/books/create">Add book</a></li>
+        <li><a href="/orders/getAll">orders</a></li>
+    </c:if>
+</ul>
 <h1>Books</h1>
-<c:if test="${message!=null}">
-    <h3><em> ${message}</em></h3>
-</c:if>
-<h1><a href="${pageContext.request.contextPath}/books/create"><button>add book</button></a></h1>
 <table>
     <tr>
         <th>#</th>
         <th>Title</th>
         <th>Author</th>
         <th>Year Publishing</th>
-<%--        <th>Availability</th>--%>
+        <th>Availability</th>
         <th>More info</th>
     </tr>
     <c:forEach items="${books}" var="book" varStatus="counter">
         <tr>
-            <td>${counter.count}</td>
-            <td>${book.bookName}</td>
-            <td>${book.author}</td>
-            <td>${book.yearPublishing}</td>
-<%--            <td>${book.availability}</td>--%>
-            <td><form action="${pageContext.request.contextPath}/books/${book.id}" method="get"><button>Click me</button></form></td>
+            <td><c:out value="${counter.count}"/></td>
+            <td><c:out value="${book.bookName}"/></td>
+            <td><c:out value="${book.author}"/></td>
+            <td><c:out value="${book.yearPublishing}"/></td>
+            <td><c:out value="${book.availability}"/></td>
+            <td><form action="/books/${book.id}" method="get"><button>Click me</button></form></td>
         </tr>
     </c:forEach>
 </table>

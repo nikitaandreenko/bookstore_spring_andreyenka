@@ -9,7 +9,8 @@ public class UserDto {
     private int age;
     private String email;
     private Role role;
-//    private String lifeCycle;
+    private String password;
+    private String lifeCycle;
 
     public enum Role {
         USER, MANAGER, ADMIN

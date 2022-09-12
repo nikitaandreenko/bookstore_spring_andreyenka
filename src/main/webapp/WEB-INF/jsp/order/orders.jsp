@@ -6,10 +6,22 @@
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>Order</h1>
-<c:if test="${message!=null}">
-    <h3><em> ${message}</em></h3>
-</c:if>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href=/books/getAll>books</a></li>
+    <c:if test="${sessionScope.user == null}">
+        <li style="float:right" ><a  class="active" href="/login">Login</a></li>
+        <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user != null}">
+        <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+        <li style="float:right"><a class="active" href="/users/create">New user</a></li>
+        <li><a href="/books/create">Add book</a></li>
+        <li><a href="/orders/getAll">orders</a></li>
+    </c:if>
+</ul>
 <table>
     <tr><th>#</th>
         <th>User</th>
@@ -20,11 +32,11 @@
     </tr>
 <c:forEach items="${orders}" var="order" varStatus="counter" >
     <tr>
-        <td>${counter.count}</td>
-        <td>${order.user.email}</td>
-        <td>${order.status}</td>
-        <td>${order.totalCost}</td>
-        <td><form action="${pageContext.request.contextPath}/orders/${order.id}" method="get"><button>Click me</button></form></td>
+        <td><c:out value="${counter.count}"/></td>
+        <td><c:out value="${order.user.email}"/></td>
+        <td><c:out value="${order.status}"/></td>
+        <td><c:out value="${order.totalCost}"/></td>
+        <td><form action="/orders/${order.id}" method="get"><button>Click me</button></form></td>
     </tr>
 </c:forEach>
 </table>

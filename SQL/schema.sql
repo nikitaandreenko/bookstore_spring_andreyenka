@@ -26,8 +26,9 @@ CREATE TABLE IF NOT EXISTS users
     last_name VARCHAR(100) NOT NULL,
     user_age INTEGER NOT NULL,
     email VARCHAR(100) NOT NULL,
-    user_role VARCHAR(100) NOT NULL,
-    life_cycle VARCHAR(30) NOT NULL DEFAULT 'active'
+    user_role VARCHAR(100) NOT NULL DEFAULT 'USER',
+    life_cycle VARCHAR(30) NOT NULL DEFAULT 'active',
+    user_password VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS orders

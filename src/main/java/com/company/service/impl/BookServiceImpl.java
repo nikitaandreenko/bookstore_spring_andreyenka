@@ -7,6 +7,7 @@ import com.company.service.dto.BookDto;
 import com.company.service.dto.ObjectMapperService;
 import com.company.service.exception.EntityNotFoundException;
 import com.company.service.exception.ValidateException;
+import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +19,12 @@ import java.util.List;
 
 
 @Service("bookService")
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
     private static final Logger log = LogManager.getLogger(BookServiceImpl.class);
 
     private final BookRepository bookRepository;
     private final ObjectMapperService mapper;
-
-    @Autowired
-    public BookServiceImpl(BookRepository bookRepository, ObjectMapperService mapper) {
-        this.bookRepository = bookRepository;
-        this.mapper = mapper;
-    }
-
 
     @Override
     public BookDto create(BookDto book) {

@@ -7,6 +7,7 @@ import com.company.service.dto.ObjectMapperService;
 import com.company.service.dto.OrderDto;
 import com.company.service.exception.BadRequestException;
 import com.company.service.exception.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("orderService")
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final ObjectMapperService mapper;
 
     private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
-
-    @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, ObjectMapperService mapper) {
-        this.orderRepository = orderRepository;
-        this.mapper = mapper;
-    }
-
 
     @Override
     public OrderDto create(OrderDto entity) {

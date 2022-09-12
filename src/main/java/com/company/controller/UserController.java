@@ -39,11 +39,21 @@ public class UserController {
         model.addAttribute("message", "bookstore by Andreyenka");
         return "user/createUserForm";
     }
+    @GetMapping("/registration")
+    public String registrationUserForm(Model model) {
+        model.addAttribute("message", "bookstore by Andreyenka");
+        return "user/registrationForm";
+    }
 
     @PostMapping("/create")
     public String createUser(@ModelAttribute UserDto user) {
         userService.create(user);
-        return "redirect:/users/getAll";
+        return "redirect:/";
+    }
+    @PostMapping("/registration")
+    public String registrationUser(@ModelAttribute UserDto user) {
+        userService.registration(user);
+        return "redirect:/";
     }
 
     @GetMapping("/update/{id}")

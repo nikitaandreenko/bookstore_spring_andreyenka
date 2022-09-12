@@ -62,10 +62,21 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User login(String email, String password) {
+        User user = entityManager.createQuery("from User where email = :paramName1 and password = :paramName2", User.class)
+                .setParameter("paramName1", email).setParameter("paramName2", password).getSingleResult();
+        return user;
+    }
+
+    @Override
     public List<User> getUserByLastName(String lastName) {
         List<User> users = entityManager.createQuery("from User where lastName = :paramName", User.class)
                 .setParameter("paramName", lastName).getResultList();
         return users;
     }
-
+    @Override
+    public User registration(User user) {
+        entityManager.persist(user);
+        return user;
+    }
 }

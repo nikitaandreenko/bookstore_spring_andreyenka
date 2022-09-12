@@ -23,29 +23,29 @@ VALUES         ('it starts us', 'Collen Hoover', '978-1668001226', 11.99, 366, '
                 ('A Letter From Your Teacher: On the First Day of School', 'Shannon Olsen', '978-1735414126', 13.99, 31, 'soft', 2007, 'ENGLISH','in stock');
 
 
-INSERT INTO users (first_name, last_name, user_age, email, user_role)
-VALUES ('Nik', 'Swanson', 35, 'n.sw@gmail.com', 'ADMIN'),
-       ('Nik', 'Meclo', 24, 'n.mcl@gmail.com', 'ADMIN'),
-       ('Sam', 'Growner', 42, 's.gr_4@mail.com', 'USER'),
-       ('Wane', 'Rooney', 39, 'WR.10@gmail.com', 'MANAGER'),
-       ('Mike', 'Ramcey', 28, 'm.rmc@gmail.com', 'USER'),
-       ('Samanta', 'Robson', 42, 'samanta_rob123@gmail.com', 'ADMIN'),
-       ('Selena', 'Gomes', 43, 'selena_love_sing@gmail.com', 'USER'),
-       ('Raley', 'Rricey', 56, 'ral.12387@mail.com', 'MANAGER'),
-       ('Brad', 'Spacey', 35, 'br_spacey.com', 'ADMIN'),
-       ('Helena', 'Rassy', 42, 'helena.ras456@gmail.com', 'USER'),
-       ('Mike', 'Walent', 50, 'mik.walent@mail.com', 'MANAGER'),
-       ('Stasey', 'Lacatelli', 35, 'locat.ital12@gmail.com', 'ADMIN'),
-       ('Jeck', 'Peterson', 46, 'pet.jeck1987@gmail.com', 'USER'),
-       ('Molly', 'Swanson', 22, 'swans.mol1999@gmail.com', 'USER'),
-       ('Rob', 'Jeferson', 17, 'jeferson19991999@gmail.com', 'USER'),
-       ('Jim', 'Paranga', 40, 'par.jim_1998@mail.com', 'USER'),
-       ('Samanta', 'Metry', 35, 'sam.petry15678@gmail.com', 'ADMIN'),
-       ('Sam', 'Cook', 19, 'cokky_sam1987@gmail.com', 'USER'),
-       ('Wolly', 'Monson', 59, 'monson_1967@gmail.com', 'MANAGER'),
-       ('Nik', 'Cracks', 49, 'cr_nik_1979@gmail.com', 'ADMIN'),
-       ('Silly', 'Sorento', 42, 'sil.srn18@gmail.com', 'USER'),
-       ('Molly', 'Mellony', 40, 'molly191919@gmail.com', 'USER');
+INSERT INTO users (first_name, last_name, user_age, email, user_role, user_password)
+VALUES ('Nik', 'Swanson', 35, 'n.sw@gmail.com', 'ADMIN', 'd033e22ae348aeb5660fc2140aec35850c4da997'),
+       ('Nik', 'Meclo', 24, 'n.mcl@gmail.com', 'ADMIN', 'd033e22ae348aeb5660fc2140aec35850c4da997'),
+       ('Sam', 'Growner', 42, 's.gr_4@mail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Wane', 'Rooney', 39, 'WR.10@gmail.com', 'MANAGER','1a8565a9dc72048ba03b4156be3e569f22771f23'),
+       ('Mike', 'Ramcey', 28, 'm.rmc@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Samanta', 'Robson', 42, 'samanta_rob123@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Selena', 'Gomes', 43, 'selena_love_sing@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Raley', 'Rricey', 56, 'ral.12387@mail.com', 'MANAGER', '1a8565a9dc72048ba03b4156be3e569f22771f23'),
+       ('Brad', 'Spacey', 35, 'br_spacey.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Helena', 'Rassy', 42, 'helena.ras456@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Mike', 'Walent', 50, 'mik.walent@mail.com', 'MANAGER', '1a8565a9dc72048ba03b4156be3e569f22771f23'),
+       ('Stasey', 'Lacatelli', 35, 'locat.ital12@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Jeck', 'Peterson', 46, 'pet.jeck1987@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Molly', 'Swanson', 22, 'swans.mol1999@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Rob', 'Jeferson', 17, 'jeferson19991999@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Jim', 'Paranga', 40, 'par.jim_1998@mail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Samanta', 'Metry', 35, 'sam.petry15678@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Sam', 'Cook', 19, 'cokky_sam1987@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Wolly', 'Monson', 59, 'monson_1967@gmail.com', 'USER','12dea96fec20593566ab75692c9949596833adc9'),
+       ('Nik', 'Cracks', 49, 'cr_nik_1979@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Silly', 'Sorento', 42, 'sil.srn18@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
+       ('Molly', 'Mellony', 40, 'molly191919@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9');
 
 INSERT INTO orders (user_id, total_cost, status)
 VALUES ((SELECT id FROM users WHERE email = 'n.sw@gmail.com'), 0.0, 'PENDING'),
