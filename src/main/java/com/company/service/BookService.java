@@ -13,5 +13,4 @@ public interface BookService extends AbstractService<Long, BookDto> {
 
     BigDecimal totalPriceByAuthor(String author);
 
-
 }

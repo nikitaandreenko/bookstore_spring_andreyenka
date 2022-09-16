@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service("userService")
@@ -101,6 +102,14 @@ public class UserServiceImpl implements UserService {
         return mapper.toDto(userCreated);
     }
 
+    @Override
+    public UserDto updateRegistration(UserDto user) {
+        log.debug("Update user={} in database users", user);
+        validateUpdate(user);
+        User userUpdated = mapper.toEntityRegistration(user);
+        userRepository.update(userUpdated);
+        return mapper.toDto(userUpdated);
+    }
 
     @Override
     public UserDto update(UserDto user) {
@@ -121,8 +130,8 @@ public class UserServiceImpl implements UserService {
 
 
     private void validateCreate(UserDto user) {
-        if (user == null) {
-            throw new ValidateException("Users can't be empty...");
+        if (!(Objects.equals(user.getPassword(), user.getConfirmPassword()) && user.getPassword().matches("(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{6,}$"))) {
+            throw new ValidateException("Password must contain at least one uppercase letter, one lowercase letter and at least 6 characters");
         }
         if (user.getAge() <= 0) {
             throw new ValidateException("Age is not valid. Age can't be less 0");

@@ -19,7 +19,6 @@ public class BookController {
     @GetMapping("/{id}")
     public String getBook(@PathVariable Long id, Model model) {
         BookDto book = bookService.findById(id);
-        model.addAttribute("message", "bookstore by Andreyenka");
         model.addAttribute("book", book);
         return "book/book";
     }
@@ -28,13 +27,11 @@ public class BookController {
     public String getBooks(Model model) {
         List<BookDto> books = bookService.findAll();
         model.addAttribute("books", books);
-        model.addAttribute("message", "bookstore by Andreyenka");
         return "book/books";
     }
 
     @GetMapping("/create")
     public String createUserForm(Model model) {
-        model.addAttribute("message", "bookstore by Andreyenka");
         return "book/createBookForm";
     }
 
@@ -47,7 +44,6 @@ public class BookController {
     @GetMapping("/update/{id}")
     public String updateBookForm(@PathVariable Long id, Model model) {
         BookDto book = bookService.findById(id);
-        model.addAttribute("message", "bookstore by Andreyenka");
         model.addAttribute("book", book);
         return "book/updateBookForm";
     }
@@ -63,4 +59,5 @@ public class BookController {
         bookService.delete(id);
         return "redirect:/books/getAll";
     }
+
 }

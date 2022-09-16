@@ -17,6 +17,8 @@ import java.util.List;
 @Transactional
 public class UserRepositoryImpl implements UserRepository {
 
+    public static final Class<User> GET_BY_ID = User.class;
+    public static final String GET_ALL_USER = "from User";
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -29,14 +31,12 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(Long id) {
-        User user = entityManager.find(User.class, id);
-        return user;
+        return entityManager.find(GET_BY_ID, id);
     }
 
     @Override
     public List<User> findAll() {
-        List<User> users = entityManager.createQuery("from User", User.class).getResultList();
-        return users;
+        return entityManager.createQuery(GET_ALL_USER, User.class).getResultList();
     }
 
     @Override
@@ -57,8 +57,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUserByEmail(String email) {
-        User user = entityManager.find(User.class, email);
-        return user;
+        return entityManager.find(User.class, email);
     }
 
     @Override
@@ -70,12 +69,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getUserByLastName(String lastName) {
-        List<User> users = entityManager.createQuery("from User where lastName = :paramName", User.class)
+        return entityManager.createQuery("from User where lastName = :paramName", User.class)
                 .setParameter("paramName", lastName).getResultList();
-        return users;
     }
     @Override
     public User registration(User user) {
+        entityManager.persist(user);
+        return user;
+    }
+
+    @Override
+    public User updateRegistration(User user) {
         entityManager.persist(user);
         return user;
     }

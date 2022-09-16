@@ -19,9 +19,6 @@ public class UserController {
     @GetMapping("/{id}")
     public String getUser(@PathVariable Long id, Model model) {
         UserDto user = userService.findById(id);
-        model.addAttribute("message", "bookstore by Andreyenka");
-        model.addAttribute("messageUpdate", "User successfully updated!!!");
-        model.addAttribute("messageCreate", "User successfully updated!!!");
         model.addAttribute("user", user);
         return "user/user";
     }
@@ -30,18 +27,16 @@ public class UserController {
     public String getUsers(Model model) {
         List<UserDto> users = userService.findAll();
         model.addAttribute("users", users);
-        model.addAttribute("message", "bookstore by Andreyenka");
         return "user/users";
     }
 
     @GetMapping("/create")
     public String createUserForm(Model model) {
-        model.addAttribute("message", "bookstore by Andreyenka");
         return "user/createUserForm";
     }
+
     @GetMapping("/registration")
     public String registrationUserForm(Model model) {
-        model.addAttribute("message", "bookstore by Andreyenka");
         return "user/registrationForm";
     }
 
@@ -50,6 +45,7 @@ public class UserController {
         userService.create(user);
         return "redirect:/";
     }
+
     @PostMapping("/registration")
     public String registrationUser(@ModelAttribute UserDto user) {
         userService.registration(user);
@@ -59,7 +55,6 @@ public class UserController {
     @GetMapping("/update/{id}")
     public String updateUserForm(@PathVariable Long id, Model model) {
         UserDto user = userService.findById(id);
-        model.addAttribute("message", "bookstore by Andreyenka");
         model.addAttribute("user", user);
         return "user/updateUserForm";
     }
@@ -67,6 +62,11 @@ public class UserController {
     @PostMapping("/update/{id}")
     public String updateUser(@ModelAttribute UserDto user, Model model) {
         userService.update(user);
+        return "redirect:/users/" + user.getId();
+    }
+    @PostMapping("/updateRegistration/{id}")
+    public String updateRegistrationUser(@ModelAttribute UserDto user, Model model) {
+        userService.updateRegistration(user);
         return "redirect:/users/" + user.getId();
     }
 

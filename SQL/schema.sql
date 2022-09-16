@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS basket;
 */
 
 CREATE TABLE IF NOT EXISTS books
@@ -41,10 +42,13 @@ CREATE TABLE IF NOT EXISTS orders
 CREATE TABLE IF NOT EXISTS order_items
 (
     id BIGSERIAL PRIMARY KEY,
-    order_id BIGINT REFERENCES orders NOT NULL,
+    order_id BIGINT REFERENCES orders,
     book_id BIGINT REFERENCES books NOT NULL,
     quantity INTEGER NOT NULL,
     price NUMERIC(6,2) NOT NULL
 );
+
+
+
 
 

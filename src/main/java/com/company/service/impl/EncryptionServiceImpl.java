@@ -14,7 +14,6 @@ public class EncryptionServiceImpl implements EncryptionService {
     public static final int RADIX = 16;
     public static final int SIGNUM = 1;
 
-
     @Override
     public String digest(String input) {
         try {

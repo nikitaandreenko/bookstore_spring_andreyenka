@@ -14,6 +14,10 @@ import java.util.List;
 @Transactional
 public class BookRepositoryImpl implements BookRepository {
 
+    public static final String ALL_BOOKS = "from Book";
+    public static final String SOFT_DELETE_BOOK = "update Book set availability = 'out of stock' where id = :id";
+    public static final Class<Book> GET_BY_ISBN = Book.class;
+    public static final String GET_BY_AUTHOR = "FROM Book where author = :paramName";
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -28,14 +32,11 @@ public class BookRepositoryImpl implements BookRepository {
         Book book = entityManager.find(Book.class, id);
         return book;
     }
-
     @Override
     public List<Book> findAll() {
-        List<Book> books = entityManager.createQuery("from Book", Book.class).getResultList();
+        List<Book> books = entityManager.createQuery(ALL_BOOKS, Book.class).getResultList();
         return books;
     }
-
-
     @Override
     public Book update(Book entity) {
         entityManager.merge(entity);
@@ -48,21 +49,19 @@ public class BookRepositoryImpl implements BookRepository {
         if (book == null) {
             return false;
         }
-        entityManager.createQuery("update Book set availability = 'out of stock' where id = :id").setParameter("id", id).executeUpdate();
+        entityManager.createQuery(SOFT_DELETE_BOOK).setParameter("id", id).executeUpdate();
         return true;
     }
 
     @Override
     public Book getByIsbn(String isbn) {
-        Book book = entityManager.find(Book.class, isbn);
-        return book;
+        return entityManager.find(GET_BY_ISBN, isbn);
     }
 
     @Override
     public List<Book> getByAuthor(String author) {
-        List<Book> books = entityManager.createQuery("FROM Book where author = :paramName", Book.class)
+        return entityManager.createQuery(GET_BY_AUTHOR, Book.class)
                 .setParameter("paramName", author).getResultList();
-        return books;
     }
 
 }

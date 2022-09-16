@@ -18,5 +18,4 @@ public class AuthorizationFilter extends HttpFilter {
         }
         chain.doFilter(req, res);
     }
-
 }

@@ -12,12 +12,16 @@
     <c:if test="${sessionScope.user == null}">
         <li style="float:right" ><a  class="active" href="/login">Login</a></li>
         <li style="float:right"><a class="active" href="/users/create">Registration</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
     </c:if>
     <c:if test="${sessionScope.user != null}">
         <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+        <li style="float:right"><a class="active" href="/users/${user.id}" method="get">My profile</a></li>
     </c:if>
     <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
-        <li style="float:right"><a class="active" href="/users/create">New user</a></li>
+        <li><a href="/users/create">New user</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
         <li><a href="/books/create">Add book</a></li>
         <li><a href="/orders/getAll">orders</a></li>
     </c:if>

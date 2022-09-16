@@ -10,6 +10,7 @@ public class UserDto {
     private String email;
     private Role role;
     private String password;
+    private String confirmPassword;
     private String lifeCycle;
 
     public enum Role {

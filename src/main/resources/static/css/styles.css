@@ -56,9 +56,9 @@ button{
     background-color: #20E2E2;
     color: #C8242D;
     border-radius: 8px;
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
+    width: 90px;
+    height: 40px;
+    font-size: 16px;
 }
 div{
     display: flex;
@@ -79,7 +79,7 @@ input[type=submit] {
 .form {
     width: 400px;
     position: fixed;
-    top: 30%;
+    top: 20%;
     left: 35%;
 }
 
@@ -96,8 +96,8 @@ legend{
 }
 
 button:hover{
-    width: 120px;
-    height: 70px;
+    width: 95px;
+    height: 50px;
     transition: 0.5s;
     background-color: #ffd300;
 }
@@ -144,15 +144,15 @@ background: url(images/error.jpg) no-repeat;
 }
 
 .new_button{
-    font-size: 16px;
-    width: 200px;
-    height: 30px;
+    font-size: 13px;
+    width: 250px;
+    height: 20px;
     background-color: #20E2E2;
 }
 .new_button:hover{
-    font-size: 16px;
-    width: 200px;
-    height: 30px;
+    font-size: 14px;
+    width: 300px;
+    height: 23px;
     transition: 0.5s;
     background-color: #ffd300;
 }

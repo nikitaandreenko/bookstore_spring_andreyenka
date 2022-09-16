@@ -16,4 +16,6 @@ public interface UserRepository extends AbstractRepository<Long, User> {
 
     User registration(User user);
 
+    User updateRegistration (User user);
+
 }

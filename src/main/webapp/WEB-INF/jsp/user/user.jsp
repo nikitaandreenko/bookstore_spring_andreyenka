@@ -13,38 +13,43 @@
     <c:if test="${sessionScope.user == null}">
         <li style="float:right" ><a  class="active" href="/login">Login</a></li>
         <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
     </c:if>
     <c:if test="${sessionScope.user != null}">
         <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+        <li style="float:right"><a class="active" href="/users/${user.id}" method="get">My profile</a></li>
     </c:if>
     <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
-        <li style="float:right"><a class="active" href="/users/create">New user</a></li>
+        <li><a href="/users/create">New user</a></li>
         <li><a href="/books/create">Add book</a></li>
         <li><a href="/orders/getAll">orders</a></li>
     </c:if>
 </ul>
-<h1>User</h1>
 <table>
     <tr>
         <th>First name</th>
         <th>Last name</th>
         <th>Age</th>
         <th>Email</th>
+<c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
         <th>Role</th>
         <th>Life cycle</th>
-
+</c:if>
     </tr>
     <tr>
         <td><c:out value="${user.firstName}"/></td>
         <td><c:out value="${user.lastName}"/></td>
         <td><c:out value="${user.age}"/></td>
         <td><c:out value="${user.email}"/></td>
+    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
         <td><c:out value="${user.role}"/></td>
         <td><c:out value="${user.lifeCycle}"/></td>
+    </c:if>
     </tr>
 </table>
 <div>
-    <<form action="/users/update/${user.id}" method="get" target = "_blank">
+    <form action="/users/update/${user.id}" method="get" target = "_blank">
         <button>update</button></form>
     <form action="/users/delete/${user.id}" method="post" target = "_blank">
         <button>delete</button></form>

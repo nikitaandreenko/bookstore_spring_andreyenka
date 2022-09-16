@@ -3,21 +3,23 @@
 <html>
 <head>
     <title>Books</title>
- <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <ul>
     <li><a href="/">Home</a></li>
-    <li><a href=/books/getAll>books</a></li>
     <c:if test="${sessionScope.user == null}">
-        <li style="float:right" ><a  class="active" href="/login">Login</a></li>
+        <li style="float:right"><a class="active" href="/login">Login</a></li>
         <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
     </c:if>
     <c:if test="${sessionScope.user != null}">
         <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+        <li style="float:right"><a class="active" href="/users/${user.id}" method="get">My profile</a></li>
     </c:if>
     <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
-        <li style="float:right"><a class="active" href="/users/create">New user</a></li>
+        <li><a href="/users/create">New user</a></li>
         <li><a href="/books/create">Add book</a></li>
         <li><a href="/orders/getAll">orders</a></li>
     </c:if>
@@ -31,6 +33,7 @@
         <th>Year Publishing</th>
         <th>Availability</th>
         <th>More info</th>
+        <th></th>
     </tr>
     <c:forEach items="${books}" var="book" varStatus="counter">
         <tr>
@@ -39,7 +42,16 @@
             <td><c:out value="${book.author}"/></td>
             <td><c:out value="${book.yearPublishing}"/></td>
             <td><c:out value="${book.availability}"/></td>
-            <td><form action="/books/${book.id}" method="get"><button>Click me</button></form></td>
+            <td>
+                <form action="/books/${book.id}" method="get">
+                    <button>Click me</button>
+                </form>
+            </td>
+            <td>
+                <form action="/cart/buy/${book.id}" method="get">
+                    <button>Add to cart</button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
 </table>

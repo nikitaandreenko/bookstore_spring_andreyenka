@@ -19,11 +19,7 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH
-    })
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -35,7 +31,7 @@ public class Order {
     @Column(name = "total_cost")
     private BigDecimal totalCost;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrderItem> items;
 
     public enum Status {
@@ -99,7 +95,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", user=" + user.getId() +
+                ", user=" + user +
                 ", status=" + status +
                 ", totalCost=" + totalCost +
                 ", items=" + items +

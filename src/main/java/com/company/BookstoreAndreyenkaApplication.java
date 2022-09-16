@@ -32,7 +32,7 @@ public class BookstoreAndreyenkaApplication implements WebMvcConfigurer {
 		FilterRegistrationBean<AuthorizationFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new AuthorizationFilter());
 		registrationBean.addUrlPatterns("/users/getAll", "/users/create", "/users/delete",
-				"/books/delete", "/books/delete", "/secured/*");
+				"/books/delete", "/books/delete", "/orders/getAll", "/cart/cart");
 		registrationBean.setOrder(2);
 		return registrationBean;
 	}
