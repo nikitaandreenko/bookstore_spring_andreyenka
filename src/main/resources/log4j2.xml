@@ -1,43 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="info">
     <Properties>
-        <!--        <projec.build.sourceEncoding>UTF-8</projec.build.sourceEncoding>-->
         <property name="LOG_DIR">logs</property>
-        <property name="pattern_file">%d{yyyy-MM-dd HH:mm:ss} [%M] %-5level %logger{5} - %msg%n</property>
+        <property name="pattern_file">
+            %d{yyyy-MM-dd HH:mm:ss} [%M] %-5level %logger{5} - %msg%n
+        </property>
         <property name="pattern_console">%d{HH:mm:ss} [%M] %-5level %logger{5} - %msg%n</property>
     </Properties>
     <Appenders>
         <Console name="MyConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="${pattern_console}"/>
         </Console>
-
         <File name="File1" fileName="${LOG_DIR}/text.log">
             <PatternLayout pattern="${pattern_file}"/>
         </File>
-
     </Appenders>
-
     <Loggers>
-        <Logger name="com.company.data.connection.DataSource" level="info">
+        <Logger name="com.company.repository" level="info">
             <AppenderRef ref="File1"/>
         </Logger>
-        <Logger name="com.company.data.impl.BookRepositoryImpl" level="debug">
+        <Logger name="com.company.repository.impl.BookRepositoryImpl" level="debug">
             <AppenderRef ref="MyConsole"/>
         </Logger>
         <Logger name="com.company.service.impl.BookServiceImpl" level="debug">
             <AppenderRef ref="MyConsole"/>
         </Logger>
-        <Logger name="com.company.data.impl.UserRepositoryImpl" level="debug">
+        <Logger name="com.company.repository.impl.UserRepositoryImpl" level="debug">
             <AppenderRef ref="MyConsole"/>
         </Logger>
         <Logger name="com.company.service.impl.UserServiceImpl" level="debug">
             <AppenderRef ref="MyConsole"/>
         </Logger>
-
-        <!--        <Root level="debug">-->
-        <!--            <AppenderRef ref="Console"/>-->
-        <!--            <AppenderRef ref="File1" level="info"/>-->
-        <!--        </Root>-->
+        <Logger name="com.company.repository.impl.OrderRepositoryImpl" level="debug">
+            <AppenderRef ref="MyConsole"/>
+        </Logger>
+        <Logger name="com.company.service.impl.OrderServiceImpl" level="debug">
+            <AppenderRef ref="MyConsole"/>
+        </Logger>
     </Loggers>
-
 </Configuration>

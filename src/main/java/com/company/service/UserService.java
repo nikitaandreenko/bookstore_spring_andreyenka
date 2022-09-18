@@ -17,4 +17,6 @@ public interface UserService extends AbstractService<Long, UserDto>{
 
     UserDto updateRegistration(UserDto user);
 
+
+
 }

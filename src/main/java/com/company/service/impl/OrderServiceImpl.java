@@ -1,21 +1,17 @@
 package com.company.service.impl;
 
-import com.company.repository.entity.Book;
 import com.company.repository.entity.Order;
 import com.company.repository.OrderRepository;
-import com.company.repository.entity.OrderItem;
-import com.company.repository.entity.User;
+
 import com.company.service.OrderService;
 import com.company.service.dto.*;
-import com.company.service.exception.BadRequestException;
+
 import com.company.service.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,12 +51,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto update(OrderDto entity) {
+
         return null;
     }
 
     @Override
     public void delete(Long id) {
-
+        log.debug("Delete order by id={} from database orders", id);
+        if (!orderRepository.delete(id)) {
+            throw new EntityNotFoundException("No entity with id: " + id);
+        }
     }
 
     @Override
@@ -80,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
         for (CartDto dto : cartDto) {
             sum = sum.add(dto.getBookDto().getPrice().multiply(BigDecimal.valueOf(dto.getQuantity())));
         }
-        List <OrderItemDto> orderItemDtos = cartDto.stream().map(cartDto1 -> {
+        List<OrderItemDto> orderItemDtos = cartDto.stream().map(cartDto1 -> {
             OrderItemDto orderItemDto = new OrderItemDto();
             orderItemDto.setBook(cartDto1.getBookDto());
             orderItemDto.setPrice(cartDto1.getBookDto().getPrice());
@@ -92,7 +92,22 @@ public class OrderServiceImpl implements OrderService {
         orderDto.setUser(userDto);
         orderDto.setItems(orderItemDtos);
         Order order = mapper.toEntity(orderDto);
-        orderRepository.create(order);
+        Order orderCreated = orderRepository.create(order);
+        if (orderCreated == null){
+            throw  new EntityNotFoundException("Order didn't create...");
+        }
         return mapper.toDto(order);
+    }
+
+    @Override
+    public OrderDto updateStatus(Long id, String status) {
+        log.debug("Update status order={} in database books", id);
+        Order order = orderRepository.findById(id);
+        order.setStatus(Order.Status.valueOf(status));
+        Order updatedOrder = orderRepository.update(order);
+        if (updatedOrder == null){
+            throw  new EntityNotFoundException("Order didn't update...");
+        }
+        return mapper.toDto(updatedOrder);
     }
 }

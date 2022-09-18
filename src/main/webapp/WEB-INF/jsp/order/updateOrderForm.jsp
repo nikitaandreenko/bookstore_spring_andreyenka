@@ -10,7 +10,7 @@
     <li><a href="/">Home</a></li>
     <li><a href=/books/getAll>books</a></li>
     <c:if test="${sessionScope.user == null}">
-        <li style="float:right" ><a  class="active" href="/login">Login</a></li>
+        <li style="float:right"><a class="active" href="/login">Login</a></li>
         <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
         <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
     </c:if>
@@ -34,28 +34,36 @@
         <th>All orders this user</th>
     </tr>
     <tr>
-        <td><a href="/users/${order.user.id}"><button class="new_button">${order.user.email}</button></a></td>
-        <td><c:out value="${order.status}"/></td>
+        <td><a href="/users/${order.user.id}">
+            <button class="new_button">${order.user.email}</button>
+        </a></td>
+        <td>
+            <form action="/orders/update/${order.id}" method="post">
+                <select name="status">
+                    <option selected value="${order.status}">${order.status}</option>
+                    <option>CONFIRMED</option>
+                    <option>DELIVERED</option>
+                </select>
+                <input type="submit" value="update"/>
+            </form>
+        </td>
         <td><c:out value="${order.totalCost}"/></td>
-        <td><a href="/orders/order/${order.user.id}"><button>Click me</button></a></td>
+        <td><a href="/orders/order/${order.user.id}">
+            <button>Click me</button>
+        </a></td>
     </tr>
 </table>
-    <h1>Order details</h1>
-            <table>
-                <c:forEach items="${order.items}" var="items">
-                    <tr>
-                        <td><a href="/books/${items.book.id}"><button class="new_button">${items.book.bookName}</button></a></td>
-                        <td><c:out value="${items.quantity}"/></td>
-                        <td><c:out value="${items.price}"/></td>
-                    </tr>
-                </c:forEach>
-            </table>
-<div>
-    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
-    <form action="/orders/update/${order.id}" method="get" target="_blank">
-        <button>update</button>
-    </form>
-</div>
-</c:if>
+<h1>Order details</h1>
+<table>
+    <c:forEach items="${order.items}" var="items">
+        <tr>
+            <td><a href="/books/${items.book.id}">
+                <button class="new_button">${items.book.bookName}</button>
+            </a></td>
+            <td><c:out value="${items.quantity}"/></td>
+            <td><c:out value="${items.price}"/></td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>

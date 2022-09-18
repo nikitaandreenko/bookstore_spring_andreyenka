@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/orders")
 @RequiredArgsConstructor
-public class  OrderController {
+public class OrderController {
     private final OrderService orderService;
     ObjectMapperService mapper;
 
@@ -44,7 +44,23 @@ public class  OrderController {
     public String createOrder(HttpSession session) {
         List<CartDto> cart = (List<CartDto>) session.getAttribute("cart");
         UserDto userDto = (UserDto) session.getAttribute("user");
-        orderService.createOrderNew(cart, userDto);
-        return "redirect:/orders/order/" + userDto.getId();
+        OrderDto dto = orderService.createOrderNew(cart, userDto);
+        session.removeAttribute("cart");
+        return "redirect:/orders/" + dto.getId();
     }
+
+    @GetMapping("/update/{id}")
+    public String updateOrderForm(@PathVariable Long id, Model model) {
+        OrderDto order = orderService.findById(id);
+        model.addAttribute("order", order);
+        return "order/updateOrderForm";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateOrder(@PathVariable Long id, @RequestParam String status, Model model) {
+        OrderDto order = orderService.updateStatus(id, status);
+        model.addAttribute(order);
+        return "redirect:/orders/" + order.getId();
+    }
+
 }

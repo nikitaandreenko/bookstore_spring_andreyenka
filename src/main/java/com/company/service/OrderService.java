@@ -12,4 +12,5 @@ public interface OrderService extends AbstractService<Long, OrderDto>{
 
     OrderDto createOrderNew (List<CartDto> cartDto, UserDto userDto);
 
+    OrderDto updateStatus (Long id, String status);
 }

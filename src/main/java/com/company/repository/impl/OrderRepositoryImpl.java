@@ -1,6 +1,7 @@
 package com.company.repository.impl;
 
 import com.company.repository.OrderRepository;
+import com.company.repository.entity.Book;
 import com.company.repository.entity.Order;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     public static final Class<Order> GET_BY_ID = Order.class;
     public static final String GET_ALL_ORDERS = "from Order";
     public static final String GET_BY_USER_ID = "SELECT o from Order o where o.user.id = ?1";
+    public static final String SOFT_DELETE_ORDER = "update Order set status = 'CANSELED' where id = :id";
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -39,12 +41,18 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public Order update(Order entity) {
-        return null;
+        entityManager.merge(entity);
+        return entity;
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        Order order = entityManager.find(Order.class, id);
+        if (order == null) {
+            return false;
+        }
+        entityManager.createQuery(SOFT_DELETE_ORDER).setParameter("id", id).executeUpdate();
+        return true;
     }
 
     @Override
