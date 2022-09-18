@@ -17,6 +17,7 @@ public class BookRepositoryImpl implements BookRepository {
     public static final String ALL_BOOKS = "from Book";
     public static final String SOFT_DELETE_BOOK = "update Book set availability = 'out of stock' where id = :id";
     public static final Class<Book> GET_BY_ISBN = Book.class;
+    public static final String GET_BY_TITLE = "FROM Book where bookName = :paramName";
     public static final String GET_BY_AUTHOR = "FROM Book where author = :paramName";
     @PersistenceContext
     private EntityManager entityManager;
@@ -62,6 +63,12 @@ public class BookRepositoryImpl implements BookRepository {
     public List<Book> getByAuthor(String author) {
         return entityManager.createQuery(GET_BY_AUTHOR, Book.class)
                 .setParameter("paramName", author).getResultList();
+    }
+
+    @Override
+    public Book getByTitle(String title) {
+        return entityManager.createQuery(GET_BY_TITLE, Book.class)
+                .setParameter("paramName", title).getSingleResult();
     }
 
 }

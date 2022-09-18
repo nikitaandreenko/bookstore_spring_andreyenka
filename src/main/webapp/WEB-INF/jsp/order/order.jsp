@@ -22,7 +22,8 @@
     <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
         <li><a href="/users/create">New user</a></li>
         <li><a href="/books/create">Add book</a></li>
-        <li><a href="/orders/getAll">orders</a></li>
+        <li><a href="/users/getAll">Users</a></li>
+        <li><a href="/orders/getAll">Orders</a></li>
     </c:if>
 </ul>
 <h1>Order</h1>

@@ -9,4 +9,6 @@ public interface BookRepository extends AbstractRepository<Long, Book> {
 
     List<Book> getByAuthor(String author);
 
+    Book getByTitle(String title);
+
 }

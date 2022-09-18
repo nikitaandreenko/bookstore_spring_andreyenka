@@ -7,6 +7,7 @@ import com.company.service.OrderService;
 import com.company.service.dto.*;
 
 import com.company.service.exception.EntityNotFoundException;
+import com.company.service.exception.ValidateException;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -82,7 +83,10 @@ public class OrderServiceImpl implements OrderService {
         }
         List<OrderItemDto> orderItemDtos = cartDto.stream().map(cartDto1 -> {
             OrderItemDto orderItemDto = new OrderItemDto();
-            orderItemDto.setBook(cartDto1.getBookDto());
+            BookDto bookDto = cartDto1.getBookDto();
+            if (bookDto.getAvailability().equals("in stock")) {
+                orderItemDto.setBook(bookDto);
+            }
             orderItemDto.setPrice(cartDto1.getBookDto().getPrice());
             orderItemDto.setQuantity(cartDto1.getQuantity());
             return orderItemDto;
@@ -93,8 +97,8 @@ public class OrderServiceImpl implements OrderService {
         orderDto.setItems(orderItemDtos);
         Order order = mapper.toEntity(orderDto);
         Order orderCreated = orderRepository.create(order);
-        if (orderCreated == null){
-            throw  new EntityNotFoundException("Order didn't create...");
+        if (orderCreated == null) {
+            throw new EntityNotFoundException("Order didn't create...");
         }
         return mapper.toDto(order);
     }
@@ -105,8 +109,8 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(id);
         order.setStatus(Order.Status.valueOf(status));
         Order updatedOrder = orderRepository.update(order);
-        if (updatedOrder == null){
-            throw  new EntityNotFoundException("Order didn't update...");
+        if (updatedOrder == null) {
+            throw new EntityNotFoundException("Order didn't update...");
         }
         return mapper.toDto(updatedOrder);
     }

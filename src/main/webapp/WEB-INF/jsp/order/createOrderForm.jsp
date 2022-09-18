@@ -21,7 +21,8 @@
   <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
     <li><a href="/users/create">New user</a></li>
     <li><a href="/books/create">Add book</a></li>
-    <li><a href="/orders/getAll">orders</a></li>
+    <li><a href="/users/getAll">Users</a></li>
+    <li><a href="/orders/getAll">Orders</a></li>
   </c:if>
 </ul>
 <form class="form" align=center action="/orders/create" method="post">
@@ -32,34 +33,6 @@
     <label>Total cost: <input type="text" name="totalCost" value="${sessionScope.order.totalCost}"/></label>
     <br><br>
     <label>Status: <input type="text"  name="status" value="${sessionScope.order.status}"/></label>
-    <br><br>
-
-<%--<<table>--%>
-<%--  <tr>--%>
-<%--    <th>User</th>--%>
-<%--    <th>Status</th>--%>
-<%--    <th>Total cost</th>--%>
-<%--&lt;%&ndash;    <th>Order items</th>&ndash;%&gt;--%>
-<%--    <th>All orders this user</th>--%>
-<%--  </tr>--%>
-<%--  <tr>--%>
-<%--    <td><a href="/users/${sessionScope.order.user.id}"><button class="new_button">${sessionScope.order.user.email}</button></a></td>--%>
-<%--    <td><c:out value="${sessionScope.order.status}"/></td>--%>
-<%--    <td><c:out value="${sessionScope.order.totalCost}"/></td>--%>
-<%--    <td>--%>
-<%--      <table class="table_mini">--%>
-<%--        <c:forEach items="${sessionScope.order.items}" var="items">--%>
-<%--          <tr>--%>
-<%--            <td><a href="/books/${items.book.id}"><button class="new_button">${items.book.bookName}</button></a></td>--%>
-<%--            <td><c:out value="${items.quantity}"/></td>--%>
-<%--            <td><c:out value="${items.price}"/></td>--%>
-<%--          </tr>--%>
-<%--        </c:forEach>--%>
-<%--      </table>--%>
-<%--    </td>--%>
-<%--    <td><a href="/orders/order/${sessionScope.order.user.id}"><button>Click me</button></a></td>--%>
-<%--  </tr>--%>
-<%--</table>--%>
     <br><br>
   </fieldset>
   <input type="submit" value="save"/>

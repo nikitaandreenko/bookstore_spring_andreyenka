@@ -60,4 +60,18 @@ public class BookController {
         return "redirect:/books/getAll";
     }
 
+    @GetMapping("/getAllByAuthor")
+    public  String getAllBookByAuthor(@RequestParam String author, Model model){
+        List<BookDto> books = bookService.getByAuthor(author);
+        model.addAttribute("books", books);
+            return "book/books";
+        }
+    @GetMapping("/getBookTitle")
+    public  String getBookByTitle(@RequestParam String title, Model model){
+        BookDto book = bookService.getBookTitle(title);
+        model.addAttribute("book", book);
+        return "book/book";
+    }
+
+
 }

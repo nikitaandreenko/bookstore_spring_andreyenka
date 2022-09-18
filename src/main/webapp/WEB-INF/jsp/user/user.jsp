@@ -23,9 +23,11 @@
     <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
         <li><a href="/users/create">New user</a></li>
         <li><a href="/books/create">Add book</a></li>
-        <li><a href="/orders/getAll">orders</a></li>
+        <li><a href="/users/getAll">Users</a></li>
+        <li><a href="/orders/getAll">Orders</a></li>
     </c:if>
 </ul>
+<h1><c:out value="${user.firstName}"/><br><c:out value="${user.lastName}"/></h1>
 <table>
     <tr>
         <th>First name</th>
@@ -48,18 +50,21 @@
         </c:if>
     </tr>
 </table>
-<div>
-    <form action="/users/update/${user.id}" method="get" target="_blank">
+<br><br>
+<table>
+    <tr>
+    <td><form class="form_table" action="/users/update/${user.id}" method="get" target="_blank">
         <button>update</button>
-    </form>
+    </form></td>
     <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
-        <form action="/users/delete/${user.id}" method="post" target="_blank">
+        <td><form class="form_table" action="/users/delete/${user.id}" method="post" target="_blank">
             <button>delete</button>
-        </form>
+        </form></td>
     </c:if>
-    <form action="/orders/order/${user.id}" target="_blank">
+        <td><form class="form_table" action="/orders/order/${user.id}" target="_blank">
         <button>my orders</button>
-    </form>
-</div>
+    </form></td>
+    </tr>
+</table>
 </body>
 </html>

@@ -52,7 +52,6 @@ public class BookServiceImpl implements BookService {
         if (book == null) {
             throw new EntityNotFoundException("Book with isbn:" + isbn + " doesn't exist");
         }
-
         return mapper.toDto(book);
     }
 
@@ -68,6 +67,16 @@ public class BookServiceImpl implements BookService {
         log.debug("Get book by author={} from database books", author);
         List<Book> books = bookRepository.getByAuthor(author);
         return books.stream().map(mapper::toDto).toList();
+    }
+
+    @Override
+    public BookDto getBookTitle(String title) {
+        log.debug("Get book by title={} from database books", title);
+        Book book = bookRepository.getByTitle(title);
+        if (book == null) {
+            throw new EntityNotFoundException("There isn't book:" + title + " on bookstore");
+        }
+        return mapper.toDto(book);
     }
 
     @Override

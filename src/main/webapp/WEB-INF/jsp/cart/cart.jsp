@@ -14,14 +14,13 @@
     </c:if>
     <c:if test="${sessionScope.user != null}">
         <li style="float:right"><a class="active" href="/logout">Logout</a></li>
-        <li style="float:right"><a class="active" href="/cart/index">Cart</a></li>
         <li style="float:right"><a class="active" href="/users/${user.id}" method="get">My profile</a></li>
     </c:if>
     <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
         <li><a href="/users/create">New user</a></li>
         <li><a href="/books/create">Add book</a></li>
-        <li><a href="/orders/getAll">orders</a></li>
-        <li><a href="/users/getAll">users</a></li>
+        <li><a href="/users/getAll">Users</a></li>
+        <li><a href="/orders/getAll">Orders</a></li>
     </c:if>
 </ul>
 <br><br>
@@ -54,10 +53,11 @@
             <td><c:out value="${item.bookDto.yearPublishing}"/></td>
             <td><c:out value="${item.bookDto.language}"/></td>
             <td><c:out value="${item.bookDto.availability}"/></td>
-            <td><form action="/cart/remove/${i.index}" method="post"><button>remove</button></form></td>
+            <td><form class="form_table" action="/cart/remove/${i.index}" method="post"><button>remove</button></form></td>
         </tr>
     </c:forEach>
 </table>
+<br><br>
 <table>
    <tr>
        <th>Total</th>

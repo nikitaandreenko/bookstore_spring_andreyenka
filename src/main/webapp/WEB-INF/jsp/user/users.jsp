@@ -43,7 +43,7 @@
             <td><c:out value="${user.lastName}"/></td>
             <td><c:out value="${user.role}"/></td>
             <td><c:out value="${user.lifeCycle}"/></td>
-            <td><form action="/users/${user.id}" method="get"><button>Click me</button></form></td>
+            <td><form class="form_table" action="/users/${user.id}" method="get"><button>Click me</button></form></td>
         </tr>
     </c:forEach>
 </table>

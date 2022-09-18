@@ -21,10 +21,22 @@
     <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
         <li><a href="/users/create">New user</a></li>
         <li><a href="/books/create">Add book</a></li>
-        <li><a href="/orders/getAll">orders</a></li>
+        <li><a href="/users/getAll">Users</a></li>
+        <li><a href="/orders/getAll">Orders</a></li>
     </c:if>
 </ul>
 <h1>Books</h1>
+<div class="d1">
+    <form action="/books/getAllByAuthor" method="get">
+        <input type="text" name="author" placeholder="enter author">
+        <button type="submit">find</button>
+    </form>
+    <form action="/books/getBookTitle" method="get">
+        <input type="text" name="title" placeholder="enter title">
+        <button type="submit">find</button>
+    </form>
+</div>
+<br><br>
 <table>
     <tr>
         <th>#</th>
@@ -43,12 +55,12 @@
             <td><c:out value="${book.yearPublishing}"/></td>
             <td><c:out value="${book.availability}"/></td>
             <td>
-                <form action="/books/${book.id}" method="get">
+                <form class="form_table" action="/books/${book.id}" method="get">
                     <button>Click me</button>
                 </form>
             </td>
             <td>
-                <form action="/cart/buy/${book.id}" method="get">
+                <form class="form_table" action="/cart/buy/${book.id}" method="get">
                     <button>Add to cart</button>
                 </form>
             </td>

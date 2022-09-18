@@ -24,5 +24,7 @@
             <li><a href="/users/getAll">users</a></li>
         </c:if>
     </ul>
+<br><br>
+<h1 class="index">Welcome bookstore by Andreyenka!!!</h1>
 </body>
 </html>
