@@ -29,11 +29,11 @@
 <div class="d1">
     <form action="/books/getAllByAuthor" method="get">
         <input type="text" name="author" placeholder="enter author">
-        <button type="submit">find</button>
+        <button type="submit">search</button>
     </form>
     <form action="/books/getBookTitle" method="get">
         <input type="text" name="title" placeholder="enter title">
-        <button type="submit">find</button>
+        <button type="submit">search</button>
     </form>
 </div>
 <br><br>

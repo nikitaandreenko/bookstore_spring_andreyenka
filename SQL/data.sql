@@ -1,5 +1,5 @@
 
-INSERT INTO books (book_name, author, isbn, price, pages, binding, year_publishing, book_language)
+INSERT INTO books (book_name, author, isbn, price, pages, binding, year_publishing, book_language, availability)
 VALUES         ('it starts us', 'Collen Hoover', '978-1668001226', 11.99, 366, 'solid', 2022, 'ENGLISH','in stock'),
                ('I train update books', 'Collen Hoover', '978-1533723738', 11.99, 326, 'solid', 2019, 'RUSSIAN','in stock'),
                ('Beautiful Ruins', 'Jess Walter', '978-1668001228', 13.79, 372, 'solid', 2014, 'RUSSIAN','in stock'),
@@ -21,7 +21,6 @@ VALUES         ('it starts us', 'Collen Hoover', '978-1668001226', 11.99, 366, '
                 ('A Time for Mercy', 'John Grisham', '978-1338725536', 7.50, 469, 'soft', 2010, 'ENGLISH','in stock'),
                 ('Mastering the Art of French Cooking', 'Julia Child', '978-1238725736', 19.50, 1244, 'soft', 2015, 'FRENCH','in stock'),
                 ('A Letter From Your Teacher: On the First Day of School', 'Shannon Olsen', '978-1735414126', 13.99, 31, 'soft', 2007, 'ENGLISH','in stock');
-
 
 INSERT INTO users (first_name, last_name, user_age, email, user_role, user_password)
 VALUES ('Nik', 'Swanson', 35, 'n.sw@gmail.com', 'ADMIN', 'd033e22ae348aeb5660fc2140aec35850c4da997'),
@@ -46,6 +45,7 @@ VALUES ('Nik', 'Swanson', 35, 'n.sw@gmail.com', 'ADMIN', 'd033e22ae348aeb5660fc2
        ('Nik', 'Cracks', 49, 'cr_nik_1979@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
        ('Silly', 'Sorento', 42, 'sil.srn18@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9'),
        ('Molly', 'Mellony', 40, 'molly191919@gmail.com', 'USER', '12dea96fec20593566ab75692c9949596833adc9');
+
 
 INSERT INTO orders (user_id, total_cost, status)
 VALUES ((SELECT id FROM users WHERE email = 'n.sw@gmail.com'), 0.0, 'PENDING'),
