@@ -48,8 +48,8 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registrationUser(@ModelAttribute UserDto user) {
-        userService.registration(user);
-        return "redirect:/";
+        UserDto dto = userService.registration(user);
+        return "redirect:/users/" + dto.getId();
     }
 
     @GetMapping("/update/{id}")

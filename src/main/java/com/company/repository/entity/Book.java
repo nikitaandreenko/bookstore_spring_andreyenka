@@ -14,6 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "books")
+@SQLDelete(sql = "update books set availability='out of stock' where id=?")
 @Getter
 @Setter
 @ToString

@@ -29,14 +29,14 @@ public class BookServiceImpl implements BookService {
         log.debug("Create book={} in database book", book);
         validateCreate(book);
         Book bookCreated = mapper.toEntity(book);
-        bookRepository.create(bookCreated);
+        bookRepository.save(bookCreated);
         return mapper.toDto(bookCreated);
     }
 
     @Override
     public BookDto findById(Long id) {
         log.debug("Get book by id={} from database books", id);
-        Book book = bookRepository.findById(id);
+        Book book = bookRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Book with id: " + id + " wasn't found"));
         if (book == null) {
             throw new EntityNotFoundException("Book with id:" + id + " doesn't exist");
         }
@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto getByIsbn(String isbn) {
         log.debug("Get book by isbn={} from database books", isbn);
-        Book book = bookRepository.getByIsbn(isbn);
+        Book book = bookRepository.findByIsbn(isbn);
         if (book == null) {
             throw new EntityNotFoundException("Book with isbn:" + isbn + " doesn't exist");
         }
@@ -64,14 +64,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookDto> getByAuthor(String author) {
         log.debug("Get book by author={} from database books", author);
-        List<Book> books = bookRepository.getByAuthor(author);
+        List<Book> books = bookRepository.findByAuthor(author);
         return books.stream().map(mapper::toDto).toList();
     }
 
     @Override
     public BookDto getBookTitle(String title) {
         log.debug("Get book by title={} from database books", title);
-        Book book = bookRepository.getByTitle(title);
+        Book book = bookRepository.findByBookName(title);
         if (book == null) {
             throw new EntityNotFoundException("There isn't book:" + title + " on bookstore");
         }
@@ -83,7 +83,7 @@ public class BookServiceImpl implements BookService {
         log.debug("Update book={} in database books", book);
         validateUpdate(book);
         Book bookUpdated = mapper.toEntity(book);
-        bookRepository.update(bookUpdated);
+        bookRepository.save(bookUpdated);
         return mapper.toDto(bookUpdated);
     }
 
@@ -105,16 +105,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void delete(Long id) {
         log.debug("Delete book by id={} from database books", id);
-        if (!bookRepository.delete(id)) {
-            throw new EntityNotFoundException("No entity with id: " + id);
-        }
+        bookRepository.deleteById(id);
     }
 
-    @Override
-    public BigDecimal totalPriceByAuthor(String author) {
-        log.debug("Total books by author={} from database books", author);
-        List<BookDto> books = getByAuthor(author);
-        BigDecimal total = books.stream().map(BookDto::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
-        return total;
-    }
 }

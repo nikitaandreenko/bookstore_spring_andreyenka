@@ -12,7 +12,6 @@ import com.company.service.exception.ValidateException;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -38,24 +37,22 @@ public class UserServiceImpl implements UserService {
         String hashedPassword = encryptionService.digest(originalPassword);
         user.setPassword(hashedPassword);
         User userCreated = mapper.toEntity(user);
-        userRepository.create(userCreated);
+        userRepository.save(userCreated);
         return mapper.toDto(userCreated);
     }
 
     @Override
     public UserDto findById(Long id) {
         log.debug("Get user by id={} from database users", id);
-        User user = userRepository.findById(id);
-        if (user == null) {
-            throw new EntityNotFoundException("User with id:" + id + " doesn't exist");
-        }
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id: " + id + " wasn't found"));
         return mapper.toDto(user);
     }
 
     @Override
     public UserDto getUserByEmail(String email) {
         log.debug("Get user by email={} from database users", email);
-        User user = userRepository.getUserByEmail(email);
+        User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new EntityNotFoundException("User with email:" + email + " doesn't exist");
         }
@@ -72,7 +69,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getUserByLastName(String lastName) {
         log.debug("Get user by LastName={} from database users", lastName);
-        List<User> users = userRepository.getUserByLastName(lastName);
+        List<User> users = userRepository.findByLastName(lastName);
         if (users == null) {
             throw new EntityNotFoundException("Users with lastname: " + lastName + " don't exist");
         }
@@ -83,7 +80,7 @@ public class UserServiceImpl implements UserService {
     public UserDto login(String email, String password) {
         log.debug("Get user by email and password from database users");
         String hashedPassword = encryptionService.digest(password);
-        User user = userRepository.login(email, hashedPassword);
+        User user = userRepository.findByEmailAndPassword(email, hashedPassword);
         if (user == null) {
             throw new EntityNotFoundException("User with email:" + email + " doesn't exist");
         }
@@ -98,7 +95,7 @@ public class UserServiceImpl implements UserService {
         String hashedPassword = encryptionService.digest(originalPassword);
         user.setPassword(hashedPassword);
         User userCreated = mapper.toEntityRegistration(user);
-        userRepository.registration(userCreated);
+        userRepository.save(userCreated);
         return mapper.toDto(userCreated);
     }
 
@@ -107,7 +104,7 @@ public class UserServiceImpl implements UserService {
         log.debug("Update user={} in database users", user);
         validateUpdate(user);
         User userUpdated = mapper.toEntityRegistration(user);
-        userRepository.update(userUpdated);
+        userRepository.save(userUpdated);
         return mapper.toDto(userUpdated);
     }
 
@@ -116,16 +113,14 @@ public class UserServiceImpl implements UserService {
         log.debug("Update user={} in database users", user);
         validateUpdate(user);
         User userUpdated = mapper.toEntity(user);
-        userRepository.update(userUpdated);
+        userRepository.save(userUpdated);
         return mapper.toDto(userUpdated);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Delete user by id={} in database users", id);
-        if (!userRepository.delete(id)) {
-            throw new EntityNotFoundException("No entity with id: " + id);
-        }
+        userRepository.deleteById(id);
     }
 
 
@@ -147,4 +142,5 @@ public class UserServiceImpl implements UserService {
         }
     }
 }
+
 

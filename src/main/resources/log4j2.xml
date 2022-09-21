@@ -31,7 +31,7 @@
         <Logger name="com.company.service.impl.UserServiceImpl" level="debug">
             <AppenderRef ref="MyConsole"/>
         </Logger>
-        <Logger name="com.company.repository.impl.OrderRepositoryImpl" level="debug">
+        <Logger name="com.company.repository.impl.OrderRepositoryImplOld" level="debug">
             <AppenderRef ref="MyConsole"/>
         </Logger>
         <Logger name="com.company.service.impl.OrderServiceImpl" level="debug">

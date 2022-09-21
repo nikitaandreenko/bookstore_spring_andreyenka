@@ -1,6 +1,5 @@
 package com.company.service;
 
-import com.company.repository.entity.User;
 import com.company.service.dto.UserDto;
 
 import java.util.List;

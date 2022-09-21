@@ -1,13 +1,12 @@
 package com.company.service.impl;
 
-import com.company.repository.entity.Order;
 import com.company.repository.OrderRepository;
+import com.company.repository.entity.Order;
 
 import com.company.service.OrderService;
 import com.company.service.dto.*;
 
 import com.company.service.exception.EntityNotFoundException;
-import com.company.service.exception.ValidateException;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,17 +28,15 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto create(OrderDto orderDto) {
         log.debug("Create order={} in database order", orderDto);
         Order orderCreated = mapper.toEntity(orderDto);
-        orderRepository.create(orderCreated);
+        orderRepository.save(orderCreated);
         return mapper.toDto(orderCreated);
     }
 
     @Override
     public OrderDto findById(Long id) {
         log.debug("Get order by id={} from database orders", id);
-        Order order = orderRepository.findById(id);
-        if (order == null) {
-            throw new EntityNotFoundException("User with id:" + id + " doesn't exist");
-        }
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Order with id: " + id + " wasn't found"));;
         return mapper.toDto(order);
     }
 
@@ -59,9 +56,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void delete(Long id) {
         log.debug("Delete order by id={} from database orders", id);
-        if (!orderRepository.delete(id)) {
-            throw new EntityNotFoundException("No entity with id: " + id);
-        }
+        orderRepository.deleteById(id);
+
     }
 
     @Override
@@ -96,7 +92,7 @@ public class OrderServiceImpl implements OrderService {
         orderDto.setUser(userDto);
         orderDto.setItems(orderItemDtos);
         Order order = mapper.toEntity(orderDto);
-        Order orderCreated = orderRepository.create(order);
+        Order orderCreated = orderRepository.save(order);
         if (orderCreated == null) {
             throw new EntityNotFoundException("Order didn't create...");
         }
@@ -106,9 +102,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDto updateStatus(Long id, String status) {
         log.debug("Update status order={} in database books", id);
-        Order order = orderRepository.findById(id);
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Order with id: " + id + " wasn't found"));
         order.setStatus(Order.Status.valueOf(status));
-        Order updatedOrder = orderRepository.update(order);
+        Order updatedOrder = orderRepository.save(order);
         if (updatedOrder == null) {
             throw new EntityNotFoundException("Order didn't update...");
         }

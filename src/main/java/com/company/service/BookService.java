@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.repository.entity.Book;
 import com.company.service.dto.BookDto;
 
 import java.math.BigDecimal;
@@ -13,6 +14,5 @@ public interface BookService extends AbstractService<Long, BookDto> {
 
     BookDto getBookTitle(String title);
 
-    BigDecimal totalPriceByAuthor(String author);
 
 }

@@ -1,21 +1,14 @@
 package com.company.repository;
 
 import com.company.repository.entity.User;
-import com.company.service.dto.UserDto;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserRepository extends AbstractRepository<Long, User> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-
-    User getUserByEmail(String email);
-
-    User login(String email, String password);
-
-    List<User> getUserByLastName(String lastName);
-
-    User registration(User user);
-
-    User updateRegistration (User user);
+    List<User> findByLastName(String lastName);
+    User findByEmailAndPassword(String email, String password);
+    User findByEmail(String email);
 
 }
