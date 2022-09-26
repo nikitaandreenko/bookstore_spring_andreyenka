@@ -3,7 +3,6 @@ package com.company.service.dto;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 @Data
 public class BookDto {
         private Long id;
@@ -15,7 +14,7 @@ public class BookDto {
         private String binding;
         private Integer yearPublishing;
         private Language language;
-//        private String availability;
+        private String availability;
 
         public enum Language {
             ENGLISH, RUSSIAN, SPANISH, FRENCH, DEUTSCH, ARABIC, CHINESE, JAPANESE

@@ -6,10 +6,28 @@
   <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<ul>
+  <li><a href="/">Home</a></li>
+  <li><a href=/books/getAll>books</a></li>
+  <li><a href="/">Home</a></li>
+  <c:if test="${sessionScope.user == null}">
+    <li style="float:right" ><a  class="active" href="/login">Login</a></li>
+    <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
+    <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+  </c:if>
+  <c:if test="${sessionScope.user != null}">
+    <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+    <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+    <li style="float:right"><a class="active" href="/users/${user.id}" method="get">My profile</a></li>
+  </c:if>
+  <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+    <li><a href="/users/create">New user</a></li>
+    <li><a href="/books/create">Add book</a></li>
+    <li><a href="/users/getAll">Users</a></li>
+    <li><a href="/orders/getAll">Orders</a></li>
+  </c:if>
+</ul>
 <h1>Order</h1>
-<c:if test="${message!=null}">
-  <h3><em> ${message}</em></h3>
-</c:if>
 <table>
   <tr><th>#</th>
     <th>User</th>
@@ -20,11 +38,11 @@
   </tr>
   <c:forEach items="${all_orders_by_order_id}" var="order" varStatus="counter" >
     <tr>
-      <td>${counter.count}</td>
-      <td>${order.user.email}</td>
-      <td>${order.status}</td>
-      <td>${order.totalCost}</td>
-      <td><form action="${pageContext.request.contextPath}/orders/${order.id}" method="get"><button>Click me</button></form></td>
+      <td><c:out value="${counter.count}"/></td>
+      <td><c:out value="${order.user.email}"/></td>
+      <td><c:out value="${order.status}"/></td>
+      <td><c:out value="${order.totalCost}"/></td>
+      <td><form class="form_table" action="/orders/${order.id}" method="get"><button>Click me</button></form></td>
     </tr>
   </c:forEach>
 </table>

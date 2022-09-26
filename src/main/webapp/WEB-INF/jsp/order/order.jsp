@@ -6,35 +6,57 @@
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href=/books/getAll>books</a></li>
+    <c:if test="${sessionScope.user == null}">
+        <li style="float:right" ><a  class="active" href="/login">Login</a></li>
+        <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user != null}">
+        <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+        <li style="float:right"><a class="active" href="/users/${user.id}" method="get">My profile</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+        <li><a href="/users/create">New user</a></li>
+        <li><a href="/books/create">Add book</a></li>
+        <li><a href="/users/getAll">Users</a></li>
+        <li><a href="/orders/getAll">Orders</a></li>
+    </c:if>
+</ul>
 <h1>Order</h1>
-<c:if test="${message!=null}">
-    <h3><em> ${message}</em></h3>
-</c:if>
 <table>
     <tr>
         <th>User</th>
         <th>Status</th>
         <th>Total cost</th>
-        <th>Order items</th>
         <th>All orders this user</th>
     </tr>
     <tr>
-        <td><a href="${pageContext.request.contextPath}/users/${order.user.id}"><button class="new_button">${order.user.email}</button></a></td>
-        <td>${order.status}</td>
-        <td>${order.totalCost}</td>
-        <td>
-            <table class="table_mini">
+        <td><a href="/users/${order.user.id}"><button class="new_button">${order.user.email}</button></a></td>
+        <td><c:out value="${order.status}"/></td>
+        <td><c:out value="${order.totalCost}"/></td>
+        <td><a href="/orders/order/${order.user.id}"><button>Click me</button></a></td>
+    </tr>
+</table>
+    <h1>Order details</h1>
+            <table>
                 <c:forEach items="${order.items}" var="items">
                     <tr>
-                        <td><a href="${pageContext.request.contextPath}/books/${items.book.id}"><button class="new_button">${items.book.bookName}</button></a></td>
-                        <td>${items.quantity}</td>
-                        <td>${items.price}</td>
+                        <td><a href="/books/${items.book.id}"><button class="new_button">${items.book.bookName}</button></a></td>
+                        <td><c:out value="${items.quantity}"/></td>
+                        <td><c:out value="${items.price}"/></td>
                     </tr>
                 </c:forEach>
             </table>
-        </td>
-        <td><a href="${pageContext.request.contextPath}/orders/order/${order.user.id}"><button>Click me</button></a></td>
-    </tr>
-</table>
+<div>
+    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+    <form action="/orders/update/${order.id}" method="get" target="_blank">
+        <button>update</button>
+    </form>
+</div>
+</c:if>
 </body>
 </html>

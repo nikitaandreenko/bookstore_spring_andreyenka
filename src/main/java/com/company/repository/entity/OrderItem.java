@@ -17,11 +17,11 @@ public class OrderItem {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private Order order;
 
@@ -88,7 +88,7 @@ public class OrderItem {
     public String toString() {
         return "OrderItem{" +
                 "id=" + id +
-                ", book=" + book.getId() +
+                ", book=" + book +
                 ", order=" + order +
                 ", quantity=" + quantity +
                 ", price=" + price +

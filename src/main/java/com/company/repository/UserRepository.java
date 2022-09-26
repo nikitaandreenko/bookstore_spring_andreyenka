@@ -1,14 +1,14 @@
 package com.company.repository;
 
 import com.company.repository.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserRepository extends AbstractRepository<Long, User> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-
-    User getUserByEmail(String email);
-
-    List<User> getUserByLastName(String lastName);
+    List<User> findByLastName(String lastName);
+    User findByEmailAndPassword(String email, String password);
+    User findByEmail(String email);
 
 }

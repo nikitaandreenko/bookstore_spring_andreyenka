@@ -7,34 +7,64 @@
 </head>
 
 <body>
-<h1>User</h1>
-<c:if test="${message!=null}">
-    <h3><em> ${message}</em></h3>
-</c:if>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href=/books/getAll>books</a></li>
+    <c:if test="${sessionScope.user == null}">
+        <li style="float:right"><a class="active" href="/login">Login</a></li>
+        <li style="float:right"><a class="active" href="/users/registration">Registration</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user != null}">
+        <li style="float:right"><a class="active" href="/logout">Logout</a></li>
+        <li style="float:right"><a class="active" href="/cart/cart">Cart</a></li>
+        <li style="float:right"><a class="active" href="/users/${user.id}" method="get">My profile</a></li>
+    </c:if>
+    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+        <li><a href="/users/create">New user</a></li>
+        <li><a href="/books/create">Add book</a></li>
+        <li><a href="/users/getAll">Users</a></li>
+        <li><a href="/orders/getAll">Orders</a></li>
+    </c:if>
+</ul>
+<h1><c:out value="${user.firstName}"/><br><c:out value="${user.lastName}"/></h1>
 <table>
     <tr>
         <th>First name</th>
         <th>Last name</th>
         <th>Age</th>
         <th>Email</th>
-        <th>Role</th>
-<%--        <th>Life cycle</th>--%>
-
+        <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+            <th>Role</th>
+            <th>Life cycle</th>
+        </c:if>
     </tr>
     <tr>
-        <td>${user.firstName}</td>
-        <td>${user.lastName}</td>
-        <td>${user.age}</td>
-        <td>${user.email}</td>
-        <td>${user.role}</td>
-<%--        <td>${user.lifeCycle}</td>--%>
+        <td><c:out value="${user.firstName}"/></td>
+        <td><c:out value="${user.lastName}"/></td>
+        <td><c:out value="${user.age}"/></td>
+        <td><c:out value="${user.email}"/></td>
+        <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+            <td><c:out value="${user.role}"/></td>
+            <td><c:out value="${user.lifeCycle}"/></td>
+        </c:if>
     </tr>
 </table>
-<div>
-    <<form action="${pageContext.request.contextPath}/users/update/${user.id}" method="get" target = "_blank">
-        <button>update</button></form>
-    <form action="${pageContext.request.contextPath}/users/delete/${user.id}" method="post" target = "_blank">
-        <button>delete</button></form>
-</div>
+<br><br>
+<table>
+    <tr>
+    <td><form class="form_table" action="/users/update/${user.id}" method="get" target="_blank">
+        <button>update</button>
+    </form></td>
+    <c:if test="${sessionScope.user.role.toString()=='ADMIN'}">
+        <td><form class="form_table" action="/users/delete/${user.id}" method="post" target="_blank">
+            <button>delete</button>
+        </form></td>
+    </c:if>
+        <td><form class="form_table" action="/orders/order/${user.id}" target="_blank">
+        <button>my orders</button>
+    </form></td>
+    </tr>
+</table>
 </body>
 </html>

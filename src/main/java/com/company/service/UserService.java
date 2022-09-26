@@ -10,4 +10,12 @@ public interface UserService extends AbstractService<Long, UserDto>{
 
     List<UserDto> getUserByLastName(String lastName);
 
+    UserDto login(String email, String password);
+
+    UserDto registration(UserDto user);
+
+    UserDto updateRegistration(UserDto user);
+
+
+
 }

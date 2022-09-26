@@ -26,8 +26,9 @@ CREATE TABLE IF NOT EXISTS users
     last_name VARCHAR(100) NOT NULL,
     user_age INTEGER NOT NULL,
     email VARCHAR(100) NOT NULL,
-    user_role VARCHAR(100) NOT NULL,
-    life_cycle VARCHAR(30) NOT NULL DEFAULT 'active'
+    user_role VARCHAR(100) NOT NULL DEFAULT 'USER',
+    life_cycle VARCHAR(30) NOT NULL DEFAULT 'active',
+    user_password VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS orders
@@ -40,10 +41,13 @@ CREATE TABLE IF NOT EXISTS orders
 CREATE TABLE IF NOT EXISTS order_items
 (
     id BIGSERIAL PRIMARY KEY,
-    order_id BIGINT REFERENCES orders NOT NULL,
+    order_id BIGINT REFERENCES orders,
     book_id BIGINT REFERENCES books NOT NULL,
     quantity INTEGER NOT NULL,
     price NUMERIC(6,2) NOT NULL
 );
+
+
+
 
 

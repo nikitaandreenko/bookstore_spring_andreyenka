@@ -37,15 +37,18 @@ public class User {
 
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.USER;
 
     @Column(name = "life_cycle")
     private String lifeCycle = "active";
 
+    @Column(name = "user_password")
+    private String password;
 
     public enum Role {
         USER, MANAGER, ADMIN
     }
+
 
     @Override
     public boolean equals(Object o) {
