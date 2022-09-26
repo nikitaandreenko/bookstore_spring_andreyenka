@@ -1,10 +1,11 @@
 # bookstore_bh_andreyenka
 
-## module1_config_annotation
+## Skills
 
-* @Controller
-* @Service
-* @Repository
+* Spring framework
+* Spring MVC
+* Spring Boot
+* Spring Data
+* Hibernate ORM
+* Base HTML and CSS
 
-
-Create project with Spring (annotation configuration)
