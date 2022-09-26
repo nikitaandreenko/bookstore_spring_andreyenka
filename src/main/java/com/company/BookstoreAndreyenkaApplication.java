@@ -32,14 +32,14 @@ public class BookstoreAndreyenkaApplication implements WebMvcConfigurer {
 		return new MyInterceptor();
 	}
 
-//	@Bean
-//	public FilterRegistrationBean<AuthorizationFilter> authorizationFilter() {
-//		FilterRegistrationBean<AuthorizationFilter> registrationBean = new FilterRegistrationBean<>();
-//		registrationBean.setFilter(new AuthorizationFilter());
-//		registrationBean.addUrlPatterns("/users/getAll", "/users/create", "/users/delete",
-//				"/books/delete", "/books/create","/books/update/{id}", "/orders/getAll", "/orders/update/{id}", "/cart/cart");
-//		registrationBean.setOrder(2);
-//		return registrationBean;
-//	}
+	@Bean
+	public FilterRegistrationBean<AuthorizationFilter> authorizationFilter() {
+		FilterRegistrationBean<AuthorizationFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new AuthorizationFilter());
+		registrationBean.addUrlPatterns("/users/getAll", "/users/create", "/users/delete",
+				"/books/delete", "/books/create","/books/update/{id}", "/orders/getAll", "/orders/update/{id}", "/cart/cart");
+		registrationBean.setOrder(2);
+		return registrationBean;
+	}
 
 }

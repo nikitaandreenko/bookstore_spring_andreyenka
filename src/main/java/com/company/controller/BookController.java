@@ -1,9 +1,14 @@
 package com.company.controller;
 
+import com.company.repository.entity.Book;
 import com.company.service.BookService;
 
 import com.company.service.dto.BookDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +29,17 @@ public class BookController {
     }
 
     @GetMapping("/getAll")
-    public String getBooks(Model model) {
-        List<BookDto> books = bookService.findAll();
-        model.addAttribute("books", books);
+    public String getBooks(Model model, @RequestParam(required = false) Integer page) {
+        if(page == null){
+            page = 0;
+        }else{
+            page--;
+        }
+        Pageable pageable = PageRequest.of(page, 5, Sort.Direction.ASC, "id");
+        Page <BookDto> books = bookService.findAll(pageable);
+        model.addAttribute("books", books.toList());
+        model.addAttribute("currentPage", page+1);
+        model.addAttribute("totalPages", books.getTotalPages());
         return "book/books";
     }
 

@@ -10,6 +10,8 @@ import com.company.service.exception.ValidateException;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -55,13 +57,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> findAll() {
-        log.debug("Get all books from database books");
-        List<Book> books = bookRepository.findAll();
-        return books.stream().map(mapper::toDto).toList();
-    }
-
-    @Override
     public List<BookDto> getByAuthor(String author) {
         log.debug("Get book by author={} from database books", author);
         List<Book> books = bookRepository.findByAuthor(author);
@@ -76,6 +71,13 @@ public class BookServiceImpl implements BookService {
             throw new EntityNotFoundException("There isn't book:" + title + " on bookstore");
         }
         return mapper.toDto(book);
+    }
+
+    @Override
+    public Page<BookDto> findAll(Pageable pageable) {
+        log.debug("Get all books from database books");
+        Page<Book> books = bookRepository.findAll(pageable);
+        return books.map(mapper::toDto);
     }
 
     @Override

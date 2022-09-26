@@ -4,6 +4,8 @@
 <head>
     <title>Users</title>
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <ul>
@@ -38,7 +40,7 @@
     </tr>
     <c:forEach items="${users}" var="user" varStatus="counter">
         <tr>
-            <td><c:out value="${counter.count}"/></td>
+            <td><c:out value="${user.id}"/></td>
             <td><c:out value="${user.firstName}"/></td>
             <td><c:out value="${user.lastName}"/></td>
             <td><c:out value="${user.role}"/></td>
@@ -47,5 +49,20 @@
         </tr>
     </c:forEach>
 </table>
+<br>
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="/users/getAll?page=${currentPage - 1}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="/users/getAll?page=1">1</a></li>
+            <li class="page-item"><a class="page-link" href="/users/getAll?page=2">2</a></li>
+            <li class="page-item"><a class="page-link" href="/users/getAll?page=3">3</a></li>
+            <li class="page-item"><a class="page-link" href="/users/getAll?page=4">4</a></li>
+            <li class="page-item"><a class="page-link" href="/users/getAll?page=5">5</a></li>
+            <li class="page-item"><a class="page-link" href="/users/getAll?page=6">6</a></li>
+            <li class="page-item"><a class="page-link" href="/users/getAll?page=${currentPage +1}">Next</a></li>
+        </ul>
+    </nav>
+</div>
 </body>
 </html>

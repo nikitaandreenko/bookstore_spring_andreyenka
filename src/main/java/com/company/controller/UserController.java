@@ -1,8 +1,13 @@
 package com.company.controller;
 
 import com.company.service.UserService;
+import com.company.service.dto.BookDto;
 import com.company.service.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +29,17 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public String getUsers(Model model) {
-        List<UserDto> users = userService.findAll();
-        model.addAttribute("users", users);
+    public String getUsers(Model model, @RequestParam(required = false) Integer page) {
+        if(page == null){
+            page = 0;
+        }else{
+            page--;
+        }
+        Pageable pageable = PageRequest.of(page, 5, Sort.Direction.ASC, "id");
+        Page <UserDto> users = userService.findAll(pageable);
+        model.addAttribute("users", users.toList());
+        model.addAttribute("currentPage", page+1);
+        model.addAttribute("totalPages", users.getTotalPages());
         return "user/users";
     }
 

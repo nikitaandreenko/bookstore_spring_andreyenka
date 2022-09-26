@@ -12,6 +12,8 @@ import com.company.service.exception.ValidateException;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -60,10 +62,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findAll() {
+    public Page<UserDto> findAll(Pageable pageable) {
         log.debug("Get all users from database users");
-        List<User> users = userRepository.findAll();
-        return users.stream().map(mapper::toDto).toList();
+        Page<User> users = userRepository.findAll(pageable);
+        return users.map(mapper::toDto);
     }
 
     @Override

@@ -4,6 +4,10 @@ import com.company.service.OrderService;
 import com.company.service.dto.*;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +30,17 @@ public class OrderController {
     }
 
     @GetMapping("/getAll")
-    public String getOrders(Model model) {
-        List<OrderDto> orders = orderService.findAll();
-        model.addAttribute("orders", orders);
+    public String getOrders(Model model, @RequestParam(required = false) Integer page) {
+        if(page == null){
+            page = 0;
+        }else{
+            page--;
+        }
+        Pageable pageable = PageRequest.of(page, 5, Sort.Direction.ASC, "id");
+        Page <OrderDto> orders = orderService.findAll(pageable);
+        model.addAttribute("orders", orders.toList());
+        model.addAttribute("currentPage", page+1);
+        model.addAttribute("totalPages", orders.getTotalPages());
         return "order/orders";
     }
 

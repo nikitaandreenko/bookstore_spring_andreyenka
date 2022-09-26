@@ -10,6 +10,8 @@ import com.company.service.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -41,10 +43,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> findAll() {
+    public Page<OrderDto> findAll(Pageable pageable) {
         log.debug("Get all orders from database orders");
-        List<Order> orders = orderRepository.findAll();
-        return orders.stream().map(mapper::toDto).toList();
+        Page<Order> orders = orderRepository.findAll(pageable);
+        return orders.map(mapper::toDto);
     }
 
     @Override
