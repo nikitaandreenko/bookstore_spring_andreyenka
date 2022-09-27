@@ -81,6 +81,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookDto> findAll() {
+        log.debug("Get all books from database books");
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(mapper::toDto).toList();
+    }
+
+    @Override
     public BookDto update(BookDto book) {
         log.debug("Update book={} in database books", book);
         validateUpdate(book);

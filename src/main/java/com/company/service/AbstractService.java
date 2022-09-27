@@ -13,6 +13,8 @@ public interface AbstractService <K, T>{
 
     Page<T> findAll(Pageable pageable);
 
+    List <T> findAll ();
+
     T update(T dto);
 
     void delete(K id);
