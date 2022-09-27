@@ -1,8 +1,11 @@
 package com.company.controller;
 
+import com.company.controller.rest.exception_handling.EntityIncorrectData;
+import com.company.controller.rest.exception_handling.NoSuchEntityException;
 import com.company.service.exception.EntityNotFoundException;
 import com.company.service.exception.ValidateException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

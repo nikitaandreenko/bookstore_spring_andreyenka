@@ -50,6 +50,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderDto> findAll() {
+        log.debug("Get all orders from database orders");
+        List <Order> orders = orderRepository.findAll();
+        return orders.stream().map(mapper::toDto).toList();
+    }
+
+    @Override
     public OrderDto update(OrderDto entity) {
 
         return null;

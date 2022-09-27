@@ -69,6 +69,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> findAll() {
+        log.debug("Get all users from database users");
+        List <User> users = userRepository.findAll();
+        return users.stream().map(mapper::toDto).toList();
+    }
+
+    @Override
     public List<UserDto> getUserByLastName(String lastName) {
         log.debug("Get user by LastName={} from database users", lastName);
         List<User> users = userRepository.findByLastName(lastName);
