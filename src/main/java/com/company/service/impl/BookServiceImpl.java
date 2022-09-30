@@ -8,10 +8,7 @@ import com.company.service.dto.ObjectMapperService;
 import com.company.service.exception.EntityNotFoundException;
 import com.company.service.exception.ValidateException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,8 +19,8 @@ import java.util.List;
 
 @Service("bookService")
 @RequiredArgsConstructor
+@Log4j2
 public class BookServiceImpl implements BookService {
-    private static final Logger log = LogManager.getLogger(BookServiceImpl.class);
 
     private final BookRepository bookRepository;
     private final ObjectMapperService mapper;

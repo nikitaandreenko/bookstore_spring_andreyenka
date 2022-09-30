@@ -10,8 +10,7 @@ import com.company.service.dto.UserDto;
 import com.company.service.exception.EntityNotFoundException;
 import com.company.service.exception.ValidateException;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,8 +23,8 @@ import java.util.Objects;
 @Service("userService")
 @RequiredArgsConstructor
 @Transactional
+@Log4j2
 public class UserServiceImpl implements UserService {
-    private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
     private final ObjectMapperService mapper;
 

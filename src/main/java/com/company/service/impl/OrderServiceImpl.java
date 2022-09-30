@@ -8,8 +8,7 @@ import com.company.service.dto.*;
 
 import com.company.service.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,11 +19,11 @@ import java.util.stream.Collectors;
 
 @Service("orderService")
 @RequiredArgsConstructor
+@Log4j2
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final ObjectMapperService mapper;
 
-    private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
 
     @Override
     public OrderDto create(OrderDto orderDto) {
