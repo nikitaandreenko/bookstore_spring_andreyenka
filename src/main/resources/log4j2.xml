@@ -1,41 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="info">
-    <Properties>
-        <property name="LOG_DIR">logs</property>
-        <property name="pattern_file">
-            %d{yyyy-MM-dd HH:mm:ss} [%M] %-5level %logger{5} - %msg%n
-        </property>
-        <property name="pattern_console">%d{HH:mm:ss} [%M] %-5level %logger{5} - %msg%n</property>
-    </Properties>
     <Appenders>
-        <Console name="MyConsole" target="SYSTEM_OUT">
-            <PatternLayout pattern="${pattern_console}"/>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} [%M] %-5level %logger{5} - %msg%n"/>
         </Console>
-        <File name="File1" fileName="${LOG_DIR}/text.log">
-            <PatternLayout pattern="${pattern_file}"/>
+        <File name="LogToFile" fileName="logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.company.repository" level="info">
-            <AppenderRef ref="File1"/>
-        </Logger>
-        <Logger name="com.company.repository.impl.BookRepositoryImpl" level="debug">
-            <AppenderRef ref="MyConsole"/>
-        </Logger>
         <Logger name="com.company.service.impl.BookServiceImpl" level="debug">
-            <AppenderRef ref="MyConsole"/>
-        </Logger>
-        <Logger name="com.company.repository.impl.UserRepositoryImpl" level="debug">
-            <AppenderRef ref="MyConsole"/>
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
         </Logger>
         <Logger name="com.company.service.impl.UserServiceImpl" level="debug">
-            <AppenderRef ref="MyConsole"/>
-        </Logger>
-        <Logger name="com.company.repository.impl.OrderRepositoryImplOld" level="debug">
-            <AppenderRef ref="MyConsole"/>
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
         </Logger>
         <Logger name="com.company.service.impl.OrderServiceImpl" level="debug">
-            <AppenderRef ref="MyConsole"/>
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
         </Logger>
     </Loggers>
 </Configuration>

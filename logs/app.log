@@ -1,0 +1,6 @@
+2022-09-30 20:17:03,039 DEBUG c.c.s.i.BookServiceImpl [http-nio-8080-exec-2] Get all books from database books
+2022-09-30 20:24:07,527 DEBUG c.c.s.i.BookServiceImpl [http-nio-8080-exec-2] Get all books from database books
+2022-09-30 20:24:10,654 DEBUG c.c.s.i.BookServiceImpl [http-nio-8080-exec-3] Get book by id=1 from database books
+2022-09-30 20:24:20,181 DEBUG c.c.s.i.UserServiceImpl [http-nio-8080-exec-6] Get user by email and password from database users
+2022-09-30 20:24:22,669 DEBUG c.c.s.i.UserServiceImpl [http-nio-8080-exec-7] Get all users from database users
+2022-09-30 20:24:25,211 DEBUG c.c.s.i.UserServiceImpl [http-nio-8080-exec-8] Get user by id=1 from database users
